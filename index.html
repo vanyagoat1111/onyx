@@ -3,465 +3,1029 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onyx | Профессиональная разработка сайтов и автоматизация B2B</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>Onyx Systems | Продающие сайты представительского класса по подписке</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* === ПРЕМИАЛЬНЫЕ СТИЛИ (АСПРО КАРКАС В СТИЛЕ ONYX) === */
         :root {
-            --primary: #0F172A; /* Глубокий благородный графит */
-            --primary-accent: #475569; /* Платиновый серый для элементов */
-            --bg-body: #F8FAFC; /* Чистый светлый B2B фон */
-            --bg-white: #FFFFFF;
-            --text-main: #0F172A;
-            --text-muted: #64748B;
-            --border-color: #E2E8F0;
-            --radius: 6px; /* Фирменная строгая геометрия Аспро */
+            --bg-main: #0b0f19;
+            --bg-card: #141b2d;
+            --bg-darker: #070a12;
+            --accent: #3b82f6;
+            --accent-gradient: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            --accent-hover: #1d4ed8;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --success: #10b981;
+            --error: #ef4444;
+            --border: #222c44;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-body);
+            background-color: var(--bg-main);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* === ВЕРХНЯЯ ПАНЕЛЬ (TOP BAR) === */
-        .top-bar {
-            background: #0F172A;
-            color: #F1F5F9;
-            font-size: 13px;
-            padding: 12px 0;
-            font-weight: 400;
-            border-bottom: 1px solid #1E293B;
-        }
-
-        .top-bar .inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .top-bar-contacts span {
-            margin-right: 25px;
-        }
-
-        .top-bar-contacts i {
-            color: var(--text-muted);
-            margin-right: 6px;
-        }
-
-        /* === ОСНОВНАЯ ШАПКА (HEADER) === */
+        /* Навигация */
         header {
-            background: var(--bg-white);
-            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
             z-index: 1000;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
         }
 
-        .header-inner {
+        .header-flex {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 90px;
         }
 
         .logo {
-            font-size: 26px;
-            font-weight: 700;
-            color: #0F172A;
-            text-decoration: none;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 24px;
+            letter-spacing: -1px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .main-nav {
-            display: flex;
-            list-style: none;
-            gap: 35px;
-        }
-
-        .main-nav a {
+        nav a {
+            color: var(--text-muted);
             text-decoration: none;
-            color: #0F172A;
+            margin-left: 25px;
+            font-size: 14px;
             font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Главный баннер */
+        .hero {
+            padding: 120px 0 100px 0;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(59,130,246,0.18) 0%, transparent 60%);
+        }
+
+        .badge {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            padding: 6px 18px;
+            border-radius: 100px;
             font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .main-nav a:hover {
-            color: var(--primary-accent);
-        }
-
-        /* === КНОПКИ === */
-        .btn {
-            background: #0F172A;
-            color: white;
-            padding: 14px 28px;
-            border-radius: var(--radius);
-            text-decoration: none;
             font-weight: 600;
-            font-size: 13px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid #0F172A;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        h1 span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 40px auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 18px 38px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
             cursor: pointer;
+            box-shadow: 0 4px 25px rgba(59, 130, 246, 0.25);
         }
 
         .btn:hover {
-            background: var(--primary-accent);
-            border-color: var(--primary-accent);
-            transform: translateY(-1px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            background: var(--accent-hover);
+            transform: translateY(-2px);
         }
 
-        .btn-tg {
-            background: #229ED9;
-            border-color: #229ED9;
-        }
-        .btn-tg:hover {
-            background: #1A7FA3;
-            border-color: #1A7FA3;
+        .btn-muted {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            box-shadow: none;
+            margin-left: 15px;
         }
 
-        /* === ГЛАВНЫЙ БАННЕР (HERO) === */
-        .hero {
-            background: var(--bg-white);
+        .btn-muted:hover {
+            background: var(--border);
+        }
+
+        /* Боли и потребности бизнеса */
+        .pain-section {
             padding: 100px 0;
-            border-bottom: 1px solid var(--border-color);
+            border-top: 1px solid var(--border);
         }
 
-        .hero-inner {
+        .grid-2 {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
+            grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
         }
 
-        .hero-content h1 {
-            font-size: 44px;
-            font-weight: 700;
-            line-height: 1.25;
-            color: #0F172A;
+        h2 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
             margin-bottom: 25px;
+            line-height: 1.2;
         }
 
-        .hero-content h1 span {
+        .pain-p {
             color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        .hero-content p {
+            margin-bottom: 20px;
             font-size: 16px;
-            color: var(--text-muted);
-            margin-bottom: 35px;
-            max-width: 550px;
         }
 
-        .hero-image img {
+        .stat-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #1a233a 100%);
+            border: 1px solid var(--border);
+            padding: 45px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .stat-number {
+            font-size: 80px;
+            font-weight: 900;
+            color: var(--error);
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+
+        /* Сравнение и бизнес-математика */
+        .math-section {
+            padding: 100px 0;
+            background: var(--bg-darker);
+            border-top: 1px solid var(--border);
+        }
+
+        .section-title-center {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 50px auto;
+        }
+
+        .compare-table {
             width: 100%;
-            border-radius: var(--radius);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
-            border: 1px solid var(--border-color);
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
         }
 
-        /* === БЛОК ПРЕИМУЩЕСТВ === */
-        .advantages {
-            padding: 80px 0 40px 0;
-            border-bottom: 1px solid var(--border-color);
+        .compare-table th, .compare-table td {
+            padding: 22px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
         }
 
-        .adv-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .adv-item {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
-
-        .adv-icon {
-            font-size: 24px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        .adv-text h4 {
+        .compare-table th {
+            background: #192239;
+            font-weight: 700;
             font-size: 16px;
+        }
+
+        .onyx-column {
+            color: var(--success);
             font-weight: 600;
-            margin-bottom: 8px;
         }
 
-        .adv-text p {
-            font-size: 14px;
-            color: var(--text-muted);
+        .total-row {
+            background: rgba(16, 185, 129, 0.04);
         }
 
-        /* === КАТАЛОГ УСЛУГ (СТРУКТУРА АСПРО) === */
-        .services {
+        /* Презентация продуктов */
+        .products-section {
             padding: 100px 0;
         }
 
-        .section-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 50px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: #0F172A;
-        }
-
-        .services-grid {
+        .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 
-        .service-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
-            padding: 40px;
+        .prod-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
         }
 
-        .service-card:hover {
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            border-color: #0F172A;
-            transform: translateY(-2px);
+        .prod-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
         }
 
-        .service-icon {
-            font-size: 36px;
-            color: #0F172A;
-            margin-bottom: 25px;
-        }
-
-        .service-card h3 {
-            font-size: 20px;
+        .prod-header {
+            padding: 30px;
+            background: #192239;
+            position: relative;
             font-weight: 700;
-            margin-bottom: 15px;
-            color: #0F172A;
+            font-size: 22px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .service-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 30px;
+        .prod-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .prod-body {
+            padding: 30px;
             flex-grow: 1;
         }
 
-        .service-price {
-            font-size: 20px;
-            font-weight: 700;
-            color: #0F172A;
-            margin-bottom: 25px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
+        .prod-features {
+            list-style: none;
+            margin: 20px 0;
         }
 
-        /* === ТЕХНОЛОГИЧНЫЙ ИНФО-БЛОК === */
-        .info-block {
-            background: #0F172A;
-            color: #FFFFFF;
-            padding: 80px 0;
+        .prod-features li {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .prod-features li::before {
+            content: "✓";
+            color: var(--success);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .price-tag {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--success);
+            margin-top: 15px;
+        }
+
+        .prod-footer {
+            padding: 0 30px 30px 30px;
+        }
+
+        /* Интерактивная Демо-версия сайта */
+        .demo-section {
+            padding: 100px 0;
+            background: var(--bg-darker);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .demo-browser {
+            background: #1e293b;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            margin-top: 40px;
+        }
+
+        .browser-header {
+            background: #0f172a;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .browser-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .browser-screen {
+            background: #ffffff;
+            color: #333333;
+            height: 400px;
+            overflow-y: auto;
+            padding: 30px;
+            font-size: 14px;
+        }
+
+        /* Этапы создания сайта */
+        .steps-section {
+            padding: 100px 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        /* Умная Анкета (Quiz) */
+        .quiz-section {
+            padding: 100px 0;
+            background: radial-gradient(circle at bottom, rgba(139,92,246,0.12) 0%, transparent 65%);
+        }
+
+        .quiz-wrapper {
+            background: var(--bg-card);
+            border: 2px solid var(--accent);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 850px;
+            margin: 0 auto;
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.1);
+        }
+
+        .quiz-option-btn {
+            display: block;
+            width: 100%;
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: left;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .quiz-option-btn:hover {
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        /* Отзывы и Портфолио */
+        .reviews-section {
+            padding: 100px 0;
+            background: var(--bg-darker);
+        }
+
+        .reviews-container {
+            max-width: 800px;
+            margin: 40px auto 0 auto;
             text-align: center;
         }
 
-        .info-block h2 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+        .review-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            display: none;
         }
 
-        .info-block p {
-            color: #94A3B8;
-            max-width: 700px;
-            margin: 0 auto 35px auto;
+        .review-card.active {
+            display: block;
+        }
+
+        .review-author {
+            font-weight: 700;
+            margin-top: 20px;
+            color: var(--accent);
+        }
+
+        .review-company {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .review-nav-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 0 10px;
+            font-weight: 700;
+        }
+
+        .review-nav-btn:hover {
+            background: var(--accent);
+        }
+
+        /* FAQ */
+        .faq-section {
+            padding: 100px 0;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 22px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            font-size: 17px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            margin-top: 15px;
+            color: var(--text-muted);
+            font-size: 15px;
+            display: none;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+
+        /* Подвал */
+        footer {
+            background: #05070d;
+            padding: 50px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo-zone h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .footer-links h4 {
+            color: white;
+            margin-bottom: 15px;
             font-size: 15px;
         }
 
-        /* === ФУТЕР === */
-        footer {
-            background: #0F172A;
-            color: #64748B;
-            padding: 40px 0;
-            font-size: 14px;
-            text-align: center;
-            border-top: 1px solid #1E293B;
+        .footer-links ul {
+            list-style: none;
         }
 
-        /* Адаптивность */
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Мобильная адаптивность */
         @media (max-width: 992px) {
-            .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-            .hero-content p { margin: 0 auto 35px auto; }
-            .main-nav { display: none; }
-            .top-bar { display: none; }
-            .hero-content h1 { font-size: 32px; }
+            .grid-3 { grid-template-columns: 1fr 1fr; }
+            .steps-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            .grid-2, .grid-3, .steps-grid, .footer-grid { grid-template-columns: 1fr; }
+            nav { display: none; }
+            .btn-muted { margin-left: 0; margin-top: 15px; display: block; }
+            .quiz-wrapper { padding: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="container inner">
-            <div class="top-bar-contacts">
-                <span><i class="fa-solid fa-envelope"></i> solutions@onyx.digital</span>
-                <span><i class="fa-solid fa-clock"></i> Мониторинг систем: 24/7</span>
-            </div>
-            <div>Архитектура и деплой бизнес-решений нового поколения</div>
-        </div>
-    </div>
-
     <header>
-        <div class="container header-inner">
-            <a href="#" class="logo">Onyx</a>
-            <ul class="main-nav">
-                <li><a href="#services">Решения</a></li>
-                <li><a href="https://t.me/websitest_bot" target="_blank">Аудит</a></li>
-            </ul>
-            <a href="https://t.me/websitest_bot" target="_blank" class="btn btn-tg">
-                <i class="fa-brands fa-telegram"></i> Запустить робота
-            </a>
+        <div class="container header-flex">
+            <div class="logo">ONYX SYSTEMS</div>
+            <nav>
+                <a href="#about">О концепте</a>
+                <a href="#math">Экономия</a>
+                <a href="#products">ИТ-Продукты</a>
+                <a href="#demo">Демо-версия</a>
+                <a href="#quiz">Анкета подбора</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="#faq">FAQ</a>
+            </nav>
         </div>
     </header>
 
     <section class="hero">
-        <div class="container hero-inner">
-            <div class="hero-content">
-                <h1>Проектируем цифровые экосистемы <span>для вашего бизнеса</span></h1>
-                <p>Разработка высокоскоростных статических сайтов, интеграция платежных шлюзов, сквозной аналитики и систем мгновенного уведомления в Telegram под ключ.</p>
-                <a href="https://t.me/websitest_bot" target="_blank" class="btn">
-                    Быстрый расчет стоимости <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="Onyx ИТ-Платформа">
-            </div>
-        </div>
-    </section>
-
-    <section class="container advantages">
-        <div class="adv-grid">
-            <div class="adv-item">
-                <div class="adv-icon"><i class="fa-solid fa-gauge-high"></i></div>
-                <div class="adv-text">
-                    <h4>Максимальный SpeedIndex</h4>
-                    <p>Идеальная оптимизация кода гарантирует мгновенную загрузку.</p>
-                </div>
-            </div>
-            <div class="adv-item">
-                <div class="adv-icon"><i class="fa-solid fa-cloud"></i></div>
-                <div class="adv-text">
-                    <h4>Отказоустойчивость</h4>
-                    <p>Хостинг на серверах GitHub Pages защищает от падений и DDOS.</p>
-                </div>
-            </div>
-            <div class="adv-item">
-                <div class="adv-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <div class="adv-text">
-                    <h4>Сквозная аналитика</h4>
-                    <p>Интеграция целей Яндекс.Метрики и Google Analytics.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="container services" id="services">
-        <h2 class="section-title">ИТ-Продукты для интеграции</h2>
-        
-        <div class="services-grid">
-            <div class="service-card">
-                <div>
-                    <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
-                    <h3>Landing Page (Целевая страница)</h3>
-                    <p>Высококонверсионный стек для продвижения моно-продуктов или конкретных корпоративных услуг. Идеальная мобильная оптимизация и чистый код.</p>
-                </div>
-                <div>
-                    <div class="service-price">от 15 000 ₽</div>
-                    <a href="https://t.me/websitest_bot?start=landing" target="_blank" class="btn" style="width: 100%; justify-content: center;">Конфигурировать</a>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div>
-                    <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
-                    <h3>Corporate Представительство</h3>
-                    <p>Многостраничная архитектура для комплексного позиционирования бренда. Включает интерактивные прайс-листы, каталоги и защищенные формы лидогенерации.</p>
-                </div>
-                <div>
-                    <div class="service-price">от 25 000 ₽</div>
-                    <a href="https://t.me/websitest_bot?start=corporate" target="_blank" class="btn" style="width: 100%; justify-content: center;">Конфигурировать</a>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div>
-                    <div class="service-icon"><i class="fa-solid fa-basket-shopping"></i></div>
-                    <h3>Сайт-каталог / Интернет-витрина</h3>
-                    <p>Платформа для демонстрации товарных матриц. Интегрированная JavaScript-корзина с мгновенной выгрузкой заказов менеджеру в Telegram.</p>
-                </div>
-                <div>
-                    <div class="service-price">от 40 000 ₽</div>
-                    <a href="https://t.me/websitest_bot?start=catalog" target="_blank" class="btn" style="width: 100%; justify-content: center;">Конфигурировать</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="info-block">
         <div class="container">
-            <h2>Требуется глубокая автоматизация или онлайн-эквайринг?</h2>
-            <p>Наш интеллектуальный Telegram-помощник составит интерактивное техническое задание, рассчитает смету и продемонстрирует работу платежных инвойсов в реальном времени.</p>
-            <a href="https://t.me/websitest_bot" target="_blank" class="btn btn-tg">
-                <i class="fa-brands fa-telegram"></i> Начать аудит процессов
-            </a>
+            <div class="badge">🚀 Запуск вашей продающей платформы за полчаса!</div>
+            <h1>Сайт представительского класса<br>по подписке за <span>2 990 р/мес</span></h1>
+            <p>Первый тестовый месяц пользования — бесплатно. Полноценный запуск, домен в подарок и пожизненное техническое обслуживание ИТ-архитекторами студии Onyx.</p>
+            <div>
+                <a href="https://t.me/websitest_bot?start=landing" target="_blank" class="btn">Попробовать бесплатно</a>
+                <a href="#quiz" class="btn btn-muted">Подобрать конфигурацию</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="pain-section" id="about">
+        <div class="container grid-2">
+            <div>
+                <h2>Больше не нужно слепо отдавать сотни тысяч разработчикам</h2>
+                <p class="pain-p">Классический рынок веб-студий глубоко устарел. От вас требуют огромные бюджеты наперед, разработка затягивается на месяцы, а в итоге сайт может банально не принести окупаемости вашему бизнесу.</p>
+                <p class="pain-p">Onyx Systems убирает любые риски. Вы получаете профессиональный, полностью укомплектованный сайт представительского класса в виде прозрачной ежемесячной подписки. Все обслуживание сайта мы берем на себя — бесплатно.</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">90%</div>
+                <div style="font-weight: 700; font-size: 19px; margin-bottom: 12px; color: #fff;">Бизнес-проектов закрываются в первый год</div>
+                <p style="color: var(--text-muted); font-size: 14px; line-height: 1.5;">Официальные данные Росстата доказывают: 9 из 10 стартапов прекращают существование в первые 12 месяцев. Наше предложение защищает ваш капитал от неоправданных инвестиций на старте, экономя время, нервы и ваши личные деньги.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="math-section" id="math">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Бизнес-математика: Сравнение расходов</h2>
+                <p style="color: var(--text-muted);">Давайте наглядно просчитаем финансовую выгоду вашего бюджета при работе с нами на дистанции в один год.</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Статья расходов (дистанция 1 год)</th>
+                        <th>Классические веб-студии</th>
+                        <th style="color: var(--accent);">Условия Onyx Systems</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Проектирование, прототип и веб-дизайн</td>
+                        <td>от 60 000 руб.</td>
+                        <td class="onyx-column">0 руб. (Включено)</td>
+                    </tr>
+                    <tr>
+                        <td>Верстка, программирование и тесты</td>
+                        <td>от 40 000_руб.</td>
+                        <td class="onyx-column">0 руб. (Включено)</td>
+                    </tr>
+                    <tr>
+                        <td>Покупка доменного имени (.RU) и хостинга</td>
+                        <td>от 6 000 руб.</td>
+                        <td class="onyx-column">0 руб. (Домен в подарок)</td>
+                    </tr>
+                    <tr>
+                        <td>Техническое сопровождение и правки контента</td>
+                        <td>от 25 000 руб.</td>
+                        <td class="onyx-column">0 руб. (Бесплатный сервис)</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td style="font-weight: 700; color: #fff;">ИТОГОВЫЙ РАСХОД ЗА ГОД:</td>
+                        <td style="color: var(--error); font-weight: 700; text-decoration: line-through;">от 131 000 руб.</td>
+                        <td style="color: var(--success); font-weight: 800; font-size: 20px;">29 900 руб. (Выгоднее в 4.3 раза!)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Наши готовые ИТ-продукты</h2>
+                <p style="color: var(--text-muted);">Мы разработали три стандартизированных решения под любой масштаб бизнес-задач. Выберите подходящий формат.</p>
+            </div>
+            <div class="grid-3">
+                <div class="prod-card">
+                    <div>
+                        <div class="prod-header">Landing Page <span class="prod-badge">Хит</span></div>
+                        <div class="prod-body">
+                            <p style="font-size: 14px; color: var(--text-muted);">Идеальное решение для экспресс-теста ниши, продвижения конкретной услуги или запуска контекстной/таргетированной рекламы.</p>
+                            <ul class="prod-features">
+                                <li>До 6 конверсионных блоков</li>
+                                <li>Формы захвата клиентов</li>
+                                <li>Адаптивность под смартфоны</li>
+                                <li>Связка с Telegram-уведомлениями</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="prod-footer">
+                        <div class="price-tag">2 990 р / мес.</div>
+                        <a href="https://t.me/websitest_bot?start=landing" target="_blank" class="btn" style="width: 100%; text-align: center; margin-top: 15px;">Активировать воронку</a>
+                    </div>
+                </div>
+                <div class="prod-card">
+                    <div>
+                        <div class="prod-header">Corporate Site</div>
+                        <div class="prod-body">
+                            <p style="font-size: 14px; color: var(--text-muted);">Полноценное корпоративное многостраничное представительство для формирования максимального доверия крупных клиентов к бренду.</p>
+                            <ul class="prod-features">
+                                <li>Разделы «О компании», «Услуги»</li>
+                                <li>Интерактивный блок отзывов</li>
+                                <li>Раздел документации/вакансий</li>
+                                <li>Расширенная SEO-оптимизация</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="prod-footer">
+                        <div class="price-tag">2 990 р / мес.</div>
+                        <a href="https://t.me/websitest_bot?start=corporate" target="_blank" class="btn" style="width: 100%; text-align: center; margin-top: 15px;">Запустить проект</a>
+                    </div>
+                </div>
+                <div class="prod-card">
+                    <div>
+                        <div class="prod-header">Digital Catalog</div>
+                        <div class="prod-badge" style="background:#10b981;">E-Com</div>
+                        <div class="prod-body">
+                            <p style="font-size: 14px; color: var(--text-muted);">Удобный структурированный каталог или интернет-витрина товаров с функционалом онлайн-корзины без переплат за бэкенд.</p>
+                            <ul class="prod-features">
+                                <li>Разветвленная сетка категорий</li>
+                                <li>Встроенная корзина (JS)</li>
+                                <li>Сбор заказов в Telegram-бота</li>
+                                <li>Модуль промокодов и акций</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="prod-footer">
+                        <div class="price-tag">2 990 р / мес.</div>
+                        <a href="https://t.me/websitest_bot?start=catalog" target="_blank" class="btn" style="width: 100%; text-align: center; margin-top: 15px;">Развернуть витрину</a>
+                    </div>
+                </div>
+            </div>
+            <div style="background: rgba(139, 92, 246, 0.05); border: 1px dashed #8b5cf6; border-radius: 10px; padding: 25px; margin-top: 40px; text-align: center; font-size: 15px;">
+                🎨 <b>Нужен эксклюзивный визуальный стиль?</b> По вашему запросу мы можем разработать абсолютно <b>индивидуальный дизайн</b> с кастомной инфографикой за небольшую дополнительную плату.
+            </div>
+        </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Живая Демо-версия наших продуктов</h2>
+                <p style="color: var(--text-muted);">Прямо сейчас покликайте интерактивный симулятор, чтобы оценить скорость загрузки, плавность и чистоту архитектуры наших сайтов.</p>
+            </div>
+            <div class="demo-browser">
+                <div class="browser-header">
+                    <div class="browser-dot" style="background: #ef4444;"></div>
+                    <div class="browser-dot" style="background: #f59e0b;"></div>
+                    <div class="browser-dot" style="background: #10b981;"></div>
+                    <div style="background: #334155; color: #94a3b8; font-size: 11px; padding: 4px 15px; border-radius: 4px; margin-left: 20px; width: 300px;">https://your-business-preview.onyx.ru</div>
+                </div>
+                <div class="browser-screen" id="demo-screen">
+                    <div style="text-align: center; padding-top: 40px;">
+                        <h3 style="margin-bottom: 15px; font-weight: 700; color: #1e293b;">Выберите тип бизнеса для мгновенного превью:</h3>
+                        <button onclick="loadDemoSite('auto')" class="btn" style="padding: 12px 24px; font-size: 14px; margin: 5px;">Автосервис</button>
+                        <button onclick="loadDemoSite('food')" class="btn" style="padding: 12px 24px; font-size: 14px; margin: 5px; background: #10b981;">Доставка еды</button>
+                        <button onclick="loadDemoSite('build')" class="btn" style="padding: 12px 24px; font-size: 14px; margin: 5px; background: #8b5cf6;">Строительство</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="steps-section">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Этапы создания вашего сайта</h2>
+                <p style="color: var(--text-muted);">Мы автоматизировали производство, исключив лишнюю бюрократию. Весь процесс разбит на 4 простых шага.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div style="font-weight: 700; font-size: 17px; margin-bottom: 8px; color:#fff;">Составление плана</div>
+                    <p style="color: var(--text-muted); font-size: 13px;">Анализируем нишу, формируем структуру будущих блоков и утверждаем карту проекта.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div style="font-weight: 700; font-size: 17px; margin-bottom: 8px; color:#fff;">Наполнение контентом</div>
+                    <p style="color: var(--text-muted); font-size: 13px;">Разворачиваем архитектуру кода, интегрируем ваши текста, офферы, фото и настраиваем формы.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div style="font-weight: 700; font-size: 17px; margin-bottom: 8px; color:#fff;">Онлайн презентация</div>
+                    <p style="color: var(--text-muted); font-size: 13px;">Показываем готовое решение, тестируем адаптивность и даем советы по увеличению конверсии.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div style="font-weight: 700; font-size: 17px; margin-bottom: 8px; color:#fff;">Личный программист</div>
+                    <p style="color: var(--text-muted); font-size: 13px;">Привязываем домен, запускаем. За вашим брендом закрепляется личный dev для мгновенных правок.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quiz-section" id="quiz">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Анкета подбора оптимального решения</h2>
+                <p style="color: var(--text-muted);">Пройдите экспресс-опрос, чтобы автоматически рассчитать необходимый функционал под задачи бизнеса.</p>
+            </div>
+            <div class="quiz-wrapper" id="quiz-block">
+                <div id="quiz-content">
+                    <div id="quiz-question-title" style="font-size: 22px; font-weight: 700; margin-bottom: 30px;">Шаг 1: Какое основное направление у вашего бизнеса?</div>
+                    <div id="quiz-options-box">
+                        <input type="text" id="quiz-text-input" placeholder="Например: автосервис, доставка пиццы, салон красоты..." style="width: 100%; padding: 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-main); color: #fff; font-size: 16px; margin-bottom: 25px; outline: none;">
+                    </div>
+                    <button onclick="handleQuizNext()" class="btn" style="width: 100%;">Продолжить</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Отзывы наших клиентов</h2>
+                <p style="color: var(--text-muted);">Реальные кейсы предпринимателей, которые полностью перевели свою веб-инфраструктуру на модель подписки.</p>
+            </div>
+            <div class="reviews-container">
+                <div class="review-card active" id="rev-1">
+                    <p style="font-style: italic; font-size: 17px; color: var(--text-main);">«Раньше разработка лендинга обходилась нам минимум в 50 тысяч рублей, не говоря уже про плату за хостинг и постоянные счета от фрилансеров за исправление запятых. Перешли в Onyx на подписку. За 2990 рублей в месяц получили идеальный сайт, а любые правки программист вносит за 10 минут бесплатно. Это прорыв!»</p>
+                    <div class="review-author">Артем Костров</div>
+                    <div class="review-company">Генеральный директор «Авто-Движ Пермь»</div>
+                </div>
+                <div class="review-card" id="rev-2">
+                    <p style="font-style: italic; font-size: 17px; color: var(--text-main);">«Запускали доставку суши, бюджет был сильно ограничен. Вкладывать 100 тысяч в сайт было безумием, ведь бизнес мог закрыться. Onyx Systems спасли ситуацию — развернули шикарный сайт-каталог с корзиной бесплатно, первый месяц мы не платили ни копейки! Сейчас платим подписку с прибыли. Риски нулевые.»</p>
+                    <div class="review-author">Елена Марченко</div>
+                    <div class="review-company">Основатель бренда «Суши-Рай»</div>
+                </div>
+                <div style="margin-top: 30px;">
+                    <button class="review-nav-btn" onclick="changeReview(-1)">←</button>
+                    <button class="review-nav-btn" onclick="changeReview(1)">→</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <div class="container" style="max-width: 850px;">
+            <div class="section-title-center">
+                <h2>Часто задаваемые вопросы</h2>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaqAccordion(this)">Что конкретно входит в ежемесячную стоимость? <span>+</span></div>
+                <div class="faq-answer">В подписку 2 990 р/мес абсолютно всё включено: высокоскоростной премиум-хостинг, привязка и продление вашего доменного имени, базовая поисковая оптимизация (SEO) для Яндекса и Гугла, а также услуги закрепленного за вами личного программиста, который по первому запросу будет менять контент или добавлять новые акции на сайт совершенно бесплатно.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaqAccordion(this)">Есть ли скрытые комиссии или доплаты? <span>+</span></div>
+                <div class="faq-answer">Нет, концепция Onyx Systems базируется на честности. Никаких доплат за трафик, формы заявок или хостинг. Цена фиксирована. Исключением является только личный запрос клиента на сложный индивидуальный дизайн с нуля — он рассчитывается отдельно.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaqAccordion(this)">Как работает партнерская реферальная программа? <span>+</span></div>
+                <div class="faq-answer">Все очень просто: на нашем сайте интегрирована партнерская система. Если вы рекомендуете наши услуги своим коллегам-предпринимателям, и они запускают сайт по подписке, мы будем ежемесячно выплачивать вам 15% от их тарифа прямо на вашу банковскую карту на протяжении всего времени их работы!</div>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Onyx Systems. Профессиональная веб-разработка. Все права защищены. Размещено на GitHub Pages.</p>
+            <div class="footer-grid">
+                <div class="footer-logo-zone">
+                    <h3>ONYX SYSTEMS</h3>
+                    <p style="font-size: 13px; max-width: 400px; line-height: 1.6;">Интеллектуальная дизайн-студия нового поколения. Разработка, запуск и комплексное сопровождение продающих веб-интерфейсов по подписочной бизнес-модели.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#products">Продукты</a></li>
+                        <li><a href="#quiz">Подобрать сайт</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Контакты и Саппорт</h4>
+                    <ul>
+                        <li><a href="https://t.me/websitest_bot" target="_blank" style="color: var(--accent); font-weight: 600;">🤖 Служба поддержки</a></li>
+                        <li><a href="#">Канал в Telegram</a></li>
+                        <li><a href="#">Группа ВКонтакте</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 12px;">© 2026 Onyx Systems. Все права защищены. Разработано на базе ИИ-архитектуры.</p>
+                <p style="font-size: 12px; color: var(--text-muted);">Разработка сайтов по подписке 24/7</p>
+            </div>
         </div>
     </footer>
 
+    <script>
+        // FAQ Аккордеон
+        function toggleFaqAccordion(element) {
+            const answer = element.nextElementSibling;
+            const span = element.querySelector('span');
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+                span.innerText = "+";
+            } else {
+                answer.style.display = "block";
+                span.innerText = "-";
+            }
+        }
+
+        // Логика переключения отзывов
+        let activeReviewIndex = 1;
+        const totalReviews = 2;
+        function changeReview(direction) {
+            document.getElementById(`rev-${activeReviewIndex}`).classList.remove('active');
+            activeReviewIndex += direction;
+            if (activeReviewIndex > totalReviews) activeReviewIndex = 1;
+            if (activeReviewIndex < 1) activeReviewIndex = totalReviews;
+            document.getElementById(`rev-${activeReviewIndex}`).classList.add('active');
+        }
+
+        // Симулятор живой Демо-версии
+        function loadDemoSite(type) {
+            const screen = document.getElementById('demo-screen');
+            if(type === 'auto') {
+                screen.innerHTML = `
+                    <div style="color: #1e293b; background: #f8fafc; padding: 20px; border-radius: 6px; border-left: 4px solid var(--accent);">
+                        <div style="display:flex; justify-content:space-between; font-weight:800; font-size:18px; margin-bottom:15px; color:#0f172a;">
+                            <span>🔧 АВТО-МАСТЕР 24</span>
+                            <span style="font-size:12px; color:var(--accent);">Звонок: +7 (999) 111-22-33</span>
+                        </div>
+                        <h4 style="font-size:22px; font-weight:800; margin-bottom:10px; color:#0f172a;">Профессиональный ремонт и диагностика авто в Перми</h4>
+                        <p style="color:#475569; margin-bottom:20px;">Оставьте заявку на экспресс-диагностику подвески сегодня и получите скидку 15%!</p>
+                        <input type="text" placeholder="Имя" style="padding:10px; border:1px solid #cbd5e1; width:100%; margin-bottom:10px; border-radius:4px;">
+                        <input type="text" placeholder="Телефон" style="padding:10px; border:1px solid #cbd5e1; width:100%; margin-bottom:15px; border-radius:4px;">
+                        <button onclick="alert('Заявка отправлена! (Это симуляция демо-версии)')" style="background:var(--accent); color:white; border:none; padding:12px; border-radius:4px; font-weight:600; width:100%; cursor:pointer;">Записаться на ремонт</button>
+                        <button onclick="resetDemo()" style="margin-top:15px; background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:12px; text-decoration:underline; display:block; width:100%; text-align:center;">Вернуться к выбору</button>
+                    </div>`;
+            } else if (type === 'food') {
+                screen.innerHTML = `
+                    <div style="color: #1e293b; background: #fff7ed; padding: 20px; border-radius: 6px; border-left: 4px solid #10b981;">
+                        <div style="display:flex; justify-content:space-between; font-weight:800; font-size:18px; margin-bottom:15px; color:#7c2d12;">
+                            <span>🍕 PIZZA-EXPRESS</span>
+                            <span style="font-size:12px; color:#10b981;">Доставка за 45 минут</span>
+                        </div>
+                        <h4 style="font-size:22px; font-weight:800; margin-bottom:10px; color:#7c2d12;">Горячая пицца на дровах с бесплатной доставкой</h4>
+                        <p style="color:#7c2d12; margin-bottom:20px;">Используем только фермерские продукты. При заказе двух больших пицц — кола в подарок!</p>
+                        <div style="background:#fff; border:1px solid #fed7aa; padding:15px; border-radius:6px; margin-bottom:15px;">
+                            <div style="display:flex; justify-content:space-between; font-weight:700; font-size:14px; margin-bottom:10px;">
+                                <span>Мясное Ассорти (35см)</span>
+                                <span style="color:#10b981;">590 руб.</span>
+                            </div>
+                            <button onclick="alert('Товар добавлен в корзину (Симуляция)')" style="background:#10b981; color:white; border:none; padding:6px 12px; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer;">В корзину</button>
+                        </div>
+                        <button onclick="resetDemo()" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:12px; text-decoration:underline; display:block; width:100%; text-align:center;">Вернуться к выбору</button>
+                    </div>`;
+            } else if (type === 'build') {
+                screen.innerHTML = `
+                    <div style="color: #1e293b; background: #fafafa; padding: 20px; border-radius: 6px; border-left: 4px solid #8b5cf6;">
+                        <div style="display:flex; justify-content:space-between; font-weight:800; font-size:18px; margin-bottom:15px; color:#1e1b4b;">
+                            <span>🏗️ СТРОЙ-ТЕХ-ГРУПП</span>
+                            <span style="font-size:12px; color:#8b5cf6;">Договор и Смета за 1 день</span>
+                        </div>
+                        <h4 style="font-size:22px; font-weight:800; margin-bottom:10px; color:#1e1b4b;">Строительство загородных домов под ключ по ГОСТу</h4>
+                        <p style="color:#4338ca; margin-bottom:20px;">Построим дом вашей мечты из газобетона или кирпича с гарантией стабильности цены по договору 5 лет.</p>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:15px;">
+                            <div style="background:#fff; padding:10px; border:1px solid #e0e7ff; border-radius:4px; text-align:center; font-weight:700; font-size:12px;">Проект "Уют" (120м²)</div>
+                            <div style="background:#fff; padding:10px; border:1px solid #e0e7ff; border-radius:4px; text-align:center; font-weight:700; font-size:12px;">Проект "Люкс" (210м²)</div>
+                        </div>
+                        <button onclick="alert('Консультация забронирована (Симуляция)')" style="background:#8b5cf6; color:white; border:none; padding:12px; border-radius:4px; font-weight:600; width:100%; cursor:pointer;">Скачать каталог проектов</button>
+                        <button onclick="resetDemo()" style="margin-top:15px; background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:12px; text-decoration:underline; display:block; width:100%; text-align:center;">Вернуться к выбору</button>
+                    </div>`;
+            }
+        }
+
+        function resetDemo() {
+            document.getElementById('demo-screen').innerHTML = `
+                <div style="text-align: center; padding-top: 40px;">
+                    <h3 style="margin-bottom: 15px; font-weight: 700; color: #1e293b;">Выберите тип бизнеса для мгновенного превью:</h3>
+                    <button onclick="loadDemoSite('auto')" class="btn" style="padding: 12px 24px; font-size: 14px; margin: 5px;">Автосервис</button>
+                    <button onclick="loadDemoSite('food')" class="btn" style="padding: 12px 24px; font-size: 14px; margin: 5px; background: #10b981;">Доставка еды</button>
+                    <button onclick="loadDemoSite('build')" class="btn" style="padding: 12px 24px; font-size: 14px; margin: 5px; background: #8b5cf6;">Строительство</button>
+                </div>`;
+        }
+
+        // Логика работы Умной Анкеты (Quiz)
+        let quizCurrentStep = 1;
+        let quizCollectedData = {};
+
+        function handleQuizNext() {
+            if (quizCurrentStep === 1) {
+                const textVal = document.getElementById('quiz-text-input').value.trim();
+                if (!textVal) return alert('Пожалуйста, укажите направление или нишу вашего бизнеса!');
+                quizCollectedData.niche = textVal;
+                
+                quizCurrentStep = 2;
+                document.getElementById('quiz-question-title').innerText = "Шаг 2: Требуется ли вам модуль онлайн-приема платежей на сайте?";
+                document.getElementById('quiz-options-box').innerHTML = `
+                    <button class="quiz-option-btn" onclick="saveQuizStep2('Да, нужен полноценный эквайринг')">🔥 Да, планирую принимать онлайн-оплату картами от клиентов прямо на сайте</button>
+                    <button class="quiz-option-btn" onclick="saveQuizStep2('Нет, достаточно формы сбора заявок')">🛑 Нет, достаточно сбора контактов и отправки уведомлений в Telegram</button>
+                `;
+            }
+        }
+
+        function saveQuizStep2(value) {
+            quizCollectedData.payment = value;
+            quizCurrentStep = 3;
+            document.getElementById('quiz-question-title').innerText = "Шаг 3: Оставьте ваши контактные данные для связи с ИТ-архитектором:";
+            document.getElementById('quiz-options-box').innerHTML = `
+                <input type="text" id="quiz-final-contact" placeholder="Введите ваш номер телефона или никнейм в Telegram" style="width: 100%; padding: 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-main); color: #fff; font-size: 16px; margin-bottom: 25px; outline: none;">
+            `;
+            // Замена кнопки на финал
+            document.getElementById('quiz-content').querySelector('button').setAttribute('onclick', 'handleQuizFinal()');
+        }
+
+        function handleQuizFinal() {
+            const contactVal = document.getElementById('quiz-final-contact').value.trim();
+            if (!contactVal) return alert('Пожалуйста, оставьте ваш контакт, чтобы мы могли предоставить доступы!');
+            quizCollectedData.contact = contactVal;
+            
+            // Финальный экран анкеты с бесшовным редиректом на бота воронки для совершения транзакции
+            document.getElementById('quiz-content').innerHTML = `
+                <div style="text-align: center; padding: 20px 0;">
+                    <div style="font-size: 55px; margin-bottom: 20px;">🎉</div>
+                    <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 12px; color: #fff;">Конфигурация успешно составлена!</h3>
+                    <p style="color: var(--text-muted); font-size: 15px; max-width: 600px; margin: 0 auto 30px auto;">Ваша анкета обработана ИИ-системой студии Onyx. Для активации вашего первого бесплатного тестового месяца и автоматической привязки реферальной партнерской программы перейдите в нашего главного Telegram-робота.</p>
+                    <a href="https://t.me/websitest_bot?start=landing" target="_blank" class="btn" style="display: inline-block; padding: 18px 45px; font-size: 16px;">Запустить робота и привязать оплату</a>
+                </div>
+            `;
+        }
+    </script>
 </body>
 </html>
