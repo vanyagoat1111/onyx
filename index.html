@@ -199,7 +199,7 @@
         }
 
         /* ==========================================================================
-           4. МАРКЕТИНГОВЫЙ БЛОК: СТАТИСТИКА РОССТАТА
+           4. МАРКЕТИНГОВЫЙ БЛОК: СТАТИСТИКА РОССТАТА С БОЛЯМИ КЛИЕНТА
            ========================================================================== */
         .stats-section {
             padding: 80px 0;
@@ -253,7 +253,7 @@
         }
 
         /* ==========================================================================
-           5. БИЗНЕС-МАТЕМАТИКА И ТАБЛИЦА СРАВНЕНИЯ
+           5. БИЗНЕС-МАТЕМАТИКА И СРАВНЕНИЕ С КОНКУРЕНТАМИ
            ========================================================================== */
         .math-section {
             padding: 80px 0;
@@ -451,13 +451,8 @@
             border-color: #7c3aed;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         /* ==========================================================================
-           8. ИНТЕРАКТИВНЫЙ ИНТЕРНЕТ-МАГАЗИН (ОЖИВЛЕННЫЙ РЕЖИМ ONYX-DEMO)
+           8. ИНТЕРАКТИВНЫЙ ИНТЕРНЕТ-МАГАЗИН (РЕЖИМ ONYX-DEMO)
            ========================================================================== */
         .demo-fullscreen {
             display: none;
@@ -542,7 +537,7 @@
             border-color: transparent;
         }
 
-        /* БАННЕР В МАГАЗИНЕ */
+        /* БАННЕР В ДЕМО-МАГАЗИНЕ */
         .a3-hero {
             background: #111111;
             color: #ffffff;
@@ -609,7 +604,6 @@
         .a3-card {
             background: #ffffff;
             border: 1px solid #e5e7eb;
-            border-radius: 0px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -622,198 +616,31 @@
             transform: translateY(-4px);
         }
 
-        /* РЕАЛИСТИЧНЫЕ ВЕКТОРНЫЕ ИЗОБРАЖЕНИЯ НА ЧИСТОМ CSS */
+        /* БЛОК ИЗОБРАЖЕНИЯ ТОВАРА С РЕАЛЬНЫМИ ССЫЛКАМИ ИЗ ОРИГИНАЛЬНОГО МАГАЗИНА */
         .a3-image-box {
             width: 100%;
-            height: 280px;
-            background: #f3f4f6;
+            height: 300px;
+            background: #f9fafb;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            border-bottom: 1px solid #f0f0f0;
         }
 
-        /* Базовые стили для всех типов векторной графики */
-        .vector-canvas {
-            position: relative;
-            width: 200px;
-            height: 140px;
+        .a3-image-box img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            transition: transform 0.4s ease;
         }
 
-        /* Кроссовки векторный силуэт (Nike, Adidas, Yeezy, Balenciaga) */
-        .sneaker-vector .sole {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            width: 180px;
-            height: 25px;
-            background: #ffffff;
-            border-radius: 0 0 15px 25px;
-            border-top: 4px solid #dddddd;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .sneaker-vector .body-up {
-            position: absolute;
-            bottom: 30px;
-            left: 20px;
-            width: 150px;
-            height: 70px;
-            background: #111111;
-            border-radius: 50px 110px 10px 10px;
-            transform: rotate(-5deg);
-        }
-        .sneaker-vector .tongue {
-            position: absolute;
-            top: 25px;
-            right: 45px;
-            width: 30px;
-            height: 50px;
-            background: #222222;
-            border-radius: 10px;
-            transform: rotate(25deg);
-        }
-        .sneaker-vector .swoosh {
-            position: absolute;
-            top: 55px;
-            left: 50px;
-            width: 80px;
-            height: 20px;
-            background: transparent;
-            border-bottom: 8px solid #ffffff;
-            border-right: 8px solid #ffffff;
-            border-radius: 0 0 40px 0;
-            transform: rotate(-15deg);
-        }
-        .sneaker-vector .laces {
-            position: absolute;
-            top: 40px;
-            right: 55px;
-            width: 40px;
-            height: 4px;
-            background: #ffffff;
-            box-shadow: 0 8px 0 #ffffff, 0 16px 0 #ffffff;
-            transform: rotate(-25deg);
+        .a3-card:hover .a3-image-box img {
+            transform: scale(1.06);
         }
 
-        /* Цветовые модификации обуви */
-        .vector-yeezy .body-up { background: #ded2bc; border-radius: 80px 120px 20px 20px; }
-        .vector-yeezy .sole { background: #cbbba3; border-top: none; height: 32px; border-radius: 10px 10px 20px 20px; }
-        .vector-yeezy .laces { background: #b0a085; box-shadow: 0 8px 0 #b0a085, 0 16px 0 #b0a085; }
-
-        .vector-balenciaga .sole { height: 40px; background: #eaeaea; box-shadow: 0 4px 0 #999, 0 8px 0 #bbb; }
-        .vector-balenciaga .body-up { background: #ffffff; border: 2px solid #ccc; }
-
-        .vector-offwhite .laces { background: #neon-orange; color: #ff4500; }
-        .vector-offwhite .zip-tie {
-            position: absolute;
-            top: 30px;
-            right: 35px;
-            width: 15px;
-            height: 15px;
-            border: 3px solid #ff4500;
-            border-radius: 50%;
-        }
-
-        .vector-converse .body-up { background: #f3f4f6; border-left: 60px solid #111111; border-top: 70px solid #111111; border-radius: 0; width: 140px; height: 90px; bottom: 30px; }
-        .vector-converse .sole { background: #fff; border-bottom: 3px solid #000; }
-        .vector-converse .patch { position: absolute; top: 45px; left: 35px; width: 16px; height: 16px; background: #fff; border-radius: 50%; border: 1px solid red; }
-
-        .vector-vans .body-up { background: #111; border-radius: 20px 90px 10px 10px; height: 55px; }
-        .vector-vans .stripe { position: absolute; top: 50px; left: 30px; width: 100px; height: 6px; background: #fff; transform: skewY(-10deg); }
-
-        /* Векторная одежда (Худи, Куртки, Футболки) */
-        .apparel-vector .body-main {
-            position: absolute;
-            bottom: 15px;
-            left: 45px;
-            width: 110px;
-            height: 95px;
-            background: #111111;
-            border-radius: 10px 10px 0 0;
-        }
-        .apparel-vector .sleeve-l {
-            position: absolute;
-            bottom: 25px;
-            left: 20px;
-            width: 30px;
-            height: 75px;
-            background: #111111;
-            border-radius: 10px 0 0 10px;
-            transform: rotate(15deg);
-        }
-        .apparel-vector .sleeve-r {
-            position: absolute;
-            bottom: 25px;
-            right: 20px;
-            width: 30px;
-            height: 75px;
-            background: #111111;
-            border-radius: 0 10px 10px 0;
-            transform: rotate(-15deg);
-        }
-        .apparel-vector .hood {
-            position: absolute;
-            top: 10px;
-            left: 65px;
-            width: 70px;
-            height: 35px;
-            background: #222222;
-            border-radius: 35px 35px 0 0;
-        }
-
-        .vector-amiri .body-main, .vector-amiri .sleeve-l, .vector-amiri .sleeve-r { background: #18181b; }
-        .vector-amiri .logo-text { position: absolute; top: 50px; left: 65px; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 2px; }
-
-        .vector-puma .body-main, .vector-puma .sleeve-l, .vector-puma .sleeve-r { background: #39ff14; }
-        .vector-puma .hood { display: none; } /* Футболка без капюшона */
-        .vector-puma .neck { position: absolute; top: 25px; left: 80px; width: 40px; height: 15px; background: #f3f4f6; border-radius: 0 0 20px 20px; }
-
-        .vector-jacket { background: #1e293b; }
-        .vector-jacket .zipper { position: absolute; top: 30px; left: 98px; width: 4px; height: 80px; background: #64748b; }
-
-        /* Векторные аксессуары (Сумки, Кепки) */
-        .bag-vector .bag-body {
-            position: absolute;
-            bottom: 20px;
-            left: 40px;
-            width: 120px;
-            height: 80px;
-            background: #0f172a;
-            border-radius: 12px;
-            border: 2px solid #334155;
-        }
-        .bag-vector .handle {
-            position: absolute;
-            top: 15px;
-            left: 65px;
-            width: 70px;
-            height: 40px;
-            border: 4px solid #0f172a;
-            border-bottom: none;
-            border-radius: 35px 35px 0 0;
-        }
-
-        .cap-vector .cap-dome {
-            position: absolute;
-            bottom: 35px;
-            left: 50px;
-            width: 100px;
-            height: 65px;
-            background: #7f1d1d;
-            border-radius: 50px 50px 5px 5px;
-        }
-        .cap-vector .visor {
-            position: absolute;
-            bottom: 32px;
-            right: 30px;
-            width: 60px;
-            height: 10px;
-            background: #450a0a;
-            border-radius: 0 10px 10px 0;
-        }
-
-        /* ТЕКСТОВАЯ ИНФОРМАЦИЯ КАРТОЧЕК */
         .a3-card-body {
             padding: 20px;
             display: flex;
@@ -830,12 +657,12 @@
         }
 
         .a3-name {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: #111111;
             margin-bottom: 10px;
             line-height: 1.3;
-            min-height: 42px;
+            min-height: 40px;
         }
 
         .a3-price {
@@ -848,6 +675,7 @@
         /* ИНТЕРАКТИВНЫЙ ВЫБОР РАЗМЕРОВ */
         .a3-sizes {
             display: flex;
+            flex-wrap: wrap;
             gap: 6px;
             margin-bottom: 20px;
         }
@@ -1008,6 +836,182 @@
             color: var(--text-muted);
             font-size: 14px;
         }
+
+        /* ==========================================================================
+           10. МОДAЛЬНОЕ ОКНО QUIZ-АНКЕТЫ ONYX
+           ========================================================================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 8, 15, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-plat);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 16px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-plat);
+            border-radius: 6px;
+            padding: 12px 16px;
+            color: var(--text-main);
+            font-family: var(--font-onyx);
+            font-size: 15px;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #7c3aed;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-plat);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .faq-trigger {
+            width: 100%;
+            text-align: left;
+            padding: 24px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-content {
+            display: none;
+            padding: 0 24px 24px 24px;
+            color: var(--text-muted);
+            font-size: 15px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 15px;
+        }
+
+        .faq-item.active .faq-content {
+            display: block;
+        }
+
+        .steps-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-plat);
+            padding: 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .step-item:hover {
+            border-color: var(--neon-blue);
+        }
+
+        .step-num {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .step-text h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step-text p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -1026,7 +1030,7 @@
 
     <header class="header">
         <div class="container">
-            <div class="logo">
+            <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
                 ONYX<span class="text-gradient">SYSTEMS</span><div class="logo-dot"></div>
             </div>
             <nav class="nav-menu">
@@ -1043,11 +1047,11 @@
 
     <section class="hero">
         <div class="container">
-            <h1 class="hero-title">Разработка адаптивных сайтов мирового уровня по <span class="text-gradient">модели подписки</span></h1>
-            <p class="hero-subtitle">Забудьте про огромные разовые сметы веб-студий. Получите премиальный интернет-магазин, корпоративный портал или лендинг за фиксированный ежемесячный платеж с безлимитной поддержкой.</p>
+            <h1 class="hero-title">Продающий сайт представительского класса по доступной <span class="text-gradient">подписке</span></h1>
+            <p class="hero-subtitle">Выводите свой бизнес на совершенно новый уровень вместе с ONYX. Заполняйте анкету ниже, и уже сегодня мы пришлем интерактивный прототип вашего будущего сайта.</p>
             <div class="hero-btns">
-                <button class="btn btn-primary" onclick="openDemo()">Тестировать демо-сайт</button>
-                <a href="#math" class="btn btn-secondary">Изучить экономику</a>
+                <button class="btn btn-primary" onclick="toggleModal(true)">Заполнить анкету</button>
+                <button class="btn btn-secondary" onclick="openDemo()">Демо-версия сайта</button>
             </div>
         </div>
     </section>
@@ -1055,14 +1059,14 @@
     <section class="stats-section">
         <div class="container">
             <div class="stats-grid">
-                <div class="stats-card" onclick="alert('Вы кликнули по блоку статистики. В живой версии здесь открывается детальный аналитический отчет Росстата по онлайн-коммерции.')">
-                    <div class="stats-number text-gradient">92%</div>
-                    <div style="font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Покупателей в РФ</div>
+                <div class="stats-card" onclick="alert('Аналитический триггер: мы полностью убираем риски кассового разрыва.')">
+                    <div class="stats-number text-gradient">90%</div>
+                    <div style="font-weight: 600; font-size: 14px; text-transform: uppercase;">Бизнесов в РФ закрываются</div>
                 </div>
                 <div class="stats-info">
-                    <h2>Официальные данные Росстата на текущий год</h2>
-                    <p>Более 92% платежеспособного населения крупных городов совершают как минимум одну онлайн-покупку в неделю. Бизнес, не имеющий высокотехнологичного веб-представительства, ежедневно теряет до половины целевого трафика в пользу конкурентов.</p>
-                    <p style="font-size: 14px; font-style: italic;">Нажмите на карточку со статистикой, чтобы симулировать действие пользователя.</p>
+                    <h2>Мы полностью предостерегаем ваш бизнес от финансовых рисков</h2>
+                    <p>По данным официальной статистики Росстата, около 90% новых коммерческих проектов прекращают свое существование в течение первых 12 месяцев. Инвестиции в дорогостоящую классическую веб-разработку (от 150 000 рублей) в современных реалиях часто становятся неоправданной потерей стартового капитала.</p>
+                    <p>Наша уникальная модель подписки за 2990 руб/мес полностью решает эту боль. Вы не рискуете крупными бюджетами. Мы берем на себя создание сайта, его техническую поддержку и бесплатное обслуживание на постоянной основе.</p>
                 </div>
             </div>
         </div>
@@ -1070,41 +1074,41 @@
 
     <section class="math-section" id="math">
         <div class="container">
-            <h2 class="section-title">Бизнес-математика: Сравнение подходов</h2>
+            <h2 class="section-title">Математический расчет: ONYX против веб-студий</h2>
             <div class="table-wrapper">
                 <table class="compare-table">
                     <thead>
                         <tr>
-                            <th>Параметр / Услуга</th>
-                            <th>Фриланс (Kwork/Fl)</th>
-                            <th>Классическая веб-студия</th>
-                            <th class="text-success">ONYX Systems (Подписка)</th>
+                            <th>Критерии расходов за год</th>
+                            <th>Классическая студия (РФ)</th>
+                            <th style="color: #7c3aed;">Контракт подписки ONYX</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr onclick="alert('Стоимость разработки — ключевой фактор. Мы убираем кассовые разрывы для вашего бизнеса.')">
-                            <td>Стартовая стоимость разработки</td>
-                            <td class="text-danger">от 35 000 руб.</td>
-                            <td class="text-danger">от 250 000 руб.</td>
-                            <td class="text-success">0 руб. (Входит в подписку)</td>
+                        <tr onclick="alert('Обычные студии требуют 100% предоплаты до начала ведения работ.')">
+                            <td>Разработка и запуск сайта (одноразово)</td>
+                            <td class="text-danger">от 120 000 руб.</td>
+                            <td class="text-success">0 руб. (Бесплатно)</td>
                         </tr>
-                        <tr onclick="alert('Никаких скрытых платежей за каждую правку или измененный баннер.')">
-                            <td>Внесение правок и обновлений</td>
-                            <td>Платное (от 1000 руб/час)</td>
-                            <td>По регламенту техподдержки</td>
-                            <td class="text-success">Безлимитно и бесплатно</td>
+                        <tr onclick="alert('Мы берем на себя ежегодное продление вашего доменного имени.')">
+                            <td>Покупка доменного имени (.RU / .COM)</td>
+                            <td>от 900 руб. / год</td>
+                            <td class="text-success">0 руб. (Подарок навсегда)</td>
                         </tr>
-                        <tr onclick="alert('Мы заинтересованы в долгосрочном сотрудничестве, поэтому качество кода всегда эталонное.')">
-                            <td>Гарантия на отсутствие багов</td>
-                            <td>До момента закрытия сделки</td>
-                            <td>От 3 до 6 месяцев</td>
-                            <td class="text-success">Пожизненная (пока активна подписка)</td>
+                        <tr onclick="alert('Правка текстов, баннеров и добавление акций входят в базовый тариф.')">
+                            <td>Техническое обслуживание и правки контента</td>
+                            <td class="text-danger">от 5 000 руб. / мес.</td>
+                            <td class="text-success">0 руб. (Включено)</td>
                         </tr>
-                        <tr class="highlight-row" onclick="alert('Выбирая ONYX, вы экономите сотни тысяч рублей на старте.')">
-                            <td><strong>Итоговые затраты за первый месяц</strong></td>
-                            <td class="text-danger"><strong>35 000+ руб.</strong></td>
-                            <td class="text-danger"><strong>250 000+ руб.</strong></td>
-                            <td class="text-success"><strong>Фиксированная подписка</strong></td>
+                        <tr onclick="alert('Вы можете отказаться от подписки в любой момент первого месяца.')">
+                            <td>Первый месяц полноценного тестирования</td>
+                            <td>Невозможен</td>
+                            <td class="text-success">0 руб. (Тестовый период)</td>
+                        </tr>
+                        <tr class="highlight-row" onclick="alert('Разница в бюджете очевидна. Экономьте оборотный капитал!')">
+                            <td>Итого расходы за первый год работы</td>
+                            <td class="text-danger" style="font-size:18px;">более 180 000 руб.</td>
+                            <td class="text-success" style="font-size:18px; color:#10b981;">32 890 руб.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1114,22 +1118,22 @@
 
     <section class="why-section" id="why">
         <div class="container">
-            <h2 class="section-title">Тренды веб-разработки текущего года</h2>
+            <h2 class="section-title">Почему вашему бизнесу жизненно необходим сайт в 2026 году</h2>
             <div class="why-grid">
-                <div class="why-card" onclick="alert('Интерактивный тренд 1: Полное редактирование контента силами заказчика без знания HTML.')">
+                <div class="why-card" onclick="alert('Наличие собственного брендированного веб-сайта — ключевой маркер надежности.')">
                     <div class="why-icon">01</div>
-                    <h3>Интерактивный контент-маркетинг</h3>
-                    <p>Современные пользователи не читают сухие тексты. Им необходимы живые калькуляторы, интерактивные витрины с возможностью кастомизации на лету и мгновенный отклик элементов интерфейса.</p>
+                    <h3>Доверие B2B и B2C сегментов</h3>
+                    <p>В 2026 году социальные сети и мессенджеры стали перегруженным инфошумом. Наличие собственного брендированного веб-сайта — ключевой маркер надежности и стабильности вашей компании для клиентов.</p>
                 </div>
-                <div class="why-card" onclick="alert('Интерактивный тренд 2: Скорость загрузки влияет на конверсию и позиции в Яндексе/Google.')">
+                <div class="why-card" onclick="alert('Без оптимизированного кода ваш бизнес невидим для умного поиска.')">
                     <div class="why-icon">02</div>
-                    <h3>Автономность инфраструктуры</h3>
-                    <p>Сайты должны мгновенно открываться на любых устройствах. Использование чистого кода, отказ от тяжелых фреймворков и правильное серверное кэширование поднимают конверсию в продажи на 34%.</p>
+                    <h3>Интеграция с ИИ-системами</h3>
+                    <p>Современные поисковые роботы и умные нейросети анализируют структуру вашего сайта для выдачи прямых рекомендаций пользователям. Без оптимизированного кода ваш бизнес невидим для умного поиска.</p>
                 </div>
-                <div class="why-card" onclick="alert('Интерактивный тренд 3: Бесшовный чекаут в 1 клик через СБП снижает процент брошенных корзин.')">
+                <div class="why-card" onclick="alert('Интегрированные формы и квизы мгновенно перенаправляют структурированные лиды.')">
                     <div class="why-icon">03</div>
-                    <h3>Интеграция мгновенных платежей</h3>
-                    <p>Покупатель ожидает увидеть интеграцию СБП, Tinkoff Pay и Яндекс Пэй прямо внутри интерфейса оформления заказа без лишних редиректов и переходов на внешние страницы.</p>
+                    <h3>Автоматический прием заявки</h3>
+                    <p>Сайт работает автономно круглые сутки. Интегрированные формы и квизы мгновенно перенаправляют структурированные лиды в ваши корпоративные чаты и CRM-системы.</p>
                 </div>
             </div>
         </div>
@@ -1137,164 +1141,260 @@
 
     <section class="templates-section" id="templates">
         <div class="container">
-            <h2 class="section-title">9 Отраслевых ИТ-Шаблонов Onyx</h2>
+            <h2 class="section-title">Отраслевые ИТ-решения для любого направления</h2>
             <div class="tabs-nav">
-                <button class="tab-btn active" onclick="switchTab(event, 'tab-clothes')">Магазин Одежды</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-beauty')">Салон Красоты</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-delivery')">Доставка Еды</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-crypto')">Крипто-Платформа</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-realty')">Агентство Недвижимости</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-auto')">Автосервис</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-edu')">Онлайн-Школа</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-medical')">Медицинский Центр</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-law')">Юридические Услуги</button>
+                <button class="tab-btn active" onclick="switchTab(event, 'infobiz')">Инфобизнес</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tourism')">Туризм</button>
+                <button class="tab-btn" onclick="switchTab(event, 'medical')">Медцентры</button>
+                <button class="tab-btn" onclick="switchTab(event, 'b2b')">B2B Производство</button>
+                <button class="tab-btn" onclick="switchTab(event, 'clothes')">Бренды одежды</button>
+                <button class="tab-btn" onclick="switchTab(event, 'hotel')">Отели</button>
+                <button class="tab-btn" onclick="switchTab(event, 'bakery')">Пекарни и Кофейни</button>
+                <button class="tab-btn" onclick="switchTab(event, 'consult')">Консалтинг</button>
+                <button class="tab-btn" onclick="switchTab(event, 'legal')">Юриспруденция</button>
             </div>
 
-            <div id="tab-clothes" class="tab-content active">
+            <div id="infobiz" class="tab-content active">
                 <div class="template-preview-grid">
                     <div class="template-info">
-                        <h3>Премиальный eCommerce-каталог одежды</h3>
-                        <p>Идеально подходит для локальных брендов шоурумов, андеграунд-коллекций и крупных магазинов обуви. Включает интерактивную корзину, выбор параметров и кастомный чекаут.</p>
-                        <button class="btn btn-primary" onclick="openDemo()">Запустить интерактивный тест</button>
+                        <h3>Платформы для Онлайн-школ и Инфобизнеса</h3>
+                        <p>Идеальная воронка продаж для курсов, вебинаров и гайдов. Мощный лид-магнит, прогревающая структура блоков, таймеры обратного отсчета.</p>
+                        <button class="btn btn-primary" onclick="toggleModal(true)">Хочу такой сайт</button>
                     </div>
                     <div class="template-mockup" onclick="openDemo()">
-                        <div style="font-size: 40px; margin-bottom: 10px;">👟</div>
-                        <h4>Нажмите, чтобы открыть живую модель ONYX-DEMO</h4>
+                        <div class="text-gradient" style="font-weight:800; font-size:24px;">INFO.PROMPT</div>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-beauty" class="tab-content">
+            <div id="tourism" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
-                        <h3>Сайт бьюти-индустрии и SPA</h3>
-                        <p>Интеграция с онлайн-календарями записи, личными кабинетами мастеров и интерактивной галереей выполненных работ высокого разрешения.</p>
-                        <button class="btn btn-secondary" onclick="alert('Данный шаблон активируется в вашем репозитории при подключении подписки.')">Посмотреть структуру</button>
+                        <h3>Сайты витрины для Туристических Агентств</h3>
+                        <p>Удобные каталоги горящих туров и экскурсий. Формы подбора направлений по фильтрам.</p>
+                        <button class="btn btn-primary" onclick="toggleModal(true)">Хочу такой сайт</button>
                     </div>
-                    <div class="template-mockup">
-                        <div style="font-size: 40px; margin-bottom: 10px;">✨</div>
-                        <h4>Интерфейс бронирования и SPA-каталог</h4>
+                    <div class="template-mockup" onclick="openDemo()">
+                        <div class="text-gradient" style="font-weight:800; font-size:24px;">WANDER.LUST</div>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-delivery" class="tab-content">
+            <div id="medical" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
-                        <h3>Сервис заказа и быстрой доставки еды</h3>
-                        <p>Зонирование карты доставки на JavaScript, автоматический расчет времени прибытия курьера, интеграция с кухонными терминалами CRM.</p>
-                        <button class="btn btn-secondary" onclick="alert('Активация доступна по запросу в техподдержку студии ONYX.')">Посмотреть структуру</button>
+                        <h3>Медицинские Центры и Клиники</h3>
+                        <p>Строгий, вызывающий стопроцентное доверие дизайн. Удобная онлайн-запись к профильным специалистам.</p>
+                        <button class="btn btn-primary" onclick="toggleModal(true)">Хочу такой сайт</button>
                     </div>
-                    <div class="template-mockup">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🍕</div>
-                        <h4>Меню ресторана с автоматическим выбором веса</h4>
+                    <div class="template-mockup" onclick="openDemo()">
+                        <div class="text-gradient" style="font-weight:800; font-size:24px;">MED.PREMIUM</div>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-crypto" class="tab-content">
+            <div id="b2b" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
-                        <h3>Финтех и Крипто-аналитическая платформа</h3>
-                        <p>Живые графики котировок, калькуляторы доходности стейкинга, адаптивные виджеты транзакций и подключение Web3-кошельков.</p>
-                        <button class="btn btn-secondary" onclick="alert('Финтех-шаблон доступен в рамках тарифа Enterprise.')">Посмотреть структуру</button>
+                        <h3>Тяжелый B2B сектор и Производство</h3>
+                        <p>Массивные оптовые корпоративные сайты-каталоги станков, металлопроката или строительных материалов.</p>
+                        <button class="btn btn-primary" onclick="toggleModal(true)">Хочу такой сайт</button>
                     </div>
-                    <div class="template-mockup">
-                        <div style="font-size: 40px; margin-bottom: 10px;">⚡</div>
-                        <h4>Web3 дашборд и графики TradingView</h4>
+                    <div class="template-mockup" onclick="openDemo()">
+                        <div class="text-gradient" style="font-weight:800; font-size:24px;">PROD.INDUSTRIES</div>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-realty" class="tab-content">
+            <div id="clothes" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
-                        <h3>Каталог элитной городской недвижимости</h3>
-                        <p>Фильтры по районам, стоимости, интерактивные планировки этажей, 3D-туры по объектам и мгновенная отправка презентаций в Telegram.</p>
-                        <button class="btn btn-secondary" onclick="alert('Шаблон недвижимости требует интеграции с вашей базой данных CRM.')">Посмотреть структуру</button>
+                        <h3>Дизайнерские бренды одежды и шоурумы</h3>
+                        <p>Минималистичный журнальный дизайн, где фокус внимания смещен на фотографии коллекций лукбуков.</p>
+                        <button class="btn btn-primary" onclick="openDemo()">Хочу такой сайт</button>
                     </div>
-                    <div class="template-mockup">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🏢</div>
-                        <h4>Интерактивный выбор квартир на схеме дома</h4>
+                    <div class="template-mockup" onclick="openDemo()">
+                        <div class="text-gradient" style="font-weight:800; font-size:24px;">FASHION.MONO</div>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-auto" class="tab-content">
+            <div id="hotel" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
-                        <h3>Лендинг автосервиса и детейлинг-центра</h3>
-                        <p>Интерактивный калькулятор стоимости кузовного ремонта по загруженной фотографии дефекта и калькулятор ТО автомобиля.</p>
-                        <button class="btn btn-secondary" onclick="alert('Шаблон готов к развертыванию.')">Посмотреть структуру</button>
+                        <h3>Сайты для Отелей, Загородных Комплексов и Баз Отдыха</h3>
+                        <p>Презентация номерного фонда, интерактивные 3D туры по домикам, модули онлайн-бронирования свободных дат.</p>
+                        <button class="btn btn-primary" onclick="toggleModal(true)">Хочу такой сайт</button>
                     </div>
-                    <div class="template-mockup">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🚗</div>
-                        <h4>Калькулятор детейлинга по марке авто</h4>
+                    <div class="template-mockup" onclick="openDemo()">
+                        <div class="text-gradient" style="font-weight:800; font-size:24px;">ECO.RESORT</div>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-edu" class="tab-content">
+            <div id="bakery" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
-                        <h3>Платформа онлайн-образования и курсов</h3>
-                        <p>Блоки программ обучения, карточки лекторов с видео-визитками, интеграция с платежными шлюзами для продажи доступов к урокам.</p>
-                        <button class="btn btn-secondary" onclick="alert('Шаблон готов к развертыванию.')">Посмотреть структуру</button>
+                        <h3>Крафтовые пекарни, кондитерские и локальные кофейни</h3>
+                        <p>Уютная и аппетитная презентация выпечки, тортов на заказ и сортов кофе.</p>
+                        <button class="btn btn-primary" onclick="toggleModal(true)">Хочу такой сайт</button>
                     </div>
-                    <div class="template-mockup">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🎓</div>
-                        <h4>Каталог лекций и личный кабинет студента</h4>
+                    <div class="template-mockup" onclick="openDemo()">
+                        <div class="text-gradient" style="font-weight:800; font-size:24px;">CRUST.COFFEE</div>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-medical" class="tab-content">
+            <div id="consult" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
-                        <h3>Сайт многопрофильной медицинской клиники</h3>
-                        <p>Справочник врачей, прайс-лист на медицинские анализы с поиском, онлайн-запись на прием с соблюдением требований ФЗ-152.</p>
-                        <button class="btn btn-secondary" onclick="alert('Медицинский шаблон готов к развертыванию.')">Посмотреть структуру</button>
+                        <h3>Консалтинговые компании и бизнес-аналитика</h3>
+                        <p>Строгий экспертный дизайн для аналитиков, аудиторов и финансовых брокеров.</p>
+                        <button class="btn btn-primary" onclick="toggleModal(true)">Хочу такой сайт</button>
                     </div>
-                    <div class="template-mockup">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🩺</div>
-                        <h4>Расписание врачей и выбор свободных слотов</h4>
+                    <div class="template-mockup" onclick="openDemo()">
+                        <div class="text-gradient" style="font-weight:800; font-size:24px;">ASSET.PARTNERS</div>
                     </div>
                 </div>
             </div>
 
-            <div id="tab-law" class="tab-content">
+            <div id="legal" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
-                        <h3>Портал юридических и адвокатских услуг</h3>
-                        <p>Строгий премиальный дизайн, блоки разбора успешных кейсов (судебная практика), формы для экспресс-оценки правовых рисков.</p>
-                        <button class="btn btn-secondary" onclick="alert('Юридический шаблон готов к развертыванию.')">Посмотреть структуру</button>
+                        <h3>Юридические компании и частные адвокаты</h3>
+                        <p>Классическая, фундаментальная структура блоков в стиле крупных юридических бюро. Разделы по практикам.</p>
+                        <button class="btn btn-primary" onclick="toggleModal(true)">Хочу такой сайт</button>
                     </div>
-                    <div class="template-mockup">
-                        <div style="font-size: 40px; margin-bottom: 10px;">💼</div>
-                        <h4>База выигранных дел с фильтрацией по статьям</h4>
+                    <div class="template-mockup" onclick="openDemo()">
+                        <div class="text-gradient" style="font-weight:800; font-size:24px;">LEX.JUSTICE</div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <section class="steps-section" id="steps">
+        <div class="container">
+            <h2 class="section-title">Прозрачные этапы создания вашего сайта</h2>
+            <div class="steps-timeline">
+                <div class="step-item" onclick="alert('Этап 1: Получение заявки и анкетирование.')">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <h3>Получение заявки и глубокий анализ</h3>
+                        <p>Вы заполняете нашу фирменную интерактивную анкету-квиз, указывая специфику ниши, ваши основные пожелания, фирменный стиль.</p>
+                    </div>
+                </div>
+                <div class="step-item" onclick="alert('Этап 2: Составление майнд-карты и плана блоков.')">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <h3>Составление индивидуальной ИТ-стратегии</h3>
+                        <p>Ваш персональный программист связывается с вами, проводит детальный анализ конкурентов вашей сферы и формирует структуру блоков.</p>
+                    </div>
+                </div>
+                <div class="step-item" onclick="alert('Этап 3: Написание кода и чистая верстка.')">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <h3>Разработка и верстка сайта</h3>
+                        <p>Пишется чистый, валидный код (HTML, CSS, JavaScript) с интеграцией всех форм сбора заявок, анимаций и скриптов аналитики Яндекс.</p>
+                    </div>
+                </div>
+                <div class="step-item" onclick="alert('Этап 4: Делегирование и привязка DNS записей.')">
+                    <div class="step-num">4</div>
+                    <div class="step-text">
+                        <h3>Привязка вашего домена</h3>
+                        <p>Мы приобретаем под ваш проект уникальное доменное имя, настраиваем глобальные маршрутизаторы DNS, A и CNAME записи.</p>
+                    </div>
+                </div>
+                <div class="step-item" onclick="alert('Этап 5: Финальный деплой на хостинг.')">
+                    <div class="step-num">5</div>
+                    <div class="step-text">
+                        <h3>Публикация сайта</h3>
+                        <p>Сайт деплоится на высокоскоростные облачные сервера хостинга, запускается первая тестовая контекстная реклама, и вы принимаете лиды.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">Часто задаваемые вопросы (FAQ)</h2>
+            <div class="faq-accordion">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <button class="faq-trigger">Что входит в стоимость 2990 рублей в месяц? <span>+</span></button>
+                    <div class="faq-content">В эту стоимость полностью входит разработка сайта представительского класса, круглосуточная поддержка вашего персонального программиста, оплата хостинга, продление доменного имени и бесконечные контентные правки по вашему запросу.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <button class="faq-trigger">Сайт действительно будет моим? <span>+</span></button>
+                    <div class="faq-content">Да, мы заключаем официальный юридический договор. Весь исходный код сайта публикуется в вашем открытом или закрытом доступе, а домен регистрируется строго на ваши паспортные данные или реквизиты компании.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <button class="faq-trigger">Как быстро вносятся изменения на сайт? <span>+</span></button>
+                    <div class="faq-content">Все рутинные изменения контента (замена цен, добавление новых товаров, обновление акций, смена номеров) выполняются вашим личным ИТ-консультантом в течение 1 часа с момента отправки ТЗ в Телеграм.</div>
+                </div>
+            </div>
         </div>
     </section>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 ONYX Systems. Все права защищены. Разработано силами искусственного интеллекта на базе GitHub Pages.</p>
+            <p>&copy; 2026 ONYX Systems. Все права защищены. Разработка высококонверсионных ИТ-решений по подписке.</p>
         </div>
     </footer>
+
+    <div id="orderModal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" onclick="toggleModal(false)">×</button>
+            <h3 class="modal-title">Анкета на разработку ИТ-продукта</h3>
+            <form id="onyxLeadForm" onsubmit="sendLeadToBot(event)">
+                <div class="form-group">
+                    <label class="form-label">Ваше ФИО</label>
+                    <input type="text" id="leadFio" class="form-input" required placeholder="Иванов Иван Иванович">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ваш город</label>
+                    <input type="text" id="leadCity" class="form-input" required placeholder="Пермь">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Вид вашего бизнеса (Ниша)</label>
+                    <input type="text" id="leadNiche" class="form-input" required placeholder="Автосервис / Доставка еды">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Название вашей компании</label>
+                    <input type="text" id="leadCompany" class="form-input" required placeholder="ООО Вектор">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ссылки на ваши соц. сети или старый сайт</label>
+                    <input type="text" id="leadSocials" class="form-input" placeholder="vk.com/mybusiness">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ваши основные пожелания к дизайну</label>
+                    <textarea id="leadWishes" class="form-textarea" rows="2" placeholder="Хочу строгий темный B2B стиль"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Откуда вы узнали о нашей компании?</label>
+                    <select id="leadSource" class="form-select">
+                        <option value="yandex">Яндекс Поиск / Директ</option>
+                        <option value="telegram">Каналы в Telegram</option>
+                        <option value="avito">Объявления Авито</option>
+                        <option value="recommend">По рекомендации друзей</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Отправить анкету боту</button>
+            </form>
+        </div>
+    </div>
 
 
     <div id="demoMode" class="demo-fullscreen">
         
         <div class="a3-header">
-            <div class="a3-logo">ONYX-DEMO</div>
+            <div class="a3-logo" contenteditable="true">ONYX-DEMO</div>
             <div class="a3-nav">
-                <span>Обувь</span>
-                <span>Одежда</span>
-                <span>Аксессуары</span>
-                <span style="color: #ff4500;">Sale</span>
+                <span onclick="alert('Переход в раздел: Обувь')">Обувь</span>
+                <span onclick="alert('Переход в раздел: Одежда')">Одежда</span>
+                <span onclick="alert('Переход в раздел: Аксессуары')">Аксессуары</span>
+                <span style="color: #ff4500;" onclick="alert('Переход в раздел: Sale')">Sale</span>
             </div>
             <div class="a3-header-right">
                 <button class="a3-cart-btn" onclick="openCheckout()">
@@ -1308,29 +1408,23 @@
             <div class="a3-hero-text">
                 <span class="a3-hero-tag">A3BOOTS.SHOP | PREMIUM LINE</span>
                 <h1 contenteditable="true">Winter Line Collection 2026</h1>
-                <p contenteditable="true">Эксклюзивная подборка брутальной обуви, технологичной верхней одежды и концептуальных аксессуаров. Нажмите на любой текст или ценник ниже, чтобы изменить его прямо на экране!</p>
+                <p contenteditable="true">Эксклюзивная подборка обуви, технологичной верхней одежды и концептуальных аксессуаров. Нажмите на любой текст или ценник ниже, чтобы изменить его прямо на экране!</p>
             </div>
-            <div style="font-size: 120px; opacity: 0.15; position: absolute; right: 40px; top: 20px; user-select: none;">A3</div>
+            <div style="font-size: 120px; opacity: 0.05; position: absolute; right: 40px; top: 20px; user-select: none;">ONYX</div>
         </div>
 
         <div class="a3-catalog-container">
-            <div class="a3-catalog-title">Каталог Продукции</div>
+            <div class="a3-catalog-title" contenteditable="true">Каталог Продукции</div>
             <div class="a3-grid">
                 
                 <div class="a3-card" data-id="1">
                     <div class="a3-image-box">
-                        <div class="vector-canvas sneaker-vector">
-                            <div class="sole"></div>
-                            <div class="body-up" style="background: #111;"></div>
-                            <div class="tongue" style="background: #222;"></div>
-                            <div class="swoosh" style="border-bottom-color: #fff; border-right-color: #fff;"></div>
-                            <div class="laces"></div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/b3e/400_400_1/b3e2ec6f29fb2cb78b02e7a3eb0f92b0.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
                         <div class="a3-brand" contenteditable="true">Nike</div>
-                        <div class="a3-name" contenteditable="true">Nike Air Max Black Premium</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">12600</span> руб.</div>
+                        <div class="a3-name" contenteditable="true">Nike Air Max Black Premium Custom</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">14 990</span> ₽</div>
                         <div class="a3-sizes">
                             <div class="size-chip" onclick="selectSize(this)">41</div>
                             <div class="size-chip" onclick="selectSize(this)">42</div>
@@ -1342,17 +1436,12 @@
 
                 <div class="a3-card" data-id="2">
                     <div class="a3-image-box">
-                        <div class="vector-canvas sneaker-vector vector-yeezy">
-                            <div class="sole"></div>
-                            <div class="body-up"></div>
-                            <div class="tongue"></div>
-                            <div class="laces"></div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/c04/400_400_1/c04297120a1eb979854ef0cc18080bc6.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
                         <div class="a3-brand" contenteditable="true">Adidas</div>
-                        <div class="a3-name" contenteditable="true">Yeezy Boost 350 V2 Sesame</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">18900</span> руб.</div>
+                        <div class="a3-name" contenteditable="true">Adidas Yeezy Boost 350 V2 Onyx</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">24 890</span> ₽</div>
                         <div class="a3-sizes">
                             <div class="size-chip" onclick="selectSize(this)">40</div>
                             <div class="size-chip" onclick="selectSize(this)">42</div>
@@ -1364,17 +1453,12 @@
 
                 <div class="a3-card" data-id="3">
                     <div class="a3-image-box">
-                        <div class="vector-canvas sneaker-vector vector-balenciaga">
-                            <div class="sole"></div>
-                            <div class="body-up"></div>
-                            <div class="tongue"></div>
-                            <div class="laces" style="background:#000; box-shadow:0 8px 0 #000;"></div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/0be/400_400_1/0bed3eb4b1ca756eeea8f0b7fa1f21eb.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
                         <div class="a3-brand" contenteditable="true">Balenciaga</div>
-                        <div class="a3-name" contenteditable="true">Triple S White & Gold Edition</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">29500</span> руб.</div>
+                        <div class="a3-name" contenteditable="true">Сникеры Balenciaga Triple S White Edition</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">59 900</span> ₽</div>
                         <div class="a3-sizes">
                             <div class="size-chip" onclick="selectSize(this)">41</div>
                             <div class="size-chip" onclick="selectSize(this)">42</div>
@@ -1386,22 +1470,16 @@
 
                 <div class="a3-card" data-id="4">
                     <div class="a3-image-box">
-                        <div class="vector-canvas sneaker-vector vector-offwhite">
-                            <div class="sole" style="background:#000; border-top:4px dashed #ff4500;"></div>
-                            <div class="body-up" style="background:#fff; border:1px solid #ddd;"></div>
-                            <div class="tongue" style="background:#eee;"></div>
-                            <div class="zip-tie"></div>
-                            <div class="laces" style="background:#ff4500; box-shadow:0 8px 0 #ff4500;"></div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/2ba/400_400_1/2baa5db1f94f92d4f23e4db95d774776.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
                         <div class="a3-brand" contenteditable="true">Off-White</div>
-                        <div class="a3-name" contenteditable="true">Low Vulcanized Eco Canvas</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">16250</span> руб.</div>
+                        <div class="a3-name" contenteditable="true">Кеды Off-White Low Vulcanized Eco</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">32 500</span> ₽</div>
                         <div class="a3-sizes">
+                            <div class="size-chip" onclick="selectSize(this)">41</div>
                             <div class="size-chip" onclick="selectSize(this)">42</div>
                             <div class="size-chip" onclick="selectSize(this)">43</div>
-                            <div class="size-chip" onclick="selectSize(this)">45</div>
                         </div>
                         <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                     </div>
@@ -1409,18 +1487,12 @@
 
                 <div class="a3-card" data-id="5">
                     <div class="a3-image-box">
-                        <div class="vector-canvas apparel-vector vector-amiri">
-                            <div class="sleeve-l"></div>
-                            <div class="sleeve-r"></div>
-                            <div class="body-main"></div>
-                            <div class="hood"></div>
-                            <div class="logo-text">AMIRI</div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/7cf/400_400_1/7cfdf9d9494379ba63cb644d67be926f.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
                         <div class="a3-brand" contenteditable="true">Amiri</div>
-                        <div class="a3-name" contenteditable="true">Худи Amiri Core Logo Black Heavy</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">13400</span> руб.</div>
+                        <div class="a3-name" contenteditable="true">Худи Amiri Core Logo Black Metallic</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">45 000</span> ₽</div>
                         <div class="a3-sizes">
                             <div class="size-chip" onclick="selectSize(this)">M</div>
                             <div class="size-chip" onclick="selectSize(this)">L</div>
@@ -1432,17 +1504,12 @@
 
                 <div class="a3-card" data-id="6">
                     <div class="a3-image-box">
-                        <div class="vector-canvas apparel-vector vector-puma">
-                            <div class="sleeve-l"></div>
-                            <div class="sleeve-r"></div>
-                            <div class="body-main"></div>
-                            <div class="neck"></div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/420/400_400_1/420b92f76db3645b23b860081d0be3ea.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
                         <div class="a3-brand" contenteditable="true">Puma</div>
-                        <div class="a3-name" contenteditable="true">Футболка Puma Neon Oversize Cyber</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">4150</span> руб.</div>
+                        <div class="a3-name" contenteditable="true">Футболка Puma Неон Оверсайз Лимитированная</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">4 290</span> ₽</div>
                         <div class="a3-sizes">
                             <div class="size-chip" onclick="selectSize(this)">S</div>
                             <div class="size-chip" onclick="selectSize(this)">M</div>
@@ -1454,17 +1521,12 @@
 
                 <div class="a3-card" data-id="7">
                     <div class="a3-image-box">
-                        <div class="vector-canvas sneaker-vector vector-converse">
-                            <div class="sole"></div>
-                            <div class="body-up"></div>
-                            <div class="patch"></div>
-                            <div class="laces"></div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/88b/400_400_1/88b02e77e2ff87010a30b42f275fcbdf.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
                         <div class="a3-brand" contenteditable="true">Converse</div>
-                        <div class="a3-name" contenteditable="true">Chuck Taylor 70 High Vintage Black</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">7900</span> руб.</div>
+                        <div class="a3-name" contenteditable="true">Кеды Converse Chuck Taylor All Star Black</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">9 190</span> ₽</div>
                         <div class="a3-sizes">
                             <div class="size-chip" onclick="selectSize(this)">39</div>
                             <div class="size-chip" onclick="selectSize(this)">41</div>
@@ -1476,21 +1538,16 @@
 
                 <div class="a3-card" data-id="8">
                     <div class="a3-image-box">
-                        <div class="vector-canvas apparel-vector">
-                            <div class="sleeve-l" style="background:#1e293b;"></div>
-                            <div class="sleeve-r" style="background:#1e293b;"></div>
-                            <div class="body-main vector-jacket"></div>
-                            <div class="zipper"></div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/f30/400_400_1/f3070bc0e998777a942da182b82142e0.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
-                        <div class="a3-brand" contenteditable="true">Off-White</div>
-                        <div class="a3-name" contenteditable="true">Куртка Off-White Track Jacket Slate</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">22800</span> руб.</div>
+                        <div class="a3-brand" contenteditable="true">Vans</div>
+                        <div class="a3-name" contenteditable="true">Кеды Vans Old Skool Classic Black/White</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">8 490</span> ₽</div>
                         <div class="a3-sizes">
-                            <div class="size-chip" onclick="selectSize(this)">M</div>
-                            <div class="size-chip" onclick="selectSize(this)">L</div>
-                            <div class="size-chip" onclick="selectSize(this)">XL</div>
+                            <div class="size-chip" onclick="selectSize(this)">40</div>
+                            <div class="size-chip" onclick="selectSize(this)">42</div>
+                            <div class="size-chip" onclick="selectSize(this)">43</div>
                         </div>
                         <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                     </div>
@@ -1498,17 +1555,16 @@
 
                 <div class="a3-card" data-id="9">
                     <div class="a3-image-box">
-                        <div class="vector-canvas bag-vector">
-                            <div class="handle"></div>
-                            <div class="bag-body"></div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/9aa/400_400_1/9aa3e2bc00b213da0fa36eb2efcf80d3.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
                         <div class="a3-brand" contenteditable="true">Lanvin</div>
-                        <div class="a3-name" contenteditable="true">Сумка Lanvin Leather Tote Bag Premium</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">34100</span> руб.</div>
+                        <div class="a3-name" contenteditable="true">Кроссовки Lanvin Curb Sneakers Leather</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">67 000</span> ₽</div>
                         <div class="a3-sizes">
-                            <div class="size-chip" onclick="selectSize(this)">ONE</div>
+                            <div class="size-chip" onclick="selectSize(this)">41</div>
+                            <div class="size-chip" onclick="selectSize(this)">42</div>
+                            <div class="size-chip" onclick="selectSize(this)">44</div>
                         </div>
                         <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                     </div>
@@ -1516,17 +1572,29 @@
 
                 <div class="a3-card" data-id="10">
                     <div class="a3-image-box">
-                        <div class="vector-canvas sneaker-vector vector-vans">
-                            <div class="sole" style="background:#fff; height:22px; border-top: 2px solid #000;"></div>
-                            <div class="body-up"></div>
-                            <div class="stripe"></div>
-                            <div class="laces" style="top:32px; right:65px;"></div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/14c/400_400_1/14c6d66e7ea81b5ff9d4b0f023ea9a30.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
-                        <div class="a3-brand" contenteditable="true">Vans</div>
-                        <div class="a3-name" contenteditable="true">Vans Authentic Core Classic Black</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">6400</span> руб.</div>
+                        <div class="a3-brand" contenteditable="true">Ugg</div>
+                        <div class="a3-name" contenteditable="true">Ботинки Ugg Tasman Slippers Chestnut</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">15 400</span> ₽</div>
+                        <div class="a3-sizes">
+                            <div class="size-chip" onclick="selectSize(this)">38</div>
+                            <div class="size-chip" onclick="selectSize(this)">39</div>
+                            <div class="size-chip" onclick="selectSize(this)">41</div>
+                        </div>
+                        <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="a3-card" data-id="11">
+                    <div class="a3-image-box">
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/88b/400_400_1/88b02e77e2ff87010a30b42f275fcbdf.jpg" alt="Product">
+                    </div>
+                    <div class="a3-card-body">
+                        <div class="a3-brand" contenteditable="true">Rick Owens</div>
+                        <div class="a3-name" contenteditable="true">Кроссовки Rick Owens DRKSHDW Ramones</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">48 000</span> ₽</div>
                         <div class="a3-sizes">
                             <div class="size-chip" onclick="selectSize(this)">41</div>
                             <div class="size-chip" onclick="selectSize(this)">42</div>
@@ -1536,41 +1604,17 @@
                     </div>
                 </div>
 
-                <div class="a3-card" data-id="11">
-                    <div class="a3-image-box">
-                        <div class="vector-canvas cap-vector">
-                            <div class="cap-dome"></div>
-                            <div class="visor"></div>
-                        </div>
-                    </div>
-                    <div class="a3-card-body">
-                        <div class="a3-brand" contenteditable="true">Balenciaga</div>
-                        <div class="a3-name" contenteditable="true">Бейсболка Balenciaga Cap Vintage Red</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">5800</span> руб.</div>
-                        <div class="a3-sizes">
-                            <div class="size-chip" onclick="selectSize(this)">ONE</div>
-                        </div>
-                        <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                    </div>
-                </div>
-
                 <div class="a3-card" data-id="12">
                     <div class="a3-image-box">
-                        <div class="vector-canvas sneaker-vector">
-                            <div class="sole" style="background:#e5e7eb; border-top:4px solid #94a3b8; height:28px;"></div>
-                            <div class="body-up" style="background:#64748b;"></div>
-                            <div class="tongue" style="background:#475569;"></div>
-                            <div class="swoosh" style="border-bottom-color:#cbd5e1; border-right-color:#cbd5e1;"></div>
-                            <div class="laces" style="background:#fff;"></div>
-                        </div>
+                        <img src="https://a3boots.shop/upload/resize_cache/iblock/b3e/400_400_1/b3e2ec6f29fb2cb78b02e7a3eb0f92b0.jpg" alt="Product">
                     </div>
                     <div class="a3-card-body">
                         <div class="a3-brand" contenteditable="true">New Balance</div>
-                        <div class="a3-name" contenteditable="true">New Balance 990v5 Heritage Grey</div>
-                        <div class="a3-price"><span contenteditable="true" class="item-price-val">24200</span> руб.</div>
+                        <div class="a3-name" contenteditable="true">Кроссовки New Balance 9060 Rain Cloud</div>
+                        <div class="a3-price"><span contenteditable="true" class="item-price-val">19 800</span> ₽</div>
                         <div class="a3-sizes">
+                            <div class="size-chip" onclick="selectSize(this)">41</div>
                             <div class="size-chip" onclick="selectSize(this)">42</div>
-                            <div class="size-chip" onclick="selectSize(this)">43</div>
                             <div class="size-chip" onclick="selectSize(this)">44</div>
                         </div>
                         <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
@@ -1578,9 +1622,12 @@
                 </div>
 
             </div>
+            
+            <div style="text-align: center; margin: 60px 0;">
+                <button class="btn btn-primary" style="background:#000; color:#fff;" onclick="openCheckout()">Перейти к оформлению заказа</button>
+            </div>
         </div>
     </div>
-
 
     <div id="checkoutModal" class="checkout-backdrop">
         <div class="checkout-modal">
@@ -1595,7 +1642,7 @@
             <div class="checkout-group">
                 <label>Способ Доставки</label>
                 <select class="checkout-select" id="deliveryMethod" onchange="recalcTotal()">
-                    <option value="0">Самовывоз из шоурума A3BOOTS — 0 руб.</option>
+                    <option value="0">Самовывоз из шоурума ONYX-DEMO — 0 руб.</option>
                     <option value="450">Курьерская доставка СДЭК — 450 руб.</option>
                     <option value="300">Почта России — 300 руб.</option>
                 </select>
@@ -1631,10 +1678,8 @@
 
 
     <script>
-        // ГЛОБАЛЬНОЕ ХРАНИЛИЩЕ ЖИВОЙ КОРЗИНЫ
         let cart = [];
 
-        // Переключение табов отраслевых решений (9 окон)
         function switchTab(event, tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
@@ -1646,7 +1691,19 @@
             event.currentTarget.classList.add('active');
         }
 
-        // Поведение полноэкранного демо-режима интернет-магазина
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+
+        function toggleModal(show) {
+            const modal = document.getElementById('orderModal');
+            if(show) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
+        }
+
         function openDemo() {
             document.getElementById('demoMode').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1657,14 +1714,12 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Интерактивный выбор размеров товара пользователя
         function selectSize(element) {
             const siblingChips = element.parentElement.querySelectorAll('.size-chip');
             siblingChips.forEach(chip => chip.classList.remove('selected'));
             element.classList.add('selected');
         }
 
-        // Логика добавления товаров в "Живую" корзину
         function addToCart(buttonElement) {
             const card = buttonElement.closest('.a3-card');
             const itemId = card.getAttribute('data-id');
@@ -1673,7 +1728,6 @@
             const priceText = card.querySelector('.item-price-val').innerText;
             const price = parseInt(priceText.replace(/\s+/g, '')) || 0;
             
-            // Проверка выбора размера перед отправкой в корзину
             const selectedSizeChip = card.querySelector('.size-chip.selected');
             if (!selectedSizeChip) {
                 alert(`Пожалуйста, выберите размер для модели: ${name}`);
@@ -1681,30 +1735,31 @@
             }
             const size = selectedSizeChip.innerText;
 
-            // Добавляем в массив
             cart.push({ id: itemId, brand: brand, name: name, price: price, size: size });
-            
-            // Обновляем счетчики на живом экране
             document.getElementById('cartCount').innerText = cart.length;
             
-            alert(`Успешно добавлено в корзину:\n${brand} — ${name}\nРазмер: ${size}\nЦена: ${price} руб.\n\nКоличество товаров в корзине: ${cart.length}`);
+            alert(`Добавлено в корзину ONYX-DEMO:\n${brand} — ${name}\nРазмер: ${size}\nЦена: ${price} руб.`);
         }
 
-        // Логика поп-ап окон чекаута и подсчета бизнес-математики
         function openCheckout() {
             if (cart.length === 0) {
-                alert('Ваша корзина пуста! Добавьте несколько товаров с помощью кнопок «В корзину», предварительно выбрав размер.');
+                alert('Ваша корзина пуста! Добавьте товары кнопкой «В корзину», выбрав размер.');
                 return;
             }
             document.getElementById('checkoutModal').classList.add('active');
             recalcTotal();
         }
 
+        document.querySelectorAll('[contenteditable="true"]').forEach(element => {
+            element.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+
         function closeCheckout() {
             document.getElementById('checkoutModal').classList.remove('active');
         }
 
-        // Пересчет живой стоимости заказа на лету
         function recalcTotal() {
             let itemsTotal = 0;
             cart.forEach(item => {
@@ -1720,11 +1775,10 @@
             document.getElementById('summaryTotalPrice').innerText = finalTotal.toLocaleString('ru-RU');
         }
 
-        // Финальная имитация оформления заказа и перенаправления в банк/CRM
         function submitOrder() {
             const name = document.getElementById('custName').value.trim();
             if (!name) {
-                alert('Пожалуйста, введите ваше имя для симуляции оформления заказа.');
+                alert('Пожалуйста, введите ваше имя для оформления.');
                 return;
             }
 
@@ -1732,13 +1786,60 @@
             const payMethod = document.getElementById('paymentMethod').options[document.getElementById('paymentMethod').selectedIndex].text;
             const totalSum = document.getElementById('summaryTotalPrice').innerText;
 
-            alert(`🎉 Симуляция успешна! Заказ сформирован внутри ONYX-DEMO.\n\nКлиент: ${name}\nДоставка: ${delMethod}\nШлюз оплаты: ${payMethod}\nСумма транзакции: ${totalSum} руб.\n\nКорзина очищена. Демо-система готова к новому тесту!`);
+            alert(`🎉 Заказ успешно симулирован!\n\nИмя: ${name}\nДоставка: ${delMethod}\nОплата через: ${payMethod}\nСумма: ${totalSum} руб.`);
             
-            // Очистка данных
             cart = [];
             document.getElementById('cartCount').innerText = '0';
             document.getElementById('custName').value = '';
             closeCheckout();
+        }
+
+        function sendLeadToBot(event) {
+            event.preventDefault();
+            
+            const token = "8661217530:AAGHcGZeOAkisdW71fl6Rl3dqQapq6IIRsE";
+            const chatId = "2059002474";
+            
+            const fio = document.getElementById('leadFio').value;
+            const city = document.getElementById('leadCity').value;
+            const niche = document.getElementById('leadNiche').value;
+            const company = document.getElementById('leadCompany').value;
+            const socials = document.getElementById('leadSocials').value;
+            const wishes = document.getElementById('leadWishes').value;
+            const source = document.getElementById('leadSource').value;
+            
+            const message = `🔥 НОВАЯ ЗАЯВКА С АНКЕТЫ ONYX 🔥\n\n` +
+                            `👤 ФИО: ${fio}\n` +
+                            `📍 Город: ${city}\n` +
+                            `💼 Ниша: ${niche}\n` +
+                            `🏢 Компания: ${company}\n` +
+                            `🔗 Соц.сети: ${socials}\n` +
+                            `📝 Пожелания: ${wishes}\n` +
+                            `🌐 Источник: ${source}`;
+                            
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            })
+            .then(response => {
+                if(response.ok) {
+                    alert('Анкета отправлена в Telegram-бот!');
+                    toggleModal(false);
+                    document.getElementById('onyxLeadForm').reset();
+                } else {
+                    alert('Ошибка отправки в API Telegram.');
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Ошибка соединения с серверами.');
+            });
         }
     </script>
 </body>
