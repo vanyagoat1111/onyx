@@ -6,7 +6,17 @@
     <title>ONYX Systems — Разработка сайтов по подписке</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false, // Отключаем сброс стилей, чтобы не сломать основной сайт
+            }
+        }
+    </script>
+
     <style>
         /* ==========================================================================
            1. ПРЕМИАЛЬНЫЕ БАЗОВЫЕ СТИЛИ (ГЛАВНЫЙ САЙТ ONYX)
@@ -63,7 +73,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Кнопки */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -200,7 +209,7 @@
         }
 
         /* ==========================================================================
-           4. СТАТИСТИКА
+           4. МАРКЕТИНГОВЫЙ БЛОК: СТАТИСТИКА РОССТАТА
            ========================================================================== */
         .stats-section {
             padding: 80px 0;
@@ -667,6 +676,14 @@
             display: block;
         }
 
+        /* ПОДСВЕТКА ДЛЯ РЕДАКТИРОВАНИЯ ВО ВСЕХ ДЕМО */
+        [contenteditable="true"]:hover {
+            cursor: pointer;
+            outline: 2px dashed rgba(124, 58, 237, 0.5);
+            background: rgba(124, 58, 237, 0.05);
+            border-radius: 4px;
+        }
+
         /* ==========================================================================
            ДЕМО 1: ИНТЕРНЕТ-МАГАЗИН КРОССОВОК (A3BOOTS)
            ========================================================================== */
@@ -918,14 +935,6 @@
 
         #demoSneakers .a3-buy-btn:hover {
             background: #333333;
-        }
-
-        /* ПОДСВЕТКА ДЛЯ РЕДАКТИРОВАНИЯ ВО ВСЕХ ДЕМО */
-        [contenteditable="true"]:hover {
-            cursor: pointer;
-            outline: 2px dashed rgba(124, 58, 237, 0.5);
-            background: rgba(124, 58, 237, 0.05);
-            border-radius: 4px;
         }
 
         /* ОКНО ОФОРМЛЕНИЯ ЗАКАЗА ДЛЯ КРОССОВОК */
@@ -1635,6 +1644,40 @@
         #demoInfobiz .detail-item:last-child {
             border-bottom: none;
         }
+
+        /* ==========================================================================
+           ДЕМО 4: МЕБЕЛЬ И ИНТЕРЬЕРЫ (ONYX FURNITURE)
+           ========================================================================== */
+        #demoFurniture {
+            background-color: #121212;
+            color: #f3f4f6;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        #demoFurniture .font-serif-furn { 
+            font-family: 'Playfair Display', serif; 
+        }
+
+        #demoFurniture .furn-page-section { 
+            display: none; 
+            opacity: 0; 
+            transform: translateY(15px); 
+            transition: all 0.5s ease-in-out; 
+        }
+
+        #demoFurniture .furn-page-section.active { 
+            display: block; 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        #demoFurniture .video-overlay-furn {
+            background: linear-gradient(to bottom, rgba(18,18,18,0.3) 0%, rgba(18,18,18,0.7) 60%, rgba(18,18,18,1) 100%);
+        }
+
+        #demoFurniture .modal-element {
+            /* Базовые стили для модалки мебели */
+        }
     </style>
 </head>
 <body>
@@ -1771,7 +1814,7 @@
                 <button class="tab-btn active" onclick="switchTab(event, 'tab-infobiz')">Инфо-бизнес</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab-hotel')">Отели</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab-sneakers')">Магазин кроссовок</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-consult')">Консалтинг</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab-furniture')">Мебель и Интерьеры</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab-smm')">SMM агентство</button>
             </div>
 
@@ -1817,16 +1860,16 @@
                 </div>
             </div>
 
-            <div id="tab-consult" class="tab-content">
+            <div id="tab-furniture" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
-                        <h3>Консалтинг и Финансовая Аналитика</h3>
-                        <p>Строгий экспертный дизайн для аналитиков, аудиторов и финансовых брокеров. Блоки успешных кейсов и формы записи на аудит.</p>
-                        <button class="btn btn-secondary" onclick="alert('Демо-версия в процессе обновления. Запросите актуальный прототип у менеджера в Telegram.')">Демо в разработке</button>
+                        <h3>Премиальная мебель и интерьеры на заказ</h3>
+                        <p>Эксклюзивный каталог с индивидуальным расчетом стоимости. Идеально для мебельных фабрик, ателье и дизайнеров интерьера.</p>
+                        <button class="btn btn-primary" onclick="openDemo('demoFurniture')">Запустить демо-версию</button>
                     </div>
-                    <div class="template-mockup" onclick="alert('Демо-версия в процессе обновления. Запросите актуальный прототип у менеджера в Telegram.')">
-                        <div style="font-size: 40px; margin-bottom: 10px;">💼</div>
-                        <h4>Сборка демо-стенда...</h4>
+                    <div class="template-mockup" onclick="openDemo('demoFurniture')">
+                        <div style="font-size: 40px; margin-bottom: 10px;">🛋️</div>
+                        <h4>Открыть симулятор ONYX FURNITURE</h4>
                     </div>
                 </div>
             </div>
@@ -2341,6 +2384,348 @@
     </div>
 
 
+    <div id="demoFurniture" class="demo-fullscreen bg-[#121212] text-gray-100 min-h-screen flex flex-col overflow-x-hidden font-sans">
+        
+        <header class="sticky top-0 left-0 w-full z-40 bg-[#121212]/80 backdrop-blur-md border-b border-white/5">
+            <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+                <button onclick="showFurnPage('home')" class="text-xl sm:text-2xl font-bold tracking-[0.2em] text-white uppercase focus:outline-none hover:text-amber-500 transition-all" contenteditable="true">ONYX FURNITURE</button>
+                <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-widest text-gray-400 uppercase">
+                    <button onclick="showFurnPage('about')" class="hover:text-white transition-colors">О нас</button>
+                    <button onclick="showFurnPage('portfolio')" class="hover:text-white transition-colors">Портфолио</button>
+                    <button onclick="showFurnPage('prices')" class="hover:text-white transition-colors">Цены</button>
+                    <button onclick="showFurnPage('contacts')" class="hover:text-white transition-colors">Контакты</button>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <button onclick="openFurnModal('furn-main-modal')" class="hidden sm:block bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase px-6 py-3 transition-all rounded-sm shadow-md">Расчет</button>
+                    <button onclick="closeDemo('demoFurniture')" class="bg-red-600/10 text-red-500 border border-red-500/30 hover:bg-red-600 hover:text-white text-xs font-semibold tracking-widest uppercase px-4 py-3 transition-all rounded-sm">Выйти</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow">
+
+            <section id="furn-page-home" class="furn-page-section active">
+                <div class="relative min-h-[85vh] flex items-center justify-center text-center px-6 overflow-hidden">
+                    <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1920&q=80" alt="Роскошный модульный диван" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 video-overlay-furn z-0"></div>
+                    
+                    <div class="relative z-10 max-w-5xl mx-auto py-12">
+                        <span class="inline-block text-amber-500 text-xs font-semibold tracking-[0.3em] uppercase mb-4 animate-pulse" contenteditable="true">Ателье премиальной мебели</span>
+                        <h1 class="font-serif-furn text-4xl sm:text-6xl md:text-7xl text-white font-normal leading-tight mb-6" contenteditable="true">
+                            Мебель по <span class="italic text-amber-100">индивидуальному</span> дизайну
+                        </h1>
+                        <p class="text-gray-200 text-base sm:text-lg max-w-2xl mx-auto font-light mb-10" contenteditable="true">
+                            Создаем эксклюзивную мягкую и корпусную мебель по вашим размерам, чертежам или дизайн-проектам. Индивидуальный подход к каждому элементу интерьера.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                            <button onclick="openFurnModal('furn-main-modal')" class="w-full sm:w-auto bg-amber-700 hover:bg-amber-600 text-white font-semibold text-sm tracking-wider uppercase px-8 py-4 transition-all duration-300 rounded-sm shadow-xl">
+                                Отправить план на расчет
+                            </button>
+                            <button onclick="showFurnPage('portfolio')" class="w-full sm:w-auto border border-white/20 hover:border-white hover:bg-white/5 text-white font-semibold text-sm tracking-wider uppercase px-8 py-4 transition-all duration-300 rounded-sm bg-black/40 backdrop-blur-sm">
+                                Смотреть портфолио
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-6 py-16 border-b border-white/5">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div class="p-6 bg-[#161616]/40 border border-white/5 rounded-sm backdrop-blur-sm hover:border-amber-700/40 hover:bg-[#161616]/70 transition-all duration-300 group">
+                            <div class="font-serif-furn text-3xl sm:text-4xl text-amber-500 mb-2 group-hover:scale-110 transition-transform" contenteditable="true">10+ лет</div>
+                            <div class="text-xs uppercase tracking-widest text-gray-400 font-light" contenteditable="true">Опыт мастеров</div>
+                        </div>
+                        <div class="p-6 bg-[#161616]/40 border border-white/5 rounded-sm backdrop-blur-sm hover:border-amber-700/40 hover:bg-[#161616]/70 transition-all duration-300 group">
+                            <div class="font-serif-furn text-3xl sm:text-4xl text-amber-500 mb-2 group-hover:scale-110 transition-transform" contenteditable="true">3 года</div>
+                            <div class="text-xs uppercase tracking-widest text-gray-400 font-light" contenteditable="true">Честная гарантия</div>
+                        </div>
+                        <div class="p-6 bg-[#161616]/40 border border-white/5 rounded-sm backdrop-blur-sm hover:border-amber-700/40 hover:bg-[#161616]/70 transition-all duration-300 group">
+                            <div class="font-serif-furn text-3xl sm:text-4xl text-amber-500 mb-2 group-hover:scale-110 transition-transform" contenteditable="true">1500+</div>
+                            <div class="text-xs uppercase tracking-widest text-gray-400 font-light" contenteditable="true">Готовых проектов</div>
+                        </div>
+                        <div class="p-6 bg-[#161616]/40 border border-white/5 rounded-sm backdrop-blur-sm hover:border-amber-700/40 hover:bg-[#161616]/70 transition-all duration-300 group">
+                            <div class="font-serif-furn text-3xl sm:text-4xl text-amber-500 mb-2 group-hover:scale-110 transition-transform" contenteditable="true">0%</div>
+                            <div class="text-xs uppercase tracking-widest text-gray-400 font-light" contenteditable="true">Переплат и комиссий</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-6 py-20">
+                    <div class="text-center mb-16">
+                        <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Полный цикл реализации</span>
+                        <h2 class="font-serif-furn text-3xl sm:text-5xl text-white" contenteditable="true">Как мы создаем совершенство</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-[#161616] p-8 border border-white/5 rounded-sm hover:border-amber-700/50 hover:scale-[1.02] transition-all duration-300 group">
+                            <div class="w-12 h-12 bg-amber-950/40 border border-amber-800/30 flex items-center justify-center text-amber-500 font-serif-furn text-xl mb-6 rounded-sm group-hover:bg-amber-700 group-hover:text-white transition-all">01</div>
+                            <h3 class="text-lg font-medium text-white mb-3" contenteditable="true">Проектирование и КД</h3>
+                            <p class="text-gray-400 text-sm font-light leading-relaxed" contenteditable="true">Создаем детальную конструкторскую документацию. Прорабатываем каждый стык, зазор и скрытый крепеж до миллиметра.</p>
+                        </div>
+                        <div class="bg-[#161616] p-8 border border-white/5 rounded-sm hover:border-amber-700/50 hover:scale-[1.02] transition-all duration-300 group">
+                            <div class="w-12 h-12 bg-amber-950/40 border border-amber-800/30 flex items-center justify-center text-amber-500 font-serif-furn text-xl mb-6 rounded-sm group-hover:bg-amber-700 group-hover:text-white transition-all">02</div>
+                            <h3 class="text-lg font-medium text-white mb-3" contenteditable="true">Собственное производство</h3>
+                            <p class="text-gray-400 text-sm font-light leading-relaxed" contenteditable="true">Современные цеха. Никаких посредников. Распил, покраска в изолированных камерах, ручная сборка и жесткий технадзор.</p>
+                        </div>
+                        <div class="bg-[#161616] p-8 border border-white/5 rounded-sm hover:border-amber-700/50 hover:scale-[1.02] transition-all duration-300 group">
+                            <div class="w-12 h-12 bg-amber-950/40 border border-amber-800/30 flex items-center justify-center text-amber-500 font-serif-furn text-xl mb-6 rounded-sm group-hover:bg-amber-700 group-hover:text-white transition-all">03</div>
+                            <h3 class="text-lg font-medium text-white mb-3" contenteditable="true">Премиальный монтаж</h3>
+                            <p class="text-gray-400 text-sm font-light leading-relaxed" contenteditable="true">Доставка в специализированной упаковке и сборка штатными мастерами с пылесосами. Идеально чистый результат.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-6 pb-24">
+                    <div class="text-center mb-12">
+                        <h2 class="font-serif-furn text-3xl text-white mb-2" contenteditable="true">Направления нашей работы</h2>
+                        <p class="text-gray-400 text-xs tracking-widest uppercase font-light" contenteditable="true">Выберите интересующий раздел для деталей</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div onclick="showFurnPage('promo-sofas')" class="group relative h-[400px] overflow-hidden rounded-sm border border-white/5 cursor-pointer shadow-xl">
+                            <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1200&q=80" alt="Роскошные Диваны" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-75">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-8 flex flex-col justify-end">
+                                <h3 class="text-2xl text-white font-serif-furn mb-2" contenteditable="true">Премиальные диваны и мягкие зоны</h3>
+                                <p class="text-amber-500 text-xs font-semibold tracking-widest uppercase group-hover:translate-x-3 transition-transform duration-300">Подробнее о производстве &rarr;</p>
+                            </div>
+                        </div>
+                        <div onclick="showFurnPage('promo-kitchens')" class="group relative h-[400px] overflow-hidden rounded-sm border border-white/5 cursor-pointer shadow-xl">
+                            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80" alt="Премиальная кухня" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-75">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-8 flex flex-col justify-end">
+                                <h3 class="text-2xl text-white font-serif-furn mb-2" contenteditable="true">Умные кухни и корпусные системы</h3>
+                                <p class="text-amber-500 text-xs font-semibold tracking-widest uppercase group-hover:translate-x-3 transition-transform duration-300">Подробнее о производстве &rarr;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="furn-page-promo-sofas" class="furn-page-section py-16">
+                <div class="max-w-7xl mx-auto px-6">
+                    <button onclick="showFurnPage('home')" class="text-amber-500 text-xs font-semibold tracking-widest uppercase mb-6 inline-block hover:text-amber-400 hover:translate-x-[-4px]">&larr; Вернуться назад</button>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                        <div>
+                            <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Эксклюзивный комфорт</span>
+                            <h2 class="font-serif-furn text-4xl sm:text-5xl text-white mb-6" contenteditable="true">Премиальная мягкая мебель</h2>
+                            <p class="text-gray-300 font-light leading-relaxed mb-6" contenteditable="true">Каждый диван — это произведение инженерного искусства. Мы рассчитываем эргономику посадки индивидуально под ваш рост, подбираем идеальную жесткость латексного наполнителя (HR-пена) и комбинируем пуховые прослойки для эффекта "обволакивания".</p>
+                            <div class="space-y-4 mb-8">
+                                <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Каркасы из сухой березовой фанеры и массива хвойных пород (никакого ДСП).</p></div>
+                                <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Ткани со всего мира: бельгийский шенилл, итальянское букле, натуральная кожа.</p></div>
+                                <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Пожизненная гарантия на целостность скрытых сварных каркасов.</p></div>
+                            </div>
+                            <button onclick="openFurnModal('furn-sofa-modal')" class="bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase px-8 py-4 transition-colors rounded-sm shadow-xl">Рассчитать концепт дивана</button>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500">
+                            <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500 mt-8">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="furn-page-promo-kitchens" class="furn-page-section py-16">
+                <div class="max-w-7xl mx-auto px-6">
+                    <button onclick="showFurnPage('home')" class="text-amber-500 text-xs font-semibold tracking-widest uppercase mb-6 inline-block hover:text-amber-400 hover:translate-x-[-4px]">&larr; Вернуться назад</button>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                        <div class="order-2 lg:order-1 grid grid-cols-2 gap-4">
+                            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500 mt-[-32px]">
+                        </div>
+                        <div class="order-1 lg:order-2">
+                            <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Технологичное превосходство</span>
+                            <h2 class="font-serif-furn text-4xl sm:text-5xl text-white mb-6" contenteditable="true">Высокотехнологичные кухни</h2>
+                            <p class="text-gray-300 font-light leading-relaxed mb-6" contenteditable="true">Кухни создаются по принципу "архитектурной чистоты линии". Никаких видимых ручек, лишних зазоров или неэффективных углов. Мы интегрируем передовые механизмы плавного закрывания Blum и Hettich последнего поколения.</p>
+                            <div class="space-y-4 mb-8">
+                                <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Влагостойкий МДФ повышенной плотности с лазерной кромкой.</p></div>
+                                <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Столешницы из широкоформатного керамогранита и кварцевого агломерата.</p></div>
+                                <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Интегрированная умная светодиодная подсветка с датчиками взмаха руки.</p></div>
+                            </div>
+                            <button onclick="openFurnModal('furn-kitchen-modal')" class="bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase px-8 py-4 transition-colors rounded-sm shadow-xl">Спроектировать умную кухню</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="furn-page-portfolio" class="furn-page-section py-16">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                        <div>
+                            <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Наше портфолио</span>
+                            <h2 class="font-serif-furn text-3xl sm:text-5xl text-white" contenteditable="true">Выполненные работы</h2>
+                        </div>
+                        <p class="text-gray-400 font-light max-w-xs text-sm" contenteditable="true">Все изделия спроектированы индивидуально под интерьеры заказчиков.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-[#161616] border border-white/5 rounded-sm overflow-hidden group shadow-lg hover:border-amber-700/30 transition-all duration-300">
+                            <div class="h-64 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-medium text-white mb-1" contenteditable="true">Диван «Гранд Лаунж»</h3>
+                                <p class="text-gray-400 text-xs font-light mb-4" contenteditable="true">Материал: Текстурированное букле, независимый пружинный блок</p>
+                                <button onclick="openFurnModal('furn-main-modal')" class="text-amber-500 text-xs font-semibold uppercase tracking-wider hover:text-amber-400 hover:translate-x-1 transition-transform">Узнать стоимость &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="bg-[#161616] border border-white/5 rounded-sm overflow-hidden group shadow-lg hover:border-amber-700/30 transition-all duration-300">
+                            <div class="h-64 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-medium text-white mb-1" contenteditable="true">Кабинет из натурального шпона</h3>
+                                <p class="text-gray-400 text-xs font-light mb-4" contenteditable="true">Интегрированные столы, скрытые системы хранения</p>
+                                <button onclick="openFurnModal('furn-main-modal')" class="text-amber-500 text-xs font-semibold uppercase tracking-wider hover:text-amber-400 hover:translate-x-1 transition-transform">Узнать стоимость &rarr;</button>
+                            </div>
+                        </div>
+                        <div class="bg-[#161616] border border-white/5 rounded-sm overflow-hidden group shadow-lg hover:border-amber-700/30 transition-all duration-300">
+                            <div class="h-64 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-medium text-white mb-1" contenteditable="true">Кухонный гарнитур «Графит»</h3>
+                                <p class="text-gray-400 text-xs font-light mb-4" contenteditable="true">Фасады МДФ эмаль, интегрированный профиль и фурнитура Blum</p>
+                                <button onclick="openFurnModal('furn-main-modal')" class="text-amber-500 text-xs font-semibold uppercase tracking-wider hover:text-amber-400 hover:translate-x-1 transition-transform">Узнать стоимость &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="furn-page-prices" class="furn-page-section py-16">
+                <div class="max-w-4xl mx-auto px-6">
+                    <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Прозрачный расчет</span>
+                    <h2 class="font-serif-furn text-3xl sm:text-5xl text-white mb-4" contenteditable="true">Базовые тарифы мастерской</h2>
+                    <p class="text-gray-400 font-light text-sm mb-12" contenteditable="true">Конечная стоимость зависит от выбранных тканей, сложности проекта и фурнитуры. Работаем строго по договору.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="p-6 bg-[#161616] border border-white/5 rounded-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-amber-700/30 transition-all duration-300">
+                            <div>
+                                <h3 class="text-white font-medium text-base" contenteditable="true">Мягкая мебель (Диваны / Кресла)</h3>
+                                <p class="text-gray-400 text-xs font-light mt-1" contenteditable="true">Огромный выбор тканей (антикоготь, букле, натуральная кожа)</p>
+                            </div>
+                            <span class="font-serif-furn text-xl text-amber-500 whitespace-nowrap" contenteditable="true">от 205 000 ₽</span>
+                        </div>
+                        <div class="p-6 bg-[#161616] border border-white/5 rounded-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-amber-700/30 transition-all duration-300">
+                            <div>
+                                <h3 class="text-white font-medium text-base" contenteditable="true">Стеновые шпонированные панели</h3>
+                                <p class="text-gray-400 text-xs font-light mt-1" contenteditable="true">Шпон дуба, ореха, ясеня, МДФ основа высокой прочности</p>
+                            </div>
+                            <span class="font-serif-furn text-xl text-amber-500 whitespace-nowrap" contenteditable="true">от 14 500 ₽ / м²</span>
+                        </div>
+                    </div>
+                    <div class="mt-12 text-center bg-amber-950/20 border border-amber-900/30 p-8 rounded-sm">
+                        <h4 class="text-white font-medium mb-2" contenteditable="true">У вас есть готовый дизайн-проект или эскиз от руки?</h4>
+                        <p class="text-gray-400 text-xs font-light mb-6" contenteditable="true">Пришлите его нам — инженеры сделают точную калькуляцию за 1 рабочий день.</p>
+                        <button onclick="openFurnModal('furn-main-modal')" class="bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase px-6 py-3 transition-colors rounded-sm shadow-md">Загрузить проект на расчет</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="furn-page-about" class="furn-page-section py-16">
+                <div class="max-w-7xl mx-auto px-6">
+                    <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">О нас</span>
+                    <h2 class="font-serif-furn text-3xl sm:text-5xl text-white mb-12" contenteditable="true">Искренне любим свое дело</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6 text-gray-400 font-light leading-relaxed text-base">
+                            <p contenteditable="true">Мы — узкоспециализированная команда профессионалов. Каждый из нас пришел в мебельную сферу более 10 лет назад, пройдя путь от простых сборщиков до создателей сложнейших интерьерных конструкций.</p>
+                            <p contenteditable="true">Наше главное отличие — фанатичное отношение к качеству и швам. Если это диван, то линии будут безупречно ровными, а ткань натянута без единой лишней складки. Если это корпусная мебель — зазоры будут идеальными до долей миллиметра.</p>
+                        </div>
+                        
+                        <div class="flex items-center justify-center p-4">
+                            <div class="w-80 h-80 rounded-full border-2 border-white/80 bg-transparent flex flex-col items-center justify-center p-8 text-center shadow-2xl relative overflow-hidden group hover:border-amber-500 transition-all duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-100 group-hover:from-amber-600/10 transition-colors duration-500"></div>
+                                <span class="text-5xl font-bold tracking-[0.25em] text-white uppercase mb-2 font-serif-furn group-hover:scale-110 group-hover:text-amber-500 transition-all duration-500">O</span>
+                                <span class="text-sm tracking-[0.4em] text-white uppercase font-semibold group-hover:text-amber-400 transition-colors">ONYX FURNITURE</span>
+                                <span class="text-[10px] tracking-widest text-white/60 uppercase mt-4 font-light">СОЗДАНО В 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="furn-page-contacts" class="furn-page-section py-16">
+                <div class="max-w-4xl mx-auto px-6 text-center">
+                    <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Связь</span>
+                    <h2 class="font-serif-furn text-3xl sm:text-5xl text-white mb-6" contenteditable="true">Ждем вас в гости</h2>
+                    <p class="text-gray-400 font-light text-base mb-8" contenteditable="true">г. Москва, Пресненская наб., 12</p>
+                    <p class="text-2xl text-amber-500 font-medium" contenteditable="true">+7 (999) 000-00-00</p>
+                </div>
+            </section>
+
+        </main>
+
+        <div id="furn-main-modal" class="modal-element fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+            <div class="bg-[#161616] border border-white/10 p-8 rounded-sm max-w-md w-full relative transform scale-95 transition-transform duration-300 shadow-2xl">
+                <button onclick="closeFurnModal('furn-main-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-light transition-colors">&times;</button>
+                <span class="text-amber-500 text-[10px] font-semibold tracking-widest uppercase block mb-1">Расчет стоимости</span>
+                <h3 class="font-serif-furn text-2xl text-white mb-6">Обсудить ваш проект</h3>
+                
+                <form onsubmit="event.preventDefault(); alert('ONYX DEMO: Заявка на расчет успешно отправлена!'); closeFurnModal('furn-main-modal');" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Ваше имя</label>
+                        <input type="text" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Телефон</label>
+                        <input type="tel" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                    </div>
+                    <button type="submit" class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase py-4 transition-colors rounded-sm shadow-md">
+                        Отправить запрос
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="furn-sofa-modal" class="modal-element fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+            <div class="bg-[#161616] border border-white/10 p-8 rounded-sm max-w-md w-full relative transform scale-95 transition-transform duration-300 shadow-2xl">
+                <button onclick="closeFurnModal('furn-sofa-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-light transition-colors">&times;</button>
+                <span class="text-amber-500 text-[10px] font-semibold tracking-widest uppercase block mb-1">Мягкая мебель</span>
+                <h3 class="font-serif-furn text-2xl text-white mb-6">Концепт дивана</h3>
+                
+                <form onsubmit="event.preventDefault(); alert('ONYX DEMO: Заявка на расчет дивана успешно отправлена!'); closeFurnModal('furn-sofa-modal');" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Примерные размеры (Ш х Д)</label>
+                        <input type="text" placeholder="например, 250х180 см" class="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Телефон для связи</label>
+                        <input type="tel" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                    </div>
+                    <button type="submit" class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase py-4 transition-colors rounded-sm shadow-md">
+                        Получить расчет дивана
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="furn-kitchen-modal" class="modal-element fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+            <div class="bg-[#161616] border border-white/10 p-8 rounded-sm max-w-md w-full relative transform scale-95 transition-transform duration-300 shadow-2xl">
+                <button onclick="closeFurnModal('furn-kitchen-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-light transition-colors">&times;</button>
+                <span class="text-amber-500 text-[10px] font-semibold tracking-widest uppercase block mb-1">Корпусная мебель</span>
+                <h3 class="font-serif-furn text-2xl text-white mb-6">Проект умной кухни</h3>
+                
+                <form onsubmit="event.preventDefault(); alert('ONYX DEMO: Заявка на расчет кухни успешно отправлена!'); closeFurnModal('furn-kitchen-modal');" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Конфигурация</label>
+                        <select class="w-full bg-[#1c1c1c] border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                            <option>Прямая кухня</option>
+                            <option>Угловая (Г-образная)</option>
+                            <option>С кухонным островом</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Телефон для связи</label>
+                        <input type="tel" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                    </div>
+                    <button type="submit" class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase py-4 transition-colors rounded-sm shadow-md">
+                        Спроектировать кухню
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <script>
         // 1. ЛОГИКА ГЛАВНОГО САЙТА (ПЕРЕКЛЮЧЕНИЕ ТАБОВ, СКРОЛЛ)
         function switchTab(event, tabId) {
@@ -2386,7 +2771,7 @@
             document.body.style.overflow = 'auto';
         }
 
-        // 3. ОТПРАВКА ЛИДА С ГЛАВНОГО САЙТА В ВАШ ТЕЛЕГРАМ БОТ
+        // 3. ОТПРАВКА ЛИДА С ГЛАВНОГО САЙТА В ТЕЛЕГРАМ БОТ
         function sendLeadToBot(event) {
             event.preventDefault();
             const token = "8661217530:AAGHcGZeOAkisdW71fl6Rl3dqQapq6IIRsE";
@@ -2500,6 +2885,44 @@
             document.getElementById(`info-page-${pageId}`).classList.add('active-page');
             document.getElementById(`info-link-${pageId}`).classList.add('active');
             document.getElementById('demoInfobiz').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 7. ЛОГИКА ДЕМО МЕБЕЛИ (ONYX FURNITURE)
+        function showFurnPage(pageId) {
+            const sections = document.querySelectorAll('#demoFurniture .furn-page-section');
+            sections.forEach(sec => {
+                sec.classList.remove('active');
+            });
+            const targetSection = document.getElementById(`furn-page-${pageId}`);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                document.getElementById('demoFurniture').scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function openFurnModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modal.querySelector('.transform').classList.remove('scale-95');
+                    modal.querySelector('.transform').classList.add('scale-100');
+                }, 10);
+            }
+        }
+
+        function closeFurnModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('opacity-0');
+                modal.querySelector('.transform').classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                }, 300);
+            }
         }
 
         // Блокировка всплытия событий для редактируемых полей
