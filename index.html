@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONYX Systems — Разработка сайтов по подписке</title>
+    <title>ONYX — Разработка сайтов по подписке</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
@@ -99,6 +99,7 @@
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
             border: 1px solid var(--border-plat);
+            backdrop-filter: blur(5px);
         }
 
         .btn-secondary:hover {
@@ -107,33 +108,21 @@
             transform: translateY(-2px);
         }
 
+        /* Анимации при скролле */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* ==========================================================================
            2. ШАПКА ГЛАВНОГО САЙТА
            ========================================================================== */
-        .top-bar {
-            background-color: rgba(17, 24, 39, 0.8);
-            border-bottom: 1px solid var(--border-plat);
-            font-size: 12px;
-            color: var(--text-muted);
-            padding: 8px 0;
-        }
-
-        .top-bar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .top-bar-left span {
-            margin-right: 20px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .top-bar-left span:hover {
-            color: var(--text-main);
-        }
-
         .header {
             background-color: rgba(9, 13, 22, 0.9);
             backdrop-filter: blur(10px);
@@ -160,13 +149,6 @@
             cursor: pointer;
         }
 
-        .logo-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--gradient-accent);
-            border-radius: 50%;
-        }
-
         .nav-menu {
             display: flex;
             gap: 30px;
@@ -176,90 +158,105 @@
 
         .nav-link:hover {
             color: #7c3aed;
+            transition: color 0.3s;
         }
 
         /* ==========================================================================
            3. ГЛАВНЫЙ ЭКРАН (HERO)
            ========================================================================== */
         .hero {
-            padding: 100px 0;
+            padding: 140px 0;
             text-align: center;
             position: relative;
+            background: linear-gradient(to bottom, rgba(9,13,22,0.85), rgba(9,13,22,1)), 
+                        url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1920&q=80') center/cover;
+            border-bottom: 1px solid var(--border-plat);
         }
 
         .hero-title {
-            font-size: 48px;
+            font-size: 56px;
             font-weight: 800;
-            line-height: 1.2;
-            max-width: 900px;
+            line-height: 1.15;
+            max-width: 1000px;
             margin: 0 auto 24px auto;
+            letter-spacing: -1px;
         }
 
         .hero-subtitle {
-            font-size: 18px;
-            color: var(--text-muted);
-            max-width: 700px;
+            font-size: 20px;
+            color: var(--text-main);
+            max-width: 800px;
             margin: 0 auto 40px auto;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .hero-action-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-weight: 500;
         }
 
         .hero-btns {
             display: flex;
             justify-content: center;
             gap: 20px;
+            align-items: center;
         }
 
         /* ==========================================================================
-           4. МАРКЕТИНГОВЫЙ БЛОК: СТАТИСТИКА РОССТАТА
+           4. ЦИФРЫ ДОВЕРИЯ (СТАТИСТИКА)
            ========================================================================== */
         .stats-section {
-            padding: 80px 0;
-            background: linear-gradient(180deg, rgba(9,13,22,1) 0%, rgba(17,24,39,1) 100%);
+            padding: 100px 0;
+            background: var(--bg-main);
+        }
+
+        .stats-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .stats-header h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
         }
 
         .stats-grid {
-            display: flex;
-            align-items: center;
-            gap: 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
         }
 
-        .stats-card {
-            background: rgba(255, 255, 255, 0.02);
+        .stat-card {
+            background: var(--bg-card);
             border: 1px solid var(--border-plat);
             border-radius: 16px;
-            padding: 40px;
-            flex: 1;
+            padding: 40px 30px;
             text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
-        .stats-card:hover {
+        .stat-card:hover {
+            transform: translateY(-10px);
             border-color: var(--neon-purple);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
-            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(124, 58, 237, 0.1);
         }
 
-        .stats-number {
-            font-size: 72px;
+        .stat-num {
+            font-size: 48px;
             font-weight: 800;
-            line-height: 1;
             margin-bottom: 10px;
+            line-height: 1;
         }
 
-        .stats-info {
-            flex: 1.5;
-        }
-
-        .stats-info h2 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .stats-info p {
+        .stat-text {
             color: var(--text-muted);
-            font-size: 16px;
-            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.5;
+            font-weight: 500;
         }
 
         /* ==========================================================================
@@ -267,13 +264,13 @@
            ========================================================================== */
         .math-section {
             padding: 80px 0;
-            background: var(--bg-main);
+            background: linear-gradient(180deg, rgba(9,13,22,1) 0%, rgba(17,24,39,0.5) 100%);
         }
 
         .section-title {
             text-align: center;
             font-size: 36px;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 50px;
         }
 
@@ -283,6 +280,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border-plat);
             border-radius: 12px;
+            margin-bottom: 30px;
         }
 
         .compare-table {
@@ -304,83 +302,110 @@
         }
 
         .compare-table tbody tr {
-            cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.3s;
         }
 
         .compare-table tbody tr:hover {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
         }
 
         .highlight-row {
-            background: rgba(29, 78, 216, 0.07);
+            background: rgba(29, 78, 216, 0.1);
         }
 
-        .highlight-row:hover {
-            background: rgba(29, 78, 216, 0.12) !important;
+        .text-success {
+            color: #10b981;
+            font-weight: 600;
         }
 
-        .text-success { color: #10b981; font-weight: 600; }
-        .text-danger { color: #ef4444; font-weight: 600; }
-
-        /* ==========================================================================
-           6. ТРЕНДЫ (КАРТОЧКИ)
-           ========================================================================== */
-        .why-section {
-            padding: 80px 0;
-            background: rgba(17, 24, 39, 0.5);
+        .text-danger {
+            color: #ef4444;
+            font-weight: 600;
         }
 
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .why-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-plat);
+        .benefit-box {
+            background: linear-gradient(135deg, rgba(29, 78, 216, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            border: 1px solid var(--neon-purple);
             border-radius: 12px;
             padding: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .why-card:hover {
-            border-color: var(--border-plat-hover);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        .benefit-box h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #fff;
         }
 
-        .why-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient-accent);
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
+        .benefit-value {
+            font-size: 42px;
+            font-weight: 800;
+            color: #10b981;
+        }
+
+        /* ==========================================================================
+           6. БЛОК ROMI (ИНВЕСТИЦИИ)
+           ========================================================================== */
+        .romi-section {
+            padding: 100px 0;
+        }
+
+        .romi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
             align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 700;
         }
 
-        .why-card h3 {
+        .romi-content h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .romi-content p {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .romi-quote {
+            padding-left: 20px;
+            border-left: 4px solid var(--neon-purple);
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 12px;
+            color: #fff;
+            margin: 30px 0;
+            font-style: italic;
         }
 
-        .why-card p {
-            color: var(--text-muted);
-            font-size: 14px;
+        .romi-image-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .romi-image-wrapper img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .romi-image-wrapper:hover img {
+            transform: scale(1.05);
         }
 
         /* ==========================================================================
            7. ШАБЛОНЫ (5 ВКЛАДОК)
            ========================================================================== */
         .templates-section {
-            padding: 80px 0;
+            padding: 100px 0;
+            background: rgba(17, 24, 39, 0.4);
         }
 
         .tabs-nav {
@@ -388,16 +413,16 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .tab-btn {
-            padding: 12px 20px;
+            padding: 14px 24px;
             background: rgba(255,255,255,0.03);
             border: 1px solid var(--border-plat);
             color: var(--text-muted);
-            border-radius: 6px;
-            font-weight: 500;
+            border-radius: 8px;
+            font-weight: 600;
             font-size: 14px;
             transition: all 0.3s ease;
         }
@@ -406,14 +431,16 @@
             background: var(--gradient-accent);
             color: #fff;
             border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
         }
 
         .tab-content {
             display: none;
             background: var(--bg-card);
             border: 1px solid var(--border-plat);
-            border-radius: 12px;
-            padding: 40px;
+            border-radius: 16px;
+            padding: 50px;
             animation: fadeIn 0.5s ease forwards;
         }
 
@@ -423,7 +450,7 @@
 
         .template-preview-grid {
             display: flex;
-            gap: 40px;
+            gap: 50px;
             align-items: center;
         }
 
@@ -432,34 +459,38 @@
         }
 
         .template-info h3 {
-            font-size: 28px;
-            margin-bottom: 16px;
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 800;
         }
 
         .template-info p {
             color: var(--text-muted);
-            margin-bottom: 24px;
+            margin-bottom: 30px;
+            font-size: 16px;
         }
 
         .template-mockup {
             flex: 1;
             background: #090d16;
-            border: 4px solid #334155;
-            border-radius: 12px;
-            padding: 20px;
-            min-height: 250px;
+            border: 1px solid var(--border-plat);
+            border-radius: 16px;
+            padding: 40px 20px;
+            min-height: 300px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             cursor: pointer;
-            transition: border-color 0.3s;
+            transition: all 0.4s ease;
         }
 
         .template-mockup:hover {
-            border-color: #7c3aed;
+            border-color: var(--neon-purple);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(124, 58, 237, 0.2);
         }
 
         /* ==========================================================================
@@ -610,11 +641,12 @@
             padding: 30px;
             border-radius: 12px;
             cursor: pointer;
-            transition: border-color 0.3s;
+            transition: all 0.4s ease;
         }
 
         .step-item:hover {
             border-color: var(--neon-blue);
+            transform: translateX(10px);
         }
 
         .step-num {
@@ -641,6 +673,7 @@
             font-size: 15px;
         }
 
+        /* ПОДВАЛ */
         .footer {
             border-top: 1px solid var(--border-plat);
             padding: 40px 0;
@@ -658,31 +691,23 @@
            АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ (MOBILE RESPONSIVE FIXES)
            ========================================================================== */
         @media (max-width: 768px) {
-            .top-bar .container { flex-direction: column; gap: 10px; text-align: center; }
             .header .container { flex-direction: column; gap: 15px; }
             .nav-menu { flex-wrap: wrap; justify-content: center; gap: 10px; }
-            .hero { padding: 60px 0; }
+            .hero { padding: 80px 0; }
             .hero-title { font-size: 32px; }
             .hero-subtitle { font-size: 16px; padding: 0 10px; }
             .hero-btns { flex-direction: column; width: 100%; padding: 0 20px; box-sizing: border-box; }
             .hero-btns .btn { width: 100%; }
-            .stats-grid { flex-direction: column; gap: 30px; text-align: center; }
+            .stats-grid { grid-template-columns: 1fr; gap: 20px; }
             .section-title { font-size: 26px; }
-            .why-grid { grid-template-columns: 1fr; }
+            .romi-grid { grid-template-columns: 1fr; gap: 40px; }
             .template-preview-grid { flex-direction: column; text-align: center; }
             .tabs-nav { flex-direction: column; align-items: stretch; gap: 8px; }
             .tab-btn { width: 100%; text-align: center; }
             .step-item { flex-direction: column; align-items: center; text-align: center; }
+            .step-item:hover { transform: translateY(-5px); }
             .modal-box { margin: 15px; width: auto; padding: 25px; }
             .modal-title { font-size: 20px; }
-            .faq-trigger { font-size: 14px; padding: 15px; }
-            
-            /* Адаптивность для Демо Кроссовок */
-            #demoSneakers .a3-header { flex-direction: column; gap: 15px; padding: 15px; text-align: center; }
-            #demoSneakers .a3-nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
-            #demoSneakers .a3-hero { padding: 40px 20px; text-align: center; flex-direction: column; }
-            #demoSneakers .a3-hero-text h1 { font-size: 32px; }
-            #demoSneakers .a3-catalog-title { font-size: 22px; }
         }
 
         /* ==========================================================================
@@ -1724,64 +1749,76 @@
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="container">
-            <div class="top-bar-left">
-                <span>г. Москва, ул. Пресненская наб., 12</span>
-                <span>info@onyx-agency.ru</span>
-            </div>
-            <div>
-                <span>Режим работы: Пн-Пт с 10:00 до 19:00</span>
-            </div>
-        </div>
-    </div>
-
     <header class="header">
         <div class="container">
             <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                ONYX<span class="text-gradient">SYSTEMS</span><div class="logo-dot"></div>
+                ONYX
             </div>
             <nav class="nav-menu">
                 <a href="#" class="nav-link">Главная</a>
+                <a href="#stats" class="nav-link">Цифры</a>
                 <a href="#math" class="nav-link">Математика</a>
-                <a href="#why" class="nav-link">Тренды 2026</a>
+                <a href="#romi" class="nav-link">ROMI</a>
                 <a href="#templates" class="nav-link">Шаблоны</a>
             </nav>
-            <div>
-                <button class="btn btn-secondary" style="padding: 10px 20px; font-size: 13px;" onclick="scrollToTemplates()">Выбрать Демо</button>
-            </div>
         </div>
     </header>
 
     <section class="hero">
-        <div class="container">
-            <h1 class="hero-title">Продающий сайт представительского класса по доступной <span class="text-gradient">подписке</span></h1>
-            <p class="hero-subtitle">Выводите свой бизнес на совершенно новый уровень вместе с ONYX. Заполняйте анкету ниже, и уже сегодня мы пришлем интерактивный прототип вашего будущего сайта.</p>
+        <div class="container reveal">
+            <h1 class="hero-title">Профессиональный сайт для бизнеса без затрат на запуск</h1>
+            <p class="hero-subtitle">По подписке от 2990 ₽ в месяц. Разработка, домен и техническая поддержка включены. Запуск от 2 дней.</p>
+            <p class="hero-action-text">Заполните анкету чтобы получить план вашего будущего сайта. С вами свяжется наш менеджер.</p>
             <div class="hero-btns">
                 <button class="btn btn-primary" onclick="toggleModal(true)">Заполнить анкету</button>
-                <button class="btn btn-secondary" onclick="scrollToTemplates()">Демо-версия сайта</button>
             </div>
         </div>
     </section>
 
-    <section class="stats-section">
+    <section class="stats-section" id="stats">
         <div class="container">
+            <div class="stats-header reveal">
+                <h2>Вместо красивых слов предлагаем вам взглянуть на цифры.</h2>
+            </div>
             <div class="stats-grid">
-                <div class="stats-card" onclick="alert('Аналитический триггер: мы полностью убираем риски кассового разрыва.')">
-                    <div class="stats-number text-gradient">90%</div>
-                    <div style="font-weight: 600; font-size: 14px; text-transform: uppercase;">Бизнесов в РФ закрываются</div>
+                <div class="stat-card reveal">
+                    <div class="stat-num text-gradient">900+</div>
+                    <div class="stat-text">бизнесов подключены к нашей подписке и имеют сайт от ONYX прямо сейчас</div>
                 </div>
-                <div class="stats-info">
-                    <h2>Мы полностью предостерегаем ваш бизнес от финансовых рисков</h2>
-                    <p>По данным официальной статистики Росстата, около 90% новых коммерческих проектов прекращают свое существование в течение первых 12 месяцев. Инвестиции в дорогостоящую классическую веб-разработку (от 150 000 рублей) в современных реалиях часто становятся неоправданной потерей стартового капитала.</p>
-                    <p>Наша уникальная модель подписки за 2990 руб/мес полностью решает эту боль. Вы не рискуете крупными бюджетами. Мы берем на себя создание сайта, его техническую поддержку и бесплатное обслуживание на постоянной основе.</p>
+                <div class="stat-card reveal">
+                    <div class="stat-num text-gradient">85 000+</div>
+                    <div class="stat-text">человек посещают разработанные нами сайты ежедневно</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num text-gradient">80%</div>
+                    <div class="stat-text">выгоднее чем у других студий (смотрите математические расчеты выгод ниже)</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num text-gradient">55+</div>
+                    <div class="stat-text">городов России и стран СНГ имеют сайт от ONYX</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num text-gradient">2 дня</div>
+                    <div class="stat-text">средний срок разработки сайта</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num text-gradient">100%</div>
+                    <div class="stat-text">адаптация под мобильные устройства</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num text-gradient">0 ₽</div>
+                    <div class="stat-text">стоит разработка сайта</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-num text-gradient">12 мес.</div>
+                    <div class="stat-text">в году бесплатное обслуживание вашего сайта</div>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="math-section" id="math">
-        <div class="container">
+        <div class="container reveal">
             <h2 class="section-title">Математический расчет: ONYX против веб-студий</h2>
             <div class="table-wrapper">
                 <table class="compare-table">
@@ -1793,64 +1830,71 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr onclick="alert('Обычные студии требуют 100% предоплаты до начала ведения работ.')">
+                        <tr>
                             <td>Разработка и запуск сайта (одноразово)</td>
                             <td class="text-danger">от 120 000 руб.</td>
                             <td class="text-success">0 руб. (Бесплатно)</td>
                         </tr>
-                        <tr onclick="alert('Мы берем на себя ежегодное продление вашего доменного имени.')">
+                        <tr>
                             <td>Покупка доменного имени (.RU / .COM)</td>
                             <td>от 900 руб. / год</td>
                             <td class="text-success">0 руб. (Подарок навсегда)</td>
                         </tr>
-                        <tr onclick="alert('Правка текстов, баннеров и добавление акций входят в базовый тариф.')">
+                        <tr>
                             <td>Техническое обслуживание и правки контента</td>
-                            <td class="text-danger">от 5 000 руб. / мес.</td>
-                            <td class="text-success">0 руб. (Включено)</td>
+                            <td class="text-danger">от 60 000 руб. / год</td>
+                            <td class="text-success">Включено в подписку</td>
                         </tr>
-                        <tr onclick="alert('Вы можете отказаться от подписки в любой момент первого месяца.')">
-                            <td>Первый месяц полноценного тестирования</td>
-                            <td>Невозможен</td>
-                            <td class="text-success">0 руб. (Тестовый период)</td>
+                        <tr>
+                            <td>Дизайн сайта</td>
+                            <td class="text-danger">от 30 000 руб.</td>
+                            <td class="text-success">до 15 000 руб.</td>
                         </tr>
-                        <tr class="highlight-row" onclick="alert('Разница в бюджете очевидна. Экономьте оборотный капитал!')">
-                            <td>Итого расходы за первый год работы</td>
-                            <td class="text-danger" style="font-size:18px;">более 180 000 руб.</td>
-                            <td class="text-success" style="font-size:18px; color:#10b981;">32 890 руб.</td>
+                        <tr class="highlight-row">
+                            <td style="font-weight:700;">Итого расходы за первый год работы</td>
+                            <td class="text-danger" style="font-size:18px; font-weight:700;">от 210 900 руб.</td>
+                            <td class="text-success" style="font-size:18px; font-weight:700;">50 880 руб.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            
+            <div class="benefit-box reveal">
+                <h3>Ваша чистая выгода за первый год:</h3>
+                <div class="benefit-value">160 020 ₽ (76%)</div>
+            </div>
         </div>
     </section>
 
-    <section class="why-section" id="why">
+    <section class="romi-section" id="romi">
         <div class="container">
-            <h2 class="section-title">Почему вашему бизнесу жизненно необходим сайт в 2026 году</h2>
-            <div class="why-grid">
-                <div class="why-card" onclick="alert('Наличие собственного брендированного веб-сайта — ключевой маркер надежности.')">
-                    <div class="why-icon">01</div>
-                    <h3>Доверие B2B и B2C сегментов</h3>
-                    <p>В 2026 году социальные сети и мессенджеры стали перегруженным инфошумом. Наличие собственного брендированного веб-сайта — ключевой маркер надежности и стабильности вашей компании для клиентов.</p>
+            <div class="romi-grid">
+                <div class="romi-content reveal">
+                    <h2>Сайт — это не расход.<br>Это инвестиция в ROMI.</h2>
+                    <p>Многие компании оценивают сайт только по внешнему виду: нравится дизайн или нет, современно выглядит или устарел.</p>
+                    <p>Но для бизнеса важен другой показатель — <strong>ROMI (Return on Marketing Investment)</strong>, или возврат инвестиций в маркетинг.</p>
+                    <div class="romi-quote">
+                        Проще говоря, ROMI показывает, сколько денег приносит каждый рубль, вложенный в привлечение клиентов.
+                    </div>
+                    <p>Представьте: вы запускаете рекламу, приводите посетителей на сайт, но заявки не поступают. В этом случае рекламный бюджет расходуется впустую, а показатель ROMI стремится к нулю. Поэтому хороший сайт должен не просто красиво выглядеть. Его задача — превращать посетителей в клиентов.</p>
+                    <p>При разработке сайтов мы уделяем внимание не только дизайну, но и структуре, пользовательскому пути, скорости загрузки, удобству мобильной версии и продающим сценариям. Всё это напрямую влияет на конверсию и, как следствие, на ROMI вашего бизнеса.</p>
+                    <p>Чем больше заявок получает компания при тех же рекламных расходах, тем выше окупаемость маркетинга. Наша задача — создать сайт, который помогает бизнесу зарабатывать больше, а не просто занимать место в интернете.</p>
+                    <p style="font-size: 18px; font-weight: 600; color: #fff; margin-top: 30px;">
+                        Потому что красивый сайт — это приятно.<br>
+                        <span class="text-gradient">Сайт, который приносит клиентов и увеличивает прибыль — это выгодно.</span>
+                    </p>
                 </div>
-                <div class="why-card" onclick="alert('Без оптимизированного кода ваш бизнес невидим для умного поиска.')">
-                    <div class="why-icon">02</div>
-                    <h3>Интеграция с ИИ-системами</h3>
-                    <p>Современные поисковые роботы и умные нейросети анализируют структуру вашего сайта для выдачи прямых рекомендаций пользователям. Без оптимизированного кода ваш бизнес невидим для умного поиска.</p>
-                </div>
-                <div class="why-card" onclick="alert('Интегрированные формы и квизы мгновенно перенаправляют структурированные лиды.')">
-                    <div class="why-icon">03</div>
-                    <h3>Автоматический прием заявки</h3>
-                    <p>Сайт работает автономно круглые сутки. Интегрированные формы и квизы мгновенно перенаправляют структурированные лиды в ваши корпоративные чаты и CRM-системы.</p>
+                <div class="romi-image-wrapper reveal">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Инвестиции в ROMI и разработка">
                 </div>
             </div>
         </div>
     </section>
 
     <section class="templates-section" id="templates">
-        <div class="container">
+        <div class="container reveal">
             <h2 class="section-title">Отраслевые ИТ-решения для любого направления</h2>
-            <p style="text-align:center; color:var(--text-muted); margin-bottom: 40px;">Выберите вашу сферу и протестируйте живой симулятор прямо сейчас.</p>
+            <p style="text-align:center; color:var(--text-muted); margin-bottom: 40px; font-size: 18px;">Выберите вашу сферу и протестируйте живой симулятор прямо сейчас.</p>
             
             <div class="tabs-nav">
                 <button class="tab-btn active" onclick="switchTab(event, 'tab-infobiz')">Инфо-бизнес</button>
@@ -1868,7 +1912,7 @@
                         <button class="btn btn-primary" onclick="openDemo('demoInfobiz')">Запустить демо-версию</button>
                     </div>
                     <div class="template-mockup" onclick="openDemo('demoInfobiz')">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🎓</div>
+                        <div style="font-size: 50px; margin-bottom: 15px;">🎓</div>
                         <h4>Открыть симулятор Инфобизнеса</h4>
                     </div>
                 </div>
@@ -1882,7 +1926,7 @@
                         <button class="btn btn-primary" onclick="openDemo('demoHotel')">Запустить демо-версию</button>
                     </div>
                     <div class="template-mockup" onclick="openDemo('demoHotel')">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🏨</div>
+                        <div style="font-size: 50px; margin-bottom: 15px;">🏨</div>
                         <h4>Открыть симулятор Отеля</h4>
                     </div>
                 </div>
@@ -1896,7 +1940,7 @@
                         <button class="btn btn-primary" onclick="openDemo('demoSneakers')">Запустить демо-версию</button>
                     </div>
                     <div class="template-mockup" onclick="openDemo('demoSneakers')">
-                        <div style="font-size: 40px; margin-bottom: 10px;">👟</div>
+                        <div style="font-size: 50px; margin-bottom: 15px;">👟</div>
                         <h4>Открыть симулятор ONYX-DEMO</h4>
                     </div>
                 </div>
@@ -1910,7 +1954,7 @@
                         <button class="btn btn-primary" onclick="openDemo('demoFurniture')">Запустить демо-версию</button>
                     </div>
                     <div class="template-mockup" onclick="openDemo('demoFurniture')">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🛋️</div>
+                        <div style="font-size: 50px; margin-bottom: 15px;">🛋️</div>
                         <h4>Открыть симулятор ONYX FURNITURE</h4>
                     </div>
                 </div>
@@ -1924,7 +1968,7 @@
                         <button class="btn btn-secondary" onclick="alert('Демо-версия в процессе обновления. Запросите актуальный прототип у менеджера в Telegram.')">Демо в разработке</button>
                     </div>
                     <div class="template-mockup" onclick="alert('Демо-версия в процессе обновления. Запросите актуальный прототип у менеджера в Telegram.')">
-                        <div style="font-size: 40px; margin-bottom: 10px;">🚀</div>
+                        <div style="font-size: 50px; margin-bottom: 15px;">🚀</div>
                         <h4>Сборка демо-стенда...</h4>
                     </div>
                 </div>
@@ -1932,39 +1976,39 @@
         </div>
     </section>
 
-    <section class="steps-section" id="steps">
-        <div class="container">
+    <section class="steps-section" id="steps" style="padding: 100px 0;">
+        <div class="container reveal">
             <h2 class="section-title">Прозрачные этапы создания вашего сайта</h2>
             <div class="steps-timeline">
-                <div class="step-item" onclick="alert('Этап 1: Получение заявки и анкетирование.')">
+                <div class="step-item">
                     <div class="step-num">1</div>
                     <div class="step-text">
                         <h3>Получение заявки и глубокий анализ</h3>
                         <p>Вы заполняете нашу фирменную интерактивную анкету-квиз, указывая специфику ниши, ваши основные пожелания, фирменный стиль.</p>
                     </div>
                 </div>
-                <div class="step-item" onclick="alert('Этап 2: Составление майнд-карты и плана блоков.')">
+                <div class="step-item">
                     <div class="step-num">2</div>
                     <div class="step-text">
                         <h3>Составление индивидуальной ИТ-стратегии</h3>
                         <p>Ваш персональный программист связывается с вами, проводит детальный анализ конкурентов вашей сферы и формирует структуру блоков.</p>
                     </div>
                 </div>
-                <div class="step-item" onclick="alert('Этап 3: Написание кода и чистая верстка.')">
+                <div class="step-item">
                     <div class="step-num">3</div>
                     <div class="step-text">
                         <h3>Разработка и верстка сайта</h3>
                         <p>Пишется чистый, валидный код (HTML, CSS, JavaScript) с интеграцией всех форм сбора заявок, анимаций и скриптов аналитики Яндекс.</p>
                     </div>
                 </div>
-                <div class="step-item" onclick="alert('Этап 4: Делегирование и привязка DNS записей.')">
+                <div class="step-item">
                     <div class="step-num">4</div>
                     <div class="step-text">
                         <h3>Привязка вашего домена</h3>
                         <p>Мы приобретаем под ваш проект уникальное доменное имя, настраиваем глобальные маршрутизаторы DNS, A и CNAME записи.</p>
                     </div>
                 </div>
-                <div class="step-item" onclick="alert('Этап 5: Финальный деплой на хостинг.')">
+                <div class="step-item">
                     <div class="step-num">5</div>
                     <div class="step-text">
                         <h3>Публикация сайта</h3>
@@ -1975,8 +2019,8 @@
         </div>
     </section>
 
-    <section class="faq-section" id="faq">
-        <div class="container">
+    <section class="faq-section" id="faq" style="padding-bottom: 100px;">
+        <div class="container reveal">
             <h2 class="section-title">Часто задаваемые вопросы (FAQ)</h2>
             <div class="faq-accordion">
                 <div class="faq-item" onclick="toggleFaq(this)">
@@ -1997,7 +2041,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 ONYX Systems. Все права защищены. Разработка высококонверсионных ИТ-решений по подписке.</p>
+            <p>&copy; 2026 ONYX. Все права защищены. Разработка высококонверсионных ИТ-решений по подписке.</p>
         </div>
     </footer>
 
@@ -2300,7 +2344,6 @@
         </div>
     </div>
 
-
     <div id="demoHotel" class="demo-fullscreen">
         <div class="hotel-wrapper">
             <header class="hotel-header">
@@ -2463,7 +2506,6 @@
         </div>
     </div>
 
-
     <div id="demoInfobiz" class="demo-fullscreen">
         <div class="infobiz-wrapper">
             <header class="info-header">
@@ -2566,207 +2608,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-
-    <div id="demoFurniture" class="demo-fullscreen">
-        <div class="furn-wrapper bg-[#121212] text-gray-100 min-h-screen flex flex-col overflow-x-hidden font-sans">
-            
-            <header class="sticky top-0 left-0 w-full z-40 bg-[#121212]/80 backdrop-blur-md border-b border-white/5">
-                <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <button onclick="showFurnPage('home')" class="text-xl sm:text-2xl font-bold tracking-[0.2em] text-white uppercase focus:outline-none hover:text-amber-500 transition-all" contenteditable="true">ONYX FURNITURE</button>
-                    <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-widest text-gray-400 uppercase">
-                        <button onclick="showFurnPage('about')" class="hover:text-white transition-colors">О нас</button>
-                        <button onclick="showFurnPage('portfolio')" class="hover:text-white transition-colors">Портфолио</button>
-                        <button onclick="showFurnPage('prices')" class="hover:text-white transition-colors">Цены</button>
-                        <button onclick="showFurnPage('contacts')" class="hover:text-white transition-colors">Контакты</button>
-                    </nav>
-                    <div class="flex items-center gap-4">
-                        <button onclick="openFurnModal('furn-main-modal')" class="hidden sm:block bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase px-6 py-3 transition-all rounded-sm shadow-md">Расчет</button>
-                        <button onclick="closeDemo('demoFurniture')" class="bg-red-600/10 text-red-500 border border-red-500/30 hover:bg-red-600 hover:text-white text-xs font-semibold tracking-widest uppercase px-4 py-3 transition-all rounded-sm">Выйти</button>
-                    </div>
-                </div>
-            </header>
-
-            <main class="flex-grow">
-
-                <section id="furn-page-home" class="furn-page-section active">
-                    <div class="relative min-h-[85vh] flex items-center justify-center text-center px-6 overflow-hidden">
-                        <div class="absolute inset-0 w-full h-full z-0 pointer-events-none">
-                            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1920&q=80" alt="Роскошный модульный диван" class="w-full h-full object-cover">
-                        </div>
-                        <div class="absolute inset-0 video-overlay-furn z-0"></div>
-                        
-                        <div class="relative z-10 max-w-5xl mx-auto py-12">
-                            <span class="inline-block text-amber-500 text-xs font-semibold tracking-[0.3em] uppercase mb-4 animate-pulse" contenteditable="true">Ателье премиальной мебели</span>
-                            <h1 class="font-serif-furn text-4xl sm:text-6xl md:text-7xl text-white font-normal leading-tight mb-6" contenteditable="true">
-                                Мебель по <span class="italic text-amber-100">индивидуальному</span> дизайну
-                            </h1>
-                            <p class="text-gray-200 text-base sm:text-lg max-w-2xl mx-auto font-light mb-10" contenteditable="true">
-                                Создаем эксклюзивную мягкую и корпусную мебель по вашим размерам, чертежам или дизайн-проектам. Индивидуальный подход к каждому элементу интерьера.
-                            </p>
-                            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                                <button onclick="openFurnModal('furn-main-modal')" class="w-full sm:w-auto bg-amber-700 hover:bg-amber-600 text-white font-semibold text-sm tracking-wider uppercase px-8 py-4 transition-all duration-300 rounded-sm shadow-xl">
-                                    Отправить план на расчет
-                                </button>
-                                <button onclick="showFurnPage('portfolio')" class="w-full sm:w-auto border border-white/20 hover:border-white hover:bg-white/5 text-white font-semibold text-sm tracking-wider uppercase px-8 py-4 transition-all duration-300 rounded-sm bg-black/40 backdrop-blur-sm">
-                                    Смотреть портфолио
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="max-w-7xl mx-auto px-6 py-16 border-b border-white/5">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                            <div class="p-6 bg-[#161616]/40 border border-white/5 rounded-sm backdrop-blur-sm hover:border-amber-700/40 hover:bg-[#161616]/70 transition-all duration-300 group">
-                                <div class="font-serif-furn text-3xl sm:text-4xl text-amber-500 mb-2 group-hover:scale-110 transition-transform" contenteditable="true">10+ лет</div>
-                                <div class="text-xs uppercase tracking-widest text-gray-400 font-light" contenteditable="true">Опыт мастеров</div>
-                            </div>
-                            <div class="p-6 bg-[#161616]/40 border border-white/5 rounded-sm backdrop-blur-sm hover:border-amber-700/40 hover:bg-[#161616]/70 transition-all duration-300 group">
-                                <div class="font-serif-furn text-3xl sm:text-4xl text-amber-500 mb-2 group-hover:scale-110 transition-transform" contenteditable="true">3 года</div>
-                                <div class="text-xs uppercase tracking-widest text-gray-400 font-light" contenteditable="true">Честная гарантия</div>
-                            </div>
-                            <div class="p-6 bg-[#161616]/40 border border-white/5 rounded-sm backdrop-blur-sm hover:border-amber-700/40 hover:bg-[#161616]/70 transition-all duration-300 group">
-                                <div class="font-serif-furn text-3xl sm:text-4xl text-amber-500 mb-2 group-hover:scale-110 transition-transform" contenteditable="true">1500+</div>
-                                <div class="text-xs uppercase tracking-widest text-gray-400 font-light" contenteditable="true">Готовых проектов</div>
-                            </div>
-                            <div class="p-6 bg-[#161616]/40 border border-white/5 rounded-sm backdrop-blur-sm hover:border-amber-700/40 hover:bg-[#161616]/70 transition-all duration-300 group">
-                                <div class="font-serif-furn text-3xl sm:text-4xl text-amber-500 mb-2 group-hover:scale-110 transition-transform" contenteditable="true">0%</div>
-                                <div class="text-xs uppercase tracking-widest text-gray-400 font-light" contenteditable="true">Переплат и комиссий</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="max-w-7xl mx-auto px-6 py-20">
-                        <div class="text-center mb-16">
-                            <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Полный цикл реализации</span>
-                            <h2 class="font-serif-furn text-3xl sm:text-5xl text-white" contenteditable="true">Как мы создаем совершенство</h2>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <div class="bg-[#161616] p-8 border border-white/5 rounded-sm hover:border-amber-700/50 hover:scale-[1.02] transition-all duration-300 group">
-                                <div class="w-12 h-12 bg-amber-950/40 border border-amber-800/30 flex items-center justify-center text-amber-500 font-serif-furn text-xl mb-6 rounded-sm group-hover:bg-amber-700 group-hover:text-white transition-all">01</div>
-                                <h3 class="text-lg font-medium text-white mb-3" contenteditable="true">Проектирование и КД</h3>
-                                <p class="text-gray-400 text-sm font-light leading-relaxed" contenteditable="true">Создаем детальную конструкторскую документацию. Прорабатываем каждый стык, зазор и скрытый крепеж до миллиметра.</p>
-                            </div>
-                            <div class="bg-[#161616] p-8 border border-white/5 rounded-sm hover:border-amber-700/50 hover:scale-[1.02] transition-all duration-300 group">
-                                <div class="w-12 h-12 bg-amber-950/40 border border-amber-800/30 flex items-center justify-center text-amber-500 font-serif-furn text-xl mb-6 rounded-sm group-hover:bg-amber-700 group-hover:text-white transition-all">02</div>
-                                <h3 class="text-lg font-medium text-white mb-3" contenteditable="true">Собственное производство</h3>
-                                <p class="text-gray-400 text-sm font-light leading-relaxed" contenteditable="true">Современные цеха. Никаких посредников. Распил, покраска в изолированных камерах, ручная сборка и жесткий технадзор.</p>
-                            </div>
-                            <div class="bg-[#161616] p-8 border border-white/5 rounded-sm hover:border-amber-700/50 hover:scale-[1.02] transition-all duration-300 group">
-                                <div class="w-12 h-12 bg-amber-950/40 border border-amber-800/30 flex items-center justify-center text-amber-500 font-serif-furn text-xl mb-6 rounded-sm group-hover:bg-amber-700 group-hover:text-white transition-all">03</div>
-                                <h3 class="text-lg font-medium text-white mb-3" contenteditable="true">Премиальный монтаж</h3>
-                                <p class="text-gray-400 text-sm font-light leading-relaxed" contenteditable="true">Доставка в специализированной упаковке и сборка штатными мастерами с пылесосами. Идеально чистый результат.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="max-w-7xl mx-auto px-6 pb-24">
-                        <div class="text-center mb-12">
-                            <h2 class="font-serif-furn text-3xl text-white mb-2" contenteditable="true">Направления нашей работы</h2>
-                            <p class="text-gray-400 text-xs tracking-widest uppercase font-light" contenteditable="true">Выберите интересующий раздел для деталей</p>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div onclick="showFurnPage('promo-sofas')" class="group relative h-[400px] overflow-hidden rounded-sm border border-white/5 cursor-pointer shadow-xl">
-                                <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1200&q=80" alt="Роскошные Диваны" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-75">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-8 flex flex-col justify-end">
-                                    <h3 class="text-2xl text-white font-serif-furn mb-2" contenteditable="true">Премиальные диваны и мягкие зоны</h3>
-                                    <p class="text-amber-500 text-xs font-semibold tracking-widest uppercase group-hover:translate-x-3 transition-transform duration-300">Подробнее о производстве &rarr;</p>
-                                </div>
-                            </div>
-                            <div onclick="showFurnPage('promo-kitchens')" class="group relative h-[400px] overflow-hidden rounded-sm border border-white/5 cursor-pointer shadow-xl">
-                                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80" alt="Премиальная кухня" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-75">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-8 flex flex-col justify-end">
-                                    <h3 class="text-2xl text-white font-serif-furn mb-2" contenteditable="true">Умные кухни и корпусные системы</h3>
-                                    <p class="text-amber-500 text-xs font-semibold tracking-widest uppercase group-hover:translate-x-3 transition-transform duration-300">Подробнее о производстве &rarr;</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="furn-page-promo-sofas" class="furn-page-section py-16">
-                    <div class="max-w-7xl mx-auto px-6">
-                        <button onclick="showFurnPage('home')" class="text-amber-500 text-xs font-semibold tracking-widest uppercase mb-6 inline-block hover:text-amber-400 hover:translate-x-[-4px]">&larr; Вернуться назад</button>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-                            <div>
-                                <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Эксклюзивный комфорт</span>
-                                <h2 class="font-serif-furn text-4xl sm:text-5xl text-white mb-6" contenteditable="true">Премиальная мягкая мебель</h2>
-                                <p class="text-gray-300 font-light leading-relaxed mb-6" contenteditable="true">Каждый диван — это произведение инженерного искусства. Мы рассчитываем эргономику посадки индивидуально под ваш рост, подбираем идеальную жесткость латексного наполнителя (HR-пена) и комбинируем пуховые прослойки для эффекта "обволакивания".</p>
-                                <div class="space-y-4 mb-8">
-                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Каркасы из сухой березовой фанеры и массива хвойных пород (никакого ДСП).</p></div>
-                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Ткани со всего мира: бельгийский шенилл, итальянское букле, натуральная кожа.</p></div>
-                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Пожизненная гарантия на целостность скрытых сварных каркасов.</p></div>
-                                </div>
-                                <button onclick="openFurnModal('furn-sofa-modal')" class="bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase px-8 py-4 transition-colors rounded-sm shadow-xl">Рассчитать концепт дивана</button>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500">
-                                <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500 mt-8">
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="furn-page-promo-kitchens" class="furn-page-section py-16">
-                    <div class="max-w-7xl mx-auto px-6">
-                        <button onclick="showFurnPage('home')" class="text-amber-500 text-xs font-semibold tracking-widest uppercase mb-6 inline-block hover:text-amber-400 hover:translate-x-[-4px]">&larr; Вернуться назад</button>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-                            <div class="order-2 lg:order-1 grid grid-cols-2 gap-4">
-                                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500">
-                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500 mt-[-32px]">
-                            </div>
-                            <div class="order-1 lg:order-2">
-                                <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Технологичное превосходство</span>
-                                <h2 class="font-serif-furn text-4xl sm:text-5xl text-white mb-6" contenteditable="true">Высокотехнологичные кухни</h2>
-                                <p class="text-gray-300 font-light leading-relaxed mb-6" contenteditable="true">Кухни создаются по принципу "архитектурной чистоты линии". Никаких видимых ручек, лишних зазоров или неэффективных углов. Мы интегрируем передовые механизмы плавного закрывания Blum и Hettich последнего поколения.</p>
-                                <div class="space-y-4 mb-8">
-                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Влагостойкий МДФ повышенной плотности с лазерной кромкой.</p></div>
-                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Столешницы из широкоформатного керамогранита и кварцевого агломерата.</p></div>
-                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Интегрированная умная светодиодная подсветка с датчиками взмаха руки.</p></div>
-                                </div>
-                                <button onclick="openFurnModal('furn-kitchen-modal')" class="bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase px-8 py-4 transition-colors rounded-sm shadow-xl">Спроектировать умную кухню</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="furn-page-portfolio" class="furn-page-section py-16">
-                    <div class="max-w-7xl mx-auto px-6">
-                        <div class="mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-                            <div>
-                                <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Наше портфолио</span>
-                                <h2 class="font-serif-furn text-3xl sm:text-5xl text-white" contenteditable="true">Выполненные работы</h2>
-                            </div>
-                            <p class="text-gray-400 font-light max-w-xs text-sm" contenteditable="true">Все изделия спроектированы индивидуально под интерьеры заказчиков.</p>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            <div class="bg-[#161616] border border-white/5 rounded-sm overflow-hidden group shadow-lg hover:border-amber-700/30 transition-all duration-300">
-                                <div class="h-64 overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                </div>
-                                <div class="p-6">
-                                    <h3 class="text-lg font-medium text-white mb-1" contenteditable="true">Диван «Гранд Лаунж»</h3>
-                                    <p class="text-gray-400 text-xs font-light mb-4" contenteditable="true">Материал: Текстурированное букле, независимый пружинный блок</p>
-                                    <button onclick="openFurnModal('furn-main-modal')" class="text-amber-500 text-xs font-semibold uppercase tracking-wider hover:text-amber-400 hover:translate-x-1 transition-transform">Узнать стоимость &rarr;</button>
-                                </div>
-                            </div>
-                            <div class="bg-[#161616] border border-white/5 rounded-sm overflow-hidden group shadow-lg hover:border-amber-700/30 transition-all duration-300">
-                                <div class="h-64 overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                </div>
-                                <div class="p-6">
-                                    <h3 class="text-lg font-medium text-white mb-1" contenteditable="true">Кабинет из натурального шпона</h3>
-                                    <p class="text-gray-400 text-xs font-light mb-4" contenteditable="true">Интегрированные столы, скрытые системы хранения</p>
-                                    <button onclick="openFurnModal('furn-main-modal')" class="text-amber-500 text-xs font-semibold uppercase tracking-wider hover:text-amber-400 hover:translate-x-1 transition-transform">Узнать стоимость &rarr;</button>
-                                </div>
-                            </div>
-                            <div class="bg-[#161616] border border-white/5 rounded-sm overflow-hidden group shadow-lg hover:border-amber-700/30 transition-all duration-300">
-                                <div class="h-64 overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                </div>
-                                <div class="p-6">
+    </div>p-6">
                                     <h3 class="text-lg font-medium text-white mb-1" contenteditable="true">Кухонный гарнитур «Графит»</h3>
                                     <p class="text-gray-400 text-xs font-light mb-4" contenteditable="true">Фасады МДФ эмаль, интегрированный профиль и фурнитура Blum</p>
                                     <button onclick="openFurnModal('furn-main-modal')" class="text-amber-500 text-xs font-semibold uppercase tracking-wider hover:text-amber-400 hover:translate-x-1 transition-transform">Узнать стоимость &rarr;</button>
@@ -2914,6 +2756,31 @@
 
 
     <script>
+        // Анимации при скролле (Intersection Observer)
+        document.addEventListener("DOMContentLoaded", function() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        });
+
         // 1. ЛОГИКА ГЛАВНОГО САЙТА (ПЕРЕКЛЮЧЕНИЕ ТАБОВ, СКРОЛЛ)
         function switchTab(event, tabId) {
             const contents = document.querySelectorAll('.tab-content');
