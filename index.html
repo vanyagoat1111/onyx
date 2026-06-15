@@ -1,1759 +1,253 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONYX — Разработка сайтов по подписке</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            corePlugins: {
-                preflight: false,
-            }
-        }
-    </script>
-
-    <style>
-        /* ==========================================================================
-           1. ПРЕМИАЛЬНЫЕ БАЗОВЫЕ СТИЛИ (ГЛАВНЫЙ САЙТ ONYX)
-           ========================================================================== */
-        :root {
-            --bg-main: #090d16;
-            --bg-card: #111827;
-            --border-plat: rgba(226, 232, 240, 0.1);
-            --border-plat-hover: rgba(226, 232, 240, 0.25);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --neon-blue: #1d4ed8;
-            --neon-purple: #7c3aed;
-            --gradient-accent: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 100%);
-            --font-onyx: 'Montserrat', sans-serif;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            font-family: var(--font-onyx);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button {
-            font-family: var(--font-onyx);
-            cursor: pointer;
-            border: none;
-            background: none;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .text-gradient {
-            background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 32px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: var(--gradient-accent);
-            color: #fff;
-            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(124, 58, 237, 0.5);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            border: 1px solid var(--border-plat);
-            backdrop-filter: blur(5px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--border-plat-hover);
-            transform: translateY(-2px);
-        }
-
-        /* Анимации при скролле */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ==========================================================================
-           2. ШАПКА ГЛАВНОГО САЙТА
-           ========================================================================== */
-        .header {
-            background-color: rgba(9, 13, 22, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-plat);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .nav-link:hover {
-            color: #7c3aed;
-            transition: color 0.3s;
-        }
-
-        /* ==========================================================================
-           3. ГЛАВНЫЙ ЭКРАН (HERO)
-           ========================================================================== */
-        .hero {
-            padding: 140px 0;
-            text-align: center;
-            position: relative;
-            background: linear-gradient(to bottom, rgba(9,13,22,0.85), rgba(9,13,22,1)), 
-                        url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1920&q=80') center/cover;
-            border-bottom: 1px solid var(--border-plat);
-        }
-
-        .hero-title {
-            font-size: 56px;
-            font-weight: 800;
-            line-height: 1.15;
-            max-width: 1000px;
-            margin: 0 auto 24px auto;
-            letter-spacing: -1px;
-        }
-
-        .hero-subtitle {
-            font-size: 20px;
-            color: var(--text-main);
-            max-width: 800px;
-            margin: 0 auto 40px auto;
-            font-weight: 500;
-            opacity: 0.9;
-        }
-
-        .hero-action-text {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .hero-btns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            align-items: center;
-        }
-
-        /* ==========================================================================
-           4. ЦИФРЫ ДОВЕРИЯ (СТАТИСТИКА)
-           ========================================================================== */
-        .stats-section {
-            padding: 100px 0;
-            background: var(--bg-main);
-        }
-
-        .stats-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .stats-header h2 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-plat);
-            border-radius: 16px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.4s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--neon-purple);
-            box-shadow: 0 15px 30px rgba(124, 58, 237, 0.1);
-        }
-
-        .stat-num {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            line-height: 1;
-        }
-
-        .stat-text {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.5;
-            font-weight: 500;
-        }
-
-        /* ==========================================================================
-           5. БИЗНЕС-МАТЕМАТИКА (ТАБЛИЦА)
-           ========================================================================== */
-        .math-section {
-            padding: 80px 0;
-            background: linear-gradient(180deg, rgba(9,13,22,1) 0%, rgba(17,24,39,0.5) 100%);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 50px;
-        }
-
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            background: var(--bg-card);
-            border: 1px solid var(--border-plat);
-            border-radius: 12px;
-            margin-bottom: 30px;
-        }
-
-        .compare-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 15px;
-        }
-
-        .compare-table th, .compare-table td {
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border-plat);
-        }
-
-        .compare-table th {
-            background: rgba(255,255,255,0.02);
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .compare-table tbody tr {
-            transition: background 0.3s;
-        }
-
-        .compare-table tbody tr:hover {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .highlight-row {
-            background: rgba(29, 78, 216, 0.1);
-        }
-
-        .text-success {
-            color: #10b981;
-            font-weight: 600;
-        }
-
-        .text-danger {
-            color: #ef4444;
-            font-weight: 600;
-        }
-
-        .benefit-box {
-            background: linear-gradient(135deg, rgba(29, 78, 216, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
-            border: 1px solid var(--neon-purple);
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .benefit-box h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .benefit-value {
-            font-size: 42px;
-            font-weight: 800;
-            color: #10b981;
-        }
-
-        /* ==========================================================================
-           6. БЛОК ROMI (ИНВЕСТИЦИИ)
-           ========================================================================== */
-        .romi-section {
-            padding: 100px 0;
-        }
-
-        .romi-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .romi-content h2 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 25px;
-            line-height: 1.2;
-        }
-
-        .romi-content p {
-            color: var(--text-muted);
-            font-size: 16px;
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-
-        .romi-quote {
-            padding-left: 20px;
-            border-left: 4px solid var(--neon-purple);
-            font-size: 18px;
-            font-weight: 600;
-            color: #fff;
-            margin: 30px 0;
-            font-style: italic;
-        }
-
-        .romi-image-wrapper {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        .romi-image-wrapper img {
-            width: 100%;
-            display: block;
-            transition: transform 0.5s;
-        }
-
-        .romi-image-wrapper:hover img {
-            transform: scale(1.05);
-        }
-
-        /* ==========================================================================
-           7. ШАБЛОНЫ (5 ВКЛАДОК)
-           ========================================================================== */
-        .templates-section {
-            padding: 100px 0;
-            background: rgba(17, 24, 39, 0.4);
-        }
-
-        .tabs-nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 50px;
-        }
-
-        .tab-btn {
-            padding: 14px 24px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--border-plat);
-            color: var(--text-muted);
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-            background: var(--gradient-accent);
-            color: #fff;
-            border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2);
-        }
-
-        .tab-content {
-            display: none;
-            background: var(--bg-card);
-            border: 1px solid var(--border-plat);
-            border-radius: 16px;
-            padding: 50px;
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .template-preview-grid {
-            display: flex;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .template-info {
-            flex: 1;
-        }
-
-        .template-info h3 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .template-info p {
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            font-size: 16px;
-        }
-
-        .template-mockup {
-            flex: 1;
-            background: #090d16;
-            border: 1px solid var(--border-plat);
-            border-radius: 16px;
-            padding: 40px 20px;
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: all 0.4s ease;
-        }
-
-        .template-mockup:hover {
-            border-color: var(--neon-purple);
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(124, 58, 237, 0.2);
-        }
-
-        /* ==========================================================================
-           8. ФОРМА-КВИЗ (МОДАЛЬНОЕ ОКНО)
-           ========================================================================== */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 8, 15, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-plat);
-            width: 100%;
-            max-width: 600px;
-            border-radius: 16px;
-            padding: 40px;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            color: var(--text-muted);
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .modal-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
-
-        .form-group-onyx {
-            margin-bottom: 20px;
-        }
-
-        .form-group-onyx label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-
-        .form-group-onyx input, 
-        .form-group-onyx select, 
-        .form-group-onyx textarea {
-            width: 100%;
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--border-plat);
-            border-radius: 6px;
-            padding: 12px 16px;
-            color: var(--text-main);
-            font-family: var(--font-onyx);
-            font-size: 15px;
-        }
-
-        .form-group-onyx input:focus, 
-        .form-group-onyx select:focus, 
-        .form-group-onyx textarea:focus {
-            outline: none;
-            border-color: #7c3aed;
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* ==========================================================================
-           9. ЭТАПЫ И FAQ
-           ========================================================================== */
-        .faq-accordion {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .faq-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-plat);
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .faq-item:hover {
-            border-color: rgba(255,255,255,0.2);
-        }
-
-        .faq-trigger {
-            width: 100%;
-            text-align: left;
-            padding: 24px;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-main);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-content {
-            display: none;
-            padding: 0 24px 24px 24px;
-            color: var(--text-muted);
-            font-size: 15px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 15px;
-        }
-
-        .faq-item.active .faq-content {
-            display: block;
-        }
-
-        .steps-timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .step-item {
-            display: flex;
-            gap: 30px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-plat);
-            padding: 30px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-        }
-
-        .step-item:hover {
-            border-color: var(--neon-blue);
-            transform: translateX(10px);
-        }
-
-        .step-num {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 800;
-            flex-shrink: 0;
-        }
-
-        .step-text h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .step-text p {
-            color: var(--text-muted);
-            font-size: 15px;
-        }
-
-        /* ПОДВАЛ */
-        .footer {
-            border-top: 1px solid var(--border-plat);
-            padding: 40px 0;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ==========================================================================
-           АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ (MOBILE RESPONSIVE FIXES)
-           ========================================================================== */
-        @media (max-width: 768px) {
-            .header .container { flex-direction: column; gap: 15px; }
-            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 10px; }
-            .hero { padding: 80px 0; }
-            .hero-title { font-size: 32px; }
-            .hero-subtitle { font-size: 16px; padding: 0 10px; }
-            .hero-btns { flex-direction: column; width: 100%; padding: 0 20px; box-sizing: border-box; }
-            .hero-btns .btn { width: 100%; }
-            .stats-grid { grid-template-columns: 1fr; gap: 20px; }
-            .section-title { font-size: 26px; }
-            .romi-grid { grid-template-columns: 1fr; gap: 40px; }
-            .template-preview-grid { flex-direction: column; text-align: center; }
-            .tabs-nav { flex-direction: column; align-items: stretch; gap: 8px; }
-            .tab-btn { width: 100%; text-align: center; }
-            .step-item { flex-direction: column; align-items: center; text-align: center; }
-            .step-item:hover { transform: translateY(-5px); }
-            .modal-box { margin: 15px; width: auto; padding: 25px; }
-            .modal-title { font-size: 20px; }
-        }
-
-        /* ==========================================================================
-           ОБЩИЕ СТИЛИ ДЛЯ ВСЕХ ПОЛНОЭКРАННЫХ ДЕМО
-           ========================================================================== */
-        .demo-fullscreen {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 9999;
-            overflow-y: auto;
-            background-color: var(--bg-main);
-        }
-
-        .demo-fullscreen.active {
-            display: block;
-        }
-
-        [contenteditable="true"]:hover {
-            cursor: pointer;
-            outline: 2px dashed rgba(124, 58, 237, 0.5);
-            background: rgba(124, 58, 237, 0.05);
-            border-radius: 4px;
-        }
-
-        /* ==========================================================================
-           ДЕМО 1: ИНТЕРНЕТ-МАГАЗИН КРОССОВОК (ONYX-DEMO / МНОГОСТРАНИЧНЫЙ)
-           ========================================================================== */
-        #demoSneakers .sneaker-wrapper {
-            background: #fdfdfd;
-            color: #111111;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            min-height: 100vh;
-        }
-
-        #demoSneakers .a3-header {
-            background: #000000;
-            color: #ffffff;
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 102;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        #demoSneakers .a3-logo {
-            font-size: 24px;
-            font-weight: 900;
-            letter-spacing: 3px;
-        }
-
-        #demoSneakers .a3-nav {
-            display: flex;
-            gap: 25px;
-            font-size: 13px;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        #demoSneakers .a3-nav span {
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        #demoSneakers .a3-nav span:hover,
-        #demoSneakers .a3-nav span.active-tab {
-            color: #d4af37;
-        }
-
-        #demoSneakers .a3-header-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        #demoSneakers .a3-cart-btn {
-            background: #ffffff;
-            color: #000000;
-            padding: 10px 20px;
-            font-weight: 600;
-            font-size: 13px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            border: none;
-        }
-
-        #demoSneakers .close-demo-btn {
-            background: rgba(255,255,255,0.15);
-            color: #fff;
-            padding: 10px 16px;
-            font-size: 13px;
-            font-weight: 500;
-            border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.2);
-            cursor: pointer;
-        }
-
-        #demoSneakers .close-demo-btn:hover {
-            background: #ef4444;
-            border-color: transparent;
-        }
-
-        #demoSneakers .a3-hero {
-            background: #111111;
-            color: #ffffff;
-            padding: 80px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            overflow: hidden;
-            position: relative;
-        }
-
-        #demoSneakers .a3-hero-text {
-            max-width: 550px;
-            z-index: 2;
-        }
-
-        #demoSneakers .a3-hero-tag {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #888888;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        #demoSneakers .a3-hero-text h1 {
-            font-size: 42px;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        #demoSneakers .a3-hero-text p {
-            color: #b3b3b3;
-            font-size: 15px;
-            margin-bottom: 30px;
-        }
-
-        #demoSneakers .a3-catalog-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        #demoSneakers .sneaker-catalog-section {
-            display: none;
-        }
-
-        #demoSneakers .sneaker-catalog-section.active-section {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        #demoSneakers .a3-catalog-title {
-            font-size: 28px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 40px;
-            text-align: center;
-            border-bottom: 2px solid #000;
-            padding-bottom: 15px;
-        }
-
-        #demoSneakers .a3-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 40px 24px;
-        }
-
-        #demoSneakers .a3-card {
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        #demoSneakers .a3-card:hover {
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-            transform: translateY(-4px);
-        }
-
-        #demoSneakers .a3-image-box {
-            width: 100%;
-            height: 300px;
-            background: #f9fafb;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        #demoSneakers .a3-image-box img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            transition: transform 0.4s ease;
-        }
-
-        #demoSneakers .a3-card:hover .a3-image-box img {
-            transform: scale(1.06);
-        }
-
-        #demoSneakers .a3-card-body {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        #demoSneakers .a3-brand {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #777777;
-            margin-bottom: 5px;
-        }
-
-        #demoSneakers .a3-name {
-            font-size: 15px;
-            font-weight: 700;
-            color: #111111;
-            margin-bottom: 10px;
-            line-height: 1.3;
-            min-height: 40px;
-        }
-
-        #demoSneakers .a3-price {
-            font-size: 17px;
-            font-weight: 800;
-            color: #000000;
-            margin-bottom: 15px;
-        }
-
-        #demoSneakers .a3-sizes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 20px;
-        }
-
-        #demoSneakers .size-chip {
-            width: 36px;
-            height: 36px;
-            border: 1px solid #dddddd;
-            font-size: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        #demoSneakers .size-chip.selected {
-            background: #000000;
-            color: #ffffff;
-            border-color: #000000;
-        }
-
-        #demoSneakers .a3-buy-btn {
-            background: #000000;
-            color: #ffffff;
-            width: 100%;
-            padding: 14px;
-            text-transform: uppercase;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            transition: background 0.2s;
-            margin-top: auto;
-            border: none;
-            cursor: pointer;
-        }
-
-        #demoSneakers .a3-buy-btn:hover {
-            background: #333333;
-        }
-
-        /* ОКНО ОФОРМЛЕНИЯ ЗАКАЗА ДЛЯ КРОССОВОК */
-        .checkout-backdrop {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .checkout-backdrop.active {
-            display: flex;
-        }
-
-        .checkout-modal {
-            background: #ffffff;
-            color: #111111;
-            width: 100%;
-            max-width: 500px;
-            border-radius: 8px;
-            padding: 30px;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            font-family: sans-serif;
-        }
-
-        .checkout-modal h2 {
-            font-size: 22px;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #111;
-            padding-bottom: 10px;
-        }
-
-        .checkout-group {
-            margin-bottom: 16px;
-        }
-
-        .checkout-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            color: #555;
-        }
-
-        .checkout-select, .checkout-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #cccccc;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 14px;
-        }
-
-        .checkout-summary {
-            background: #f9fafb;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-            font-size: 14px;
-        }
-
-        .checkout-summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .checkout-summary-row.total {
-            font-weight: 800;
-            font-size: 16px;
-            border-top: 1px dashed #ccc;
-            padding-top: 8px;
-            margin-bottom: 0;
-        }
-
-        .submit-order-btn {
-            background: #10b981;
-            color: #ffffff;
-            width: 100%;
-            padding: 16px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-            border: none;
-        }
-
-        .submit-order-btn:hover {
-            background: #059669;
-        }
-
-        .close-checkout-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            font-weight: 300;
-            color: #999;
-            cursor: pointer;
-        }
-
-        /* ==========================================================================
-           ДЕМО 2: ОТЕЛИ (ONYX GRAND HOTEL)
-           ========================================================================== */
-        #demoHotel .hotel-wrapper {
-            --h-bg-dark: #080808;
-            --h-bg-card: #121212;
-            --h-accent-gold: #D4AF37;
-            --h-accent-hover: #AA8B2C;
-            --h-text-main: #FFFFFF;
-            --h-text-muted: #A0A0A0;
-            --h-border-color: #222222;
-            background-color: var(--h-bg-dark);
-            color: var(--h-text-main);
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        #demoHotel .hotel-header {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 20px 0;
-            background-color: rgba(8, 8, 8, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(15px);
-        }
-
-        #demoHotel .hotel-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 25px;
-        }
-
-        #demoHotel .header-wrap {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #demoHotel .logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            cursor: pointer;
-            color: var(--h-text-main);
-            text-decoration: none;
-        }
-
-        #demoHotel .logo span {
-            color: var(--h-accent-gold);
-        }
-
-        #demoHotel nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        #demoHotel nav a {
-            color: var(--h-text-muted);
-            text-decoration: none;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        #demoHotel nav a:hover, 
-        #demoHotel nav a.active {
-            color: var(--h-accent-gold);
-        }
-
-        #demoHotel .hotel-page {
-            display: none;
-            padding-top: 40px;
-            animation: fadeIn 0.6s ease-in-out;
-            padding-bottom: 100px;
-        }
-
-        #demoHotel .hotel-page.active-page {
-            display: block;
-        }
-
-        #demoHotel h1, 
-        #demoHotel h2, 
-        #demoHotel h3 {
-            font-weight: 400;
-            margin-top: 0;
-        }
-
-        #demoHotel .section-title {
-            font-size: 36px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-            color: var(--h-text-main);
-        }
-
-        #demoHotel .section-subtitle {
-            color: var(--h-text-muted);
-            font-size: 16px;
-            margin-bottom: 50px;
-            max-width: 800px;
-        }
-
-        #demoHotel .hotel-btn {
-            padding: 16px 35px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            border: none;
-        }
-
-        #demoHotel .btn-gold {
-            background-color: var(--h-accent-gold);
-            color: #000;
-        }
-
-        #demoHotel .btn-gold:hover {
-            background-color: var(--h-accent-hover);
-        }
-
-        #demoHotel .btn-close-demo {
-            background-color: transparent;
-            border: 1px solid var(--h-accent-gold);
-            color: var(--h-accent-gold);
-            padding: 8px 15px;
-            font-size: 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        #demoHotel .btn-close-demo:hover {
-            background-color: var(--h-accent-gold);
-            color: #000;
-        }
-
-        #demoHotel .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 80px;
-            align-items: center;
-        }
-
-        #demoHotel .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        #demoHotel .image-card {
-            background: var(--h-bg-card);
-            border: 1px solid var(--h-border-color);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        #demoHotel .image-card img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-bottom: 1px solid var(--h-border-color);
-            display: block;
-        }
-
-        #demoHotel .image-card.large-img img {
-            height: 500px;
-        }
-
-        #demoHotel .card-content {
-            padding: 30px;
-        }
-
-        #demoHotel .card-content h3 {
-            font-size: 22px;
-            color: var(--h-accent-gold);
-            margin-bottom: 10px;
-        }
-
-        #demoHotel .card-content p {
-            color: var(--h-text-muted);
-            font-size: 14px;
-            margin: 0;
-        }
-
-        #demoHotel .hero-section {
-            background-image: linear-gradient(rgba(8, 8, 8, 0.6), rgba(8, 8, 8, 1)), url('img/pic3.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        #demoHotel .hero-content h1 {
-            font-size: 64px;
-            margin: 0 0 20px 0;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: #fff;
-        }
-
-        #demoHotel .stars {
-            color: var(--h-accent-gold);
-            font-size: 24px;
-            letter-spacing: 8px;
-            margin-bottom: 20px;
-        }
-
-        #demoHotel .booking-widget {
-            background: var(--h-bg-card);
-            border: 1px solid var(--h-accent-gold);
-            padding: 50px;
-            border-radius: 8px;
-        }
-
-        #demoHotel .form-group {
-            margin-bottom: 20px;
-        }
-
-        #demoHotel .form-group label {
-            display: block;
-            font-size: 12px;
-            color: var(--h-accent-gold);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        #demoHotel .form-control {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--h-bg-dark);
-            border: 1px solid var(--h-border-color);
-            color: #fff;
-            font-size: 15px;
-            box-sizing: border-box;
-            border-radius: 4px;
-        }
-
-        @media (max-width: 850px) {
-            #demoHotel .grid-2, 
-            #demoHotel .grid-3 {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            #demoHotel .hero-content h1 {
-                font-size: 38px;
-                letter-spacing: 3px;
-            }
-            #demoHotel .header-wrap {
-                flex-direction: column;
-                gap: 15px;
-            }
-            #demoHotel nav {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-            #demoHotel .booking-widget {
-                padding: 30px;
-            }
-        }
-
-        /* ==========================================================================
-           ДЕМО 3: ИНФОБИЗНЕС
-           ========================================================================== */
-        #demoInfobiz .infobiz-wrapper {
-            --i-bg-color: #080808;
-            --i-accent-gold: #D4AF37;
-            --i-accent-gold-hover: #AA8B2C;
-            --i-text-main: #FFFFFF;
-            --i-text-muted: #A0A0A0;
-            --i-card-bg: #121212;
-            --i-input-bg: #1F1F1F;
-            --i-border-color: #222222;
-            background-color: var(--i-bg-color);
-            color: var(--i-text-main);
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        #demoInfobiz .info-header {
-            border-bottom: 1px solid var(--i-border-color);
-            padding: 20px 0;
-            background-color: rgba(8, 8, 8, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-
-        #demoInfobiz .info-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 25px;
-        }
-
-        #demoInfobiz .header-wrap {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #demoInfobiz .logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            color: var(--i-text-main);
-            text-decoration: none;
-        }
-
-        #demoInfobiz .logo span {
-            color: var(--i-accent-gold);
-        }
-
-        #demoInfobiz nav {
-            display: flex;
-            align-items: center;
-        }
-
-        #demoInfobiz nav a {
-            color: var(--i-text-muted);
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 15px;
-            font-weight: 500;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
-
-        #demoInfobiz nav a:hover, 
-        #demoInfobiz nav a.active {
-            color: var(--i-accent-gold);
-        }
-
-        #demoInfobiz .editor-badge {
-            background-color: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--i-accent-gold);
-            color: var(--i-accent-gold);
-            padding: 6px 14px;
-            font-size: 11px;
-            font-weight: bold;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        #demoInfobiz .btn-close-demo {
-            background-color: transparent;
-            border: 1px solid #ef4444;
-            color: #ef4444;
-            padding: 8px 15px;
-            font-size: 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-left: 15px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        #demoInfobiz .btn-close-demo:hover {
-            background-color: #ef4444;
-            color: #fff;
-        }
-
-        #demoInfobiz .info-page {
-            display: none;
-            padding: 40px 0 100px 0;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        #demoInfobiz .info-page.active-page {
-            display: block;
-        }
-
-        #demoInfobiz .hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
-            align-items: center;
-            margin-bottom: 80px;
-        }
-
-        @media (max-width: 968px) {
-            #demoInfobiz .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-        }
-
-        #demoInfobiz .tagline {
-            color: var(--i-accent-gold);
-            text-transform: uppercase;
-            font-size: 13px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-
-        #demoInfobiz h1 {
-            font-size: 52px;
-            line-height: 1.15;
-            margin: 0 0 25px 0;
-            font-weight: 700;
-        }
-
-        #demoInfobiz h2 {
-            font-size: 32px;
-            margin-bottom: 30px;
-            font-weight: 700;
-        }
-
-        #demoInfobiz .description-text {
-            font-size: 18px;
-            color: var(--i-text-muted);
-            margin-bottom: 40px;
-        }
-
-        #demoInfobiz .btn-group {
-            display: flex;
-            gap: 20px;
-        }
-
-        #demoInfobiz .info-btn {
-            padding: 18px 36px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            border: none;
-        }
-
-        #demoInfobiz .btn-gold {
-            background-color: var(--i-accent-gold);
-            color: #000;
-        }
-
-        #demoInfobiz .btn-gold:hover {
-            background-color: var(--i-accent-gold-hover);
-        }
-
-        #demoInfobiz .btn-outline {
-            background-color: transparent;
-            color: var(--i-text-main);
-            border: 1px solid var(--i-border-color);
-        }
-
-        #demoInfobiz .btn-outline:hover {
-            border-color: var(--i-accent-gold);
-            color: var(--i-accent-gold);
-        }
-
-        #demoInfobiz .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-bottom: 80px;
-        }
-
-        @media (max-width: 768px) {
-            #demoInfobiz .modules-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        #demoInfobiz .module-card {
-            background-color: var(--i-card-bg);
-            border: 1px solid var(--i-border-color);
-            padding: 30px;
-            border-radius: 8px;
-        }
-
-        #demoInfobiz .module-num {
-            color: var(--i-accent-gold);
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        #demoInfobiz .trend-block {
-            background-color: var(--i-card-bg);
-            border: 1px solid var(--i-border-color);
-            border-radius: 12px;
-            padding: 50px;
-            margin-bottom: 80px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        @media (max-width: 900px) {
-            #demoInfobiz .trend-block {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        #demoInfobiz .order-layout {
-            display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 60px;
-        }
-
-        @media (max-width: 968px) {
-            #demoInfobiz .order-layout {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        #demoInfobiz .checkout-box {
-            background-color: var(--i-card-bg);
-            border: 1px solid var(--i-border-color);
-            border-radius: 12px;
-            padding: 40px;
-        }
-
-        #demoInfobiz .price-tag {
-            display: flex;
-            align-items: baseline;
-            gap: 15px;
-            margin-bottom: 30px;
-            background: #1A1712;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid var(--i-accent-gold);
-        }
-
-        #demoInfobiz .form-group {
-            margin-bottom: 25px;
-        }
-
-        #demoInfobiz .form-group label {
-            display: block;
-            font-size: 13px;
-            color: var(--i-text-muted);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        #demoInfobiz .form-control {
-            width: 100%;
-            padding: 16px;
-            background-color: var(--i-input-bg);
-            border: 1px solid var(--i-border-color);
-            border-radius: 6px;
-            color: #fff;
-            font-size: 15px;
-            box-sizing: border-box;
-        }
-
-        #demoInfobiz .form-control:focus {
-            border-color: var(--i-accent-gold);
-            outline: none;
-        }
-
-        #demoInfobiz .program-details {
-            background: var(--i-card-bg);
-            border: 1px solid var(--i-border-color);
-            border-radius: 8px;
-            padding: 30px;
-            margin-top: 30px;
-        }
-
-        #demoInfobiz .detail-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--i-border-color);
-        }
-
-        #demoInfobiz .detail-item:last-child {
-            border-bottom: none;
-        }
-
-        /* ==========================================================================
-           ДЕМО 4: МЕБЕЛЬ И ИНТЕРЬЕРЫ (ONYX FURNITURE)
-           ========================================================================== */
-        #demoFurniture .furn-wrapper {
-            background-color: #121212;
-            color: #f3f4f6;
-            font-family: 'Montserrat', sans-serif;
-            min-height: 100vh;
-        }
-        
-        #demoFurniture .font-serif-furn { 
-            font-family: 'Playfair Display', serif; 
-        }
-
-        #demoFurniture .furn-page-section { 
-            display: none; 
-            opacity: 0; 
-            transform: translateY(15px); 
-            transition: all 0.5s ease-in-out; 
-        }
-
-        #demoFurniture .furn-page-section.active { 
-            display: block; 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
-
-        #demoFurniture .video-overlay-furn {
-            background: linear-gradient(to bottom, rgba(18,18,18,0.3) 0%, rgba(18,18,18,0.7) 60%, rgba(18,18,18,1) 100%);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONYX — Разработка сайтов по подписке</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { corePlugins: { preflight: false } }</script>
+<style>
+:root { --bg-main: #090d16; --bg-card: #111827; --border-plat: rgba(226, 232, 240, 0.1); --border-plat-hover: rgba(226, 232, 240, 0.25); --text-main: #f8fafc; --text-muted: #94a3b8; --neon-blue: #1d4ed8; --neon-purple: #7c3aed; --gradient-accent: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 100%); --font-onyx: 'Montserrat', sans-serif; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background-color: var(--bg-main); color: var(--text-main); font-family: var(--font-onyx); line-height: 1.6; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font-onyx); cursor: pointer; border: none; background: none; }
+.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.text-gradient { background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; border-radius: 8px; font-weight: 600; font-size: 15px; transition: all 0.3s ease; }
+.btn-primary { background: var(--gradient-accent); color: #fff; box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(124, 58, 237, 0.5); }
+.btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-plat); backdrop-filter: blur(5px); }
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--border-plat-hover); transform: translateY(-2px); }
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+.header { background-color: rgba(9, 13, 22, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-plat); padding: 20px 0; position: sticky; top: 0; z-index: 100; }
+.header .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 24px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.nav-menu { display: flex; gap: 30px; font-weight: 500; font-size: 14px; }
+.nav-link:hover { color: #7c3aed; transition: color 0.3s; }
+.hero { padding: 140px 0; text-align: center; position: relative; background: linear-gradient(to bottom, rgba(9,13,22,0.85), rgba(9,13,22,1)), url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1920&q=80') center/cover; border-bottom: 1px solid var(--border-plat); }
+.hero-title { font-size: 56px; font-weight: 800; line-height: 1.15; max-width: 1000px; margin: 0 auto 24px auto; letter-spacing: -1px; }
+.hero-subtitle { font-size: 20px; color: var(--text-main); max-width: 800px; margin: 0 auto 40px auto; font-weight: 500; opacity: 0.9; }
+.hero-action-text { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; font-weight: 500; }
+.hero-btns { display: flex; justify-content: center; gap: 20px; align-items: center; }
+.stats-section { padding: 100px 0; background: var(--bg-main); }
+.stats-header { text-align: center; margin-bottom: 60px; }
+.stats-header h2 { font-size: 36px; font-weight: 800; margin-bottom: 15px; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border-plat); border-radius: 16px; padding: 40px 30px; text-align: center; transition: all 0.4s ease; }
+.stat-card:hover { transform: translateY(-10px); border-color: var(--neon-purple); box-shadow: 0 15px 30px rgba(124, 58, 237, 0.1); }
+.stat-num { font-size: 48px; font-weight: 800; margin-bottom: 10px; line-height: 1; }
+.stat-text { color: var(--text-muted); font-size: 14px; line-height: 1.5; font-weight: 500; }
+.math-section { padding: 80px 0; background: linear-gradient(180deg, rgba(9,13,22,1) 0%, rgba(17,24,39,0.5) 100%); }
+.section-title { text-align: center; font-size: 36px; font-weight: 800; margin-bottom: 50px; }
+.table-wrapper { width: 100%; overflow-x: auto; background: var(--bg-card); border: 1px solid var(--border-plat); border-radius: 12px; margin-bottom: 30px; }
+.compare-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 15px; }
+.compare-table th, .compare-table td { padding: 20px 24px; border-bottom: 1px solid var(--border-plat); }
+.compare-table th { background: rgba(255,255,255,0.02); font-weight: 600; color: var(--text-main); }
+.compare-table tbody tr { transition: background 0.3s; }
+.compare-table tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+.highlight-row { background: rgba(29, 78, 216, 0.1); }
+.text-success { color: #10b981; font-weight: 600; }
+.text-danger { color: #ef4444; font-weight: 600; }
+.benefit-box { background: linear-gradient(135deg, rgba(29, 78, 216, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%); border: 1px solid var(--neon-purple); border-radius: 12px; padding: 30px; text-align: center; max-width: 800px; margin: 0 auto; }
+.benefit-box h3 { font-size: 24px; margin-bottom: 10px; color: #fff; }
+.benefit-value { font-size: 42px; font-weight: 800; color: #10b981; }
+.romi-section { padding: 100px 0; }
+.romi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.romi-content h2 { font-size: 36px; font-weight: 800; margin-bottom: 25px; line-height: 1.2; }
+.romi-content p { color: var(--text-muted); font-size: 16px; margin-bottom: 20px; line-height: 1.7; }
+.romi-quote { padding-left: 20px; border-left: 4px solid var(--neon-purple); font-size: 18px; font-weight: 600; color: #fff; margin: 30px 0; font-style: italic; }
+.romi-image-wrapper { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+.romi-image-wrapper img { width: 100%; display: block; transition: transform 0.5s; }
+.romi-image-wrapper:hover img { transform: scale(1.05); }
+.templates-section { padding: 100px 0; background: rgba(17, 24, 39, 0.4); }
+.tabs-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 50px; }
+.tab-btn { padding: 14px 24px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-plat); color: var(--text-muted); border-radius: 8px; font-weight: 600; font-size: 14px; transition: all 0.3s ease; }
+.tab-btn.active, .tab-btn:hover { background: var(--gradient-accent); color: #fff; border-color: transparent; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(124, 58, 237, 0.2); }
+.tab-content { display: none; background: var(--bg-card); border: 1px solid var(--border-plat); border-radius: 16px; padding: 50px; animation: fadeIn 0.5s ease forwards; }
+.tab-content.active { display: block; }
+.template-preview-grid { display: flex; gap: 50px; align-items: center; }
+.template-info { flex: 1; }
+.template-info h3 { font-size: 32px; margin-bottom: 20px; font-weight: 800; }
+.template-info p { color: var(--text-muted); margin-bottom: 30px; font-size: 16px; }
+.template-mockup { flex: 1; background: #090d16; border: 1px solid var(--border-plat); border-radius: 16px; padding: 40px 20px; min-height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.3); cursor: pointer; transition: all 0.4s ease; }
+.template-mockup:hover { border-color: var(--neon-purple); transform: translateY(-10px); box-shadow: 0 30px 60px rgba(124, 58, 237, 0.2); }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 15, 0.85); backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; }
+.modal-overlay.active { display: flex; }
+.modal-box { background: var(--bg-card); border: 1px solid var(--border-plat); width: 100%; max-width: 600px; border-radius: 16px; padding: 40px; position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+.modal-close { position: absolute; top: 20px; right: 20px; font-size: 24px; color: var(--text-muted); background: none; border: none; cursor: pointer; }
+.modal-title { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+.form-group-onyx { margin-bottom: 20px; }
+.form-group-onyx label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; }
+.form-group-onyx input, .form-group-onyx select, .form-group-onyx textarea { width: 100%; background: rgba(255,255,255,0.02); border: 1px solid var(--border-plat); border-radius: 6px; padding: 12px 16px; color: var(--text-main); font-family: var(--font-onyx); font-size: 15px; }
+.form-group-onyx input:focus, .form-group-onyx select:focus, .form-group-onyx textarea:focus { outline: none; border-color: #7c3aed; background: rgba(255,255,255,0.05); }
+.faq-accordion { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.faq-item { background: var(--bg-card); border: 1px solid var(--border-plat); border-radius: 8px; overflow: hidden; cursor: pointer; transition: border-color 0.2s; }
+.faq-item:hover { border-color: rgba(255,255,255,0.2); }
+.faq-trigger { width: 100%; text-align: left; padding: 24px; font-size: 16px; font-weight: 600; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; }
+.faq-content { display: none; padding: 0 24px 24px 24px; color: var(--text-muted); font-size: 15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
+.faq-item.active .faq-content { display: block; }
+.steps-timeline { display: flex; flex-direction: column; gap: 40px; position: relative; max-width: 800px; margin: 0 auto; }
+.step-item { display: flex; gap: 30px; background: var(--bg-card); border: 1px solid var(--border-plat); padding: 30px; border-radius: 12px; cursor: pointer; transition: all 0.4s ease; }
+.step-item:hover { border-color: var(--neon-blue); transform: translateX(10px); }
+.step-num { width: 50px; height: 50px; background: var(--gradient-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; flex-shrink: 0; }
+.step-text h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+.step-text p { color: var(--text-muted); font-size: 15px; }
+.footer { border-top: 1px solid var(--border-plat); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 768px) { .header .container { flex-direction: column; gap: 15px; } .nav-menu { flex-wrap: wrap; justify-content: center; gap: 10px; } .hero { padding: 80px 0; } .hero-title { font-size: 32px; } .hero-subtitle { font-size: 16px; padding: 0 10px; } .hero-btns { flex-direction: column; width: 100%; padding: 0 20px; box-sizing: border-box; } .hero-btns .btn { width: 100%; } .stats-grid { grid-template-columns: 1fr; gap: 20px; } .section-title { font-size: 26px; } .romi-grid { grid-template-columns: 1fr; gap: 40px; } .template-preview-grid { flex-direction: column; text-align: center; } .tabs-nav { flex-direction: column; align-items: stretch; gap: 8px; } .tab-btn { width: 100%; text-align: center; } .step-item { flex-direction: column; align-items: center; text-align: center; } .step-item:hover { transform: translateY(-5px); } .modal-box { margin: 15px; width: auto; padding: 25px; } .modal-title { font-size: 20px; } }
+.demo-fullscreen { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; overflow-y: auto; background-color: var(--bg-main); }
+.demo-fullscreen.active { display: block; }
+[contenteditable="true"]:hover { cursor: pointer; outline: 2px dashed rgba(124, 58, 237, 0.5); background: rgba(124, 58, 237, 0.05); border-radius: 4px; }
+
+/* Стили кроссовок */
+#demoSneakers .sneaker-wrapper { background: #fdfdfd; color: #111111; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; }
+#demoSneakers .a3-header { background: #000000; color: #ffffff; padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 102; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+#demoSneakers .a3-logo { font-size: 24px; font-weight: 900; letter-spacing: 3px; }
+#demoSneakers .a3-nav { display: flex; gap: 25px; font-size: 13px; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
+#demoSneakers .a3-nav span { cursor: pointer; transition: color 0.2s; }
+#demoSneakers .a3-nav span:hover, #demoSneakers .a3-nav span.active-tab { color: #d4af37; }
+#demoSneakers .a3-header-right { display: flex; align-items: center; gap: 20px; }
+#demoSneakers .a3-cart-btn { background: #ffffff; color: #000000; padding: 10px 20px; font-weight: 600; font-size: 13px; border-radius: 4px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none; }
+#demoSneakers .close-demo-btn { background: rgba(255,255,255,0.15); color: #fff; padding: 10px 16px; font-size: 13px; font-weight: 500; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; }
+#demoSneakers .close-demo-btn:hover { background: #ef4444; border-color: transparent; }
+#demoSneakers .a3-hero { background: #111111; color: #ffffff; padding: 80px 40px; display: flex; align-items: center; justify-content: space-between; overflow: hidden; position: relative; }
+#demoSneakers .a3-hero-text { max-width: 550px; z-index: 2; }
+#demoSneakers .a3-hero-tag { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #888888; margin-bottom: 12px; display: block; }
+#demoSneakers .a3-hero-text h1 { font-size: 42px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; }
+#demoSneakers .a3-hero-text p { color: #b3b3b3; font-size: 15px; margin-bottom: 30px; }
+#demoSneakers .a3-catalog-container { max-width: 1300px; margin: 0 auto; padding: 60px 20px; }
+#demoSneakers .sneaker-catalog-section { display: none; }
+#demoSneakers .sneaker-catalog-section.active-section { display: block; animation: fadeIn 0.4s ease; }
+#demoSneakers .a3-catalog-title { font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 40px; text-align: center; border-bottom: 2px solid #000; padding-bottom: 15px; }
+#demoSneakers .a3-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px 24px; }
+#demoSneakers .a3-card { background: #ffffff; border: 1px solid #e5e7eb; overflow: hidden; display: flex; flex-direction: column; position: relative; transition: all 0.3s ease; }
+#demoSneakers .a3-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.08); transform: translateY(-4px); }
+#demoSneakers .a3-image-box { width: 100%; height: 300px; background: #f9fafb; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; border-bottom: 1px solid #f0f0f0; }
+#demoSneakers .a3-image-box img { max-width: 90%; max-height: 90%; object-fit: contain; transition: transform 0.4s ease; }
+#demoSneakers .a3-card:hover .a3-image-box img { transform: scale(1.06); }
+#demoSneakers .a3-card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+#demoSneakers .a3-brand { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #777777; margin-bottom: 5px; }
+#demoSneakers .a3-name { font-size: 15px; font-weight: 700; color: #111111; margin-bottom: 10px; line-height: 1.3; min-height: 40px; }
+#demoSneakers .a3-price { font-size: 17px; font-weight: 800; color: #000000; margin-bottom: 15px; }
+#demoSneakers .a3-sizes { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+#demoSneakers .size-chip { width: 36px; height: 36px; border: 1px solid #dddddd; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; transition: all 0.2s; cursor: pointer; }
+#demoSneakers .size-chip.selected { background: #000000; color: #ffffff; border-color: #000000; }
+#demoSneakers .a3-buy-btn { background: #000000; color: #ffffff; width: 100%; padding: 14px; text-transform: uppercase; font-size: 12px; font-weight: 700; letter-spacing: 1px; transition: background 0.2s; margin-top: auto; border: none; cursor: pointer; }
+#demoSneakers .a3-buy-btn:hover { background: #333333; }
+.checkout-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 10000; align-items: center; justify-content: center; padding: 20px; }
+.checkout-backdrop.active { display: flex; }
+.checkout-modal { background: #ffffff; color: #111111; width: 100%; max-width: 500px; border-radius: 8px; padding: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.3); font-family: sans-serif; }
+.checkout-modal h2 { font-size: 22px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; border-bottom: 2px solid #111; padding-bottom: 10px; }
+.checkout-group { margin-bottom: 16px; }
+.checkout-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 6px; color: #555; }
+.checkout-select, .checkout-input { width: 100%; padding: 12px; border: 1px solid #cccccc; border-radius: 4px; font-family: inherit; font-size: 14px; }
+.checkout-summary { background: #f9fafb; padding: 15px; border-radius: 4px; margin: 20px 0; font-size: 14px; }
+.checkout-summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.checkout-summary-row.total { font-weight: 800; font-size: 16px; border-top: 1px dashed #ccc; padding-top: 8px; margin-bottom: 0; }
+.submit-order-btn { background: #10b981; color: #ffffff; width: 100%; padding: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; font-size: 14px; cursor: pointer; border: none; }
+.submit-order-btn:hover { background: #059669; }
+.close-checkout-btn { position: absolute; top: 20px; right: 20px; font-size: 24px; font-weight: 300; color: #999; cursor: pointer; }
+
+/* Стили Отеля */
+#demoHotel .hotel-wrapper { --h-bg-dark: #080808; --h-bg-card: #121212; --h-accent-gold: #D4AF37; --h-accent-hover: #AA8B2C; --h-text-main: #FFFFFF; --h-text-muted: #A0A0A0; --h-border-color: #222222; background-color: var(--h-bg-dark); color: var(--h-text-main); font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; min-height: 100vh; }
+#demoHotel .hotel-header { border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 20px 0; background-color: rgba(8, 8, 8, 0.95); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(15px); }
+#demoHotel .hotel-container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+#demoHotel .header-wrap { display: flex; justify-content: space-between; align-items: center; }
+#demoHotel .logo { font-size: 24px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; color: var(--h-text-main); text-decoration: none; }
+#demoHotel .logo span { color: var(--h-accent-gold); }
+#demoHotel nav { display: flex; gap: 30px; align-items: center; }
+#demoHotel nav a { color: var(--h-text-muted); text-decoration: none; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; cursor: pointer; font-weight: bold; }
+#demoHotel nav a:hover, #demoHotel nav a.active { color: var(--h-accent-gold); }
+#demoHotel .hotel-page { display: none; padding-top: 40px; animation: fadeIn 0.6s ease-in-out; padding-bottom: 100px; }
+#demoHotel .hotel-page.active-page { display: block; }
+#demoHotel h1, #demoHotel h2, #demoHotel h3 { font-weight: 400; margin-top: 0; }
+#demoHotel .section-title { font-size: 36px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--h-text-main); }
+#demoHotel .section-subtitle { color: var(--h-text-muted); font-size: 16px; margin-bottom: 50px; max-width: 800px; }
+#demoHotel .hotel-btn { padding: 16px 35px; font-size: 14px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; border: none; }
+#demoHotel .btn-gold { background-color: var(--h-accent-gold); color: #000; }
+#demoHotel .btn-gold:hover { background-color: var(--h-accent-hover); }
+#demoHotel .btn-close-demo { background-color: transparent; border: 1px solid var(--h-accent-gold); color: var(--h-accent-gold); padding: 8px 15px; font-size: 12px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+#demoHotel .btn-close-demo:hover { background-color: var(--h-accent-gold); color: #000; }
+#demoHotel .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; align-items: center; }
+#demoHotel .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 80px; }
+#demoHotel .image-card { background: var(--h-bg-card); border: 1px solid var(--h-border-color); border-radius: 8px; overflow: hidden; }
+#demoHotel .image-card img { width: 100%; height: 350px; object-fit: cover; border-bottom: 1px solid var(--h-border-color); display: block; }
+#demoHotel .image-card.large-img img { height: 500px; }
+#demoHotel .card-content { padding: 30px; }
+#demoHotel .card-content h3 { font-size: 22px; color: var(--h-accent-gold); margin-bottom: 10px; }
+#demoHotel .card-content p { color: var(--h-text-muted); font-size: 14px; margin: 0; }
+#demoHotel .hero-section { background-image: linear-gradient(rgba(8, 8, 8, 0.6), rgba(8, 8, 8, 1)), url('img/pic3.jpg'); background-size: cover; background-position: center; height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+#demoHotel .hero-content h1 { font-size: 64px; margin: 0 0 20px 0; letter-spacing: 6px; text-transform: uppercase; color: #fff; }
+#demoHotel .stars { color: var(--h-accent-gold); font-size: 24px; letter-spacing: 8px; margin-bottom: 20px; }
+#demoHotel .booking-widget { background: var(--h-bg-card); border: 1px solid var(--h-accent-gold); padding: 50px; border-radius: 8px; }
+#demoHotel .form-group { margin-bottom: 20px; }
+#demoHotel .form-group label { display: block; font-size: 12px; color: var(--h-accent-gold); margin-bottom: 8px; text-transform: uppercase; }
+#demoHotel .form-control { width: 100%; padding: 15px; background-color: var(--h-bg-dark); border: 1px solid var(--h-border-color); color: #fff; font-size: 15px; box-sizing: border-box; border-radius: 4px; }
+@media (max-width: 850px) { #demoHotel .grid-2, #demoHotel .grid-3 { grid-template-columns: 1fr; gap: 20px; } #demoHotel .hero-content h1 { font-size: 38px; letter-spacing: 3px; } #demoHotel .header-wrap { flex-direction: column; gap: 15px; } #demoHotel nav { flex-wrap: wrap; justify-content: center; gap: 15px; } #demoHotel .booking-widget { padding: 30px; } }
+
+/* Стили Инфобизнес */
+#demoInfobiz .infobiz-wrapper { --i-bg-color: #080808; --i-accent-gold: #D4AF37; --i-accent-gold-hover: #AA8B2C; --i-text-main: #FFFFFF; --i-text-muted: #A0A0A0; --i-card-bg: #121212; --i-input-bg: #1F1F1F; --i-border-color: #222222; background-color: var(--i-bg-color); color: var(--i-text-main); font-family: 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; min-height: 100vh; }
+#demoInfobiz .info-header { border-bottom: 1px solid var(--i-border-color); padding: 20px 0; background-color: rgba(8, 8, 8, 0.95); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+#demoInfobiz .info-container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+#demoInfobiz .header-wrap { display: flex; justify-content: space-between; align-items: center; }
+#demoInfobiz .logo { font-size: 24px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; color: var(--i-text-main); text-decoration: none; }
+#demoInfobiz .logo span { color: var(--i-accent-gold); }
+#demoInfobiz nav { display: flex; align-items: center; }
+#demoInfobiz nav a { color: var(--i-text-muted); text-decoration: none; margin-left: 30px; font-size: 15px; font-weight: 500; transition: color 0.3s; cursor: pointer; }
+#demoInfobiz nav a:hover, #demoInfobiz nav a.active { color: var(--i-accent-gold); }
+#demoInfobiz .editor-badge { background-color: rgba(212, 175, 55, 0.1); border: 1px solid var(--i-accent-gold); color: var(--i-accent-gold); padding: 6px 14px; font-size: 11px; font-weight: bold; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
+#demoInfobiz .btn-close-demo { background-color: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 8px 15px; font-size: 12px; border-radius: 4px; cursor: pointer; transition: 0.3s; margin-left: 15px; text-transform: uppercase; font-weight: bold; }
+#demoInfobiz .btn-close-demo:hover { background-color: #ef4444; color: #fff; }
+#demoInfobiz .info-page { display: none; padding: 40px 0 100px 0; animation: fadeIn 0.4s ease-in-out; }
+#demoInfobiz .info-page.active-page { display: block; }
+#demoInfobiz .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; margin-bottom: 80px; }
+@media (max-width: 968px) { #demoInfobiz .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+#demoInfobiz .tagline { color: var(--i-accent-gold); text-transform: uppercase; font-size: 13px; font-weight: bold; letter-spacing: 2px; margin-bottom: 15px; }
+#demoInfobiz h1 { font-size: 52px; line-height: 1.15; margin: 0 0 25px 0; font-weight: 700; }
+#demoInfobiz h2 { font-size: 32px; margin-bottom: 30px; font-weight: 700; }
+#demoInfobiz .description-text { font-size: 18px; color: var(--i-text-muted); margin-bottom: 40px; }
+#demoInfobiz .btn-group { display: flex; gap: 20px; }
+#demoInfobiz .info-btn { padding: 18px 36px; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; text-decoration: none; display: inline-block; text-align: center; border: none; }
+#demoInfobiz .btn-gold { background-color: var(--i-accent-gold); color: #000; }
+#demoInfobiz .btn-gold:hover { background-color: var(--i-accent-gold-hover); }
+#demoInfobiz .btn-outline { background-color: transparent; color: var(--i-text-main); border: 1px solid var(--i-border-color); }
+#demoInfobiz .btn-outline:hover { border-color: var(--i-accent-gold); color: var(--i-accent-gold); }
+#demoInfobiz .modules-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-bottom: 80px; }
+@media (max-width: 768px) { #demoInfobiz .modules-grid { grid-template-columns: 1fr; } }
+#demoInfobiz .module-card { background-color: var(--i-card-bg); border: 1px solid var(--i-border-color); padding: 30px; border-radius: 8px; }
+#demoInfobiz .module-num { color: var(--i-accent-gold); font-size: 14px; font-weight: bold; margin-bottom: 10px; }
+#demoInfobiz .trend-block { background-color: var(--i-card-bg); border: 1px solid var(--i-border-color); border-radius: 12px; padding: 50px; margin-bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+@media (max-width: 900px) { #demoInfobiz .trend-block { grid-template-columns: 1fr; } }
+#demoInfobiz .order-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; }
+@media (max-width: 968px) { #demoInfobiz .order-layout { grid-template-columns: 1fr; } }
+#demoInfobiz .checkout-box { background-color: var(--i-card-bg); border: 1px solid var(--i-border-color); border-radius: 12px; padding: 40px; }
+#demoInfobiz .price-tag { display: flex; align-items: baseline; gap: 15px; margin-bottom: 30px; background: #1A1712; padding: 20px; border-radius: 8px; border-left: 4px solid var(--i-accent-gold); }
+#demoInfobiz .form-group { margin-bottom: 25px; }
+#demoInfobiz .form-group label { display: block; font-size: 13px; color: var(--i-text-muted); margin-bottom: 10px; text-transform: uppercase; }
+#demoInfobiz .form-control { width: 100%; padding: 16px; background-color: var(--i-input-bg); border: 1px solid var(--i-border-color); border-radius: 6px; color: #fff; font-size: 15px; box-sizing: border-box; }
+#demoInfobiz .form-control:focus { border-color: var(--i-accent-gold); outline: none; }
+#demoInfobiz .program-details { background: var(--i-card-bg); border: 1px solid var(--i-border-color); border-radius: 8px; padding: 30px; margin-top: 30px; }
+#demoInfobiz .detail-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--i-border-color); }
+#demoInfobiz .detail-item:last-child { border-bottom: none; }
+
+/* Стили Мебели */
+#demoFurniture .furn-wrapper { background-color: #121212; color: #f3f4f6; font-family: 'Montserrat', sans-serif; min-height: 100vh; }
+#demoFurniture .font-serif-furn { font-family: 'Playfair Display', serif; }
+#demoFurniture .furn-page-section { display: none; opacity: 0; transform: translateY(15px); transition: all 0.5s ease-in-out; }
+#demoFurniture .furn-page-section.active { display: block; opacity: 1; transform: translateY(0); }
+#demoFurniture .video-overlay-furn { background: linear-gradient(to bottom, rgba(18,18,18,0.3) 0%, rgba(18,18,18,0.7) 60%, rgba(18,18,18,1) 100%); }
+</style>
 </head>
 <body>
 
     <header class="header">
         <div class="container">
-            <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                ONYX
-            </div>
+            <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">ONYX</div>
             <nav class="nav-menu">
                 <a href="#" class="nav-link">Главная</a>
                 <a href="#stats" class="nav-link">Цифры</a>
@@ -1781,38 +275,14 @@
                 <h2>Вместо красивых слов предлагаем вам взглянуть на цифры.</h2>
             </div>
             <div class="stats-grid">
-                <div class="stat-card reveal">
-                    <div class="stat-num text-gradient">900+</div>
-                    <div class="stat-text">бизнесов подключены к нашей подписке и имеют сайт от ONYX прямо сейчас</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-num text-gradient">85 000+</div>
-                    <div class="stat-text">человек посещают разработанные нами сайты ежедневно</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-num text-gradient">80%</div>
-                    <div class="stat-text">выгоднее чем у других студий (смотрите математические расчеты выгод ниже)</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-num text-gradient">55+</div>
-                    <div class="stat-text">городов России и стран СНГ имеют сайт от ONYX</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-num text-gradient">2 дня</div>
-                    <div class="stat-text">средний срок разработки сайта</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-num text-gradient">100%</div>
-                    <div class="stat-text">адаптация под мобильные устройства</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-num text-gradient">0 ₽</div>
-                    <div class="stat-text">стоит разработка сайта</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-num text-gradient">12 мес.</div>
-                    <div class="stat-text">в году бесплатное обслуживание вашего сайта</div>
-                </div>
+                <div class="stat-card reveal"><div class="stat-num text-gradient">900+</div><div class="stat-text">бизнесов подключены к нашей подписке и имеют сайт от ONYX прямо сейчас</div></div>
+                <div class="stat-card reveal"><div class="stat-num text-gradient">85 000+</div><div class="stat-text">человек посещают разработанные нами сайты ежедневно</div></div>
+                <div class="stat-card reveal"><div class="stat-num text-gradient">80%</div><div class="stat-text">выгоднее чем у других студий (смотрите математические расчеты выгод ниже)</div></div>
+                <div class="stat-card reveal"><div class="stat-num text-gradient">55+</div><div class="stat-text">городов России и стран СНГ имеют сайт от ONYX</div></div>
+                <div class="stat-card reveal"><div class="stat-num text-gradient">2 дня</div><div class="stat-text">средний срок разработки сайта</div></div>
+                <div class="stat-card reveal"><div class="stat-num text-gradient">100%</div><div class="stat-text">адаптация под мобильные устройства</div></div>
+                <div class="stat-card reveal"><div class="stat-num text-gradient">0 ₽</div><div class="stat-text">стоит разработка сайта</div></div>
+                <div class="stat-card reveal"><div class="stat-num text-gradient">12 мес.</div><div class="stat-text">в году бесплатное обслуживание вашего сайта</div></div>
             </div>
         </div>
     </section>
@@ -1822,43 +292,16 @@
             <h2 class="section-title">Математический расчет: ONYX против веб-студий</h2>
             <div class="table-wrapper">
                 <table class="compare-table">
-                    <thead>
-                        <tr>
-                            <th>Критерии расходов за год</th>
-                            <th>Классическая студия (РФ)</th>
-                            <th style="color: #7c3aed;">Контракт подписки ONYX</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>Критерии расходов за год</th><th>Классическая студия (РФ)</th><th style="color: #7c3aed;">Контракт подписки ONYX</th></tr></thead>
                     <tbody>
-                        <tr>
-                            <td>Разработка и запуск сайта (одноразово)</td>
-                            <td class="text-danger">от 120 000 руб.</td>
-                            <td class="text-success">0 руб. (Бесплатно)</td>
-                        </tr>
-                        <tr>
-                            <td>Покупка доменного имени (.RU / .COM)</td>
-                            <td>от 900 руб. / год</td>
-                            <td class="text-success">0 руб. (Подарок навсегда)</td>
-                        </tr>
-                        <tr>
-                            <td>Техническое обслуживание и правки контента</td>
-                            <td class="text-danger">от 60 000 руб. / год</td>
-                            <td class="text-success">Включено в подписку</td>
-                        </tr>
-                        <tr>
-                            <td>Дизайн сайта</td>
-                            <td class="text-danger">от 30 000 руб.</td>
-                            <td class="text-success">до 15 000 руб.</td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td style="font-weight:700;">Итого расходы за первый год работы</td>
-                            <td class="text-danger" style="font-size:18px; font-weight:700;">от 210 900 руб.</td>
-                            <td class="text-success" style="font-size:18px; font-weight:700;">50 880 руб.</td>
-                        </tr>
+                        <tr><td>Разработка и запуск сайта (одноразово)</td><td class="text-danger">от 120 000 руб.</td><td class="text-success">0 руб. (Бесплатно)</td></tr>
+                        <tr><td>Покупка доменного имени (.RU / .COM)</td><td>от 900 руб. / год</td><td class="text-success">0 руб. (Подарок навсегда)</td></tr>
+                        <tr><td>Техническое обслуживание и правки контента</td><td class="text-danger">от 60 000 руб. / год</td><td class="text-success">Включено в подписку</td></tr>
+                        <tr><td>Дизайн сайта</td><td class="text-danger">от 30 000 руб.</td><td class="text-success">до 15 000 руб.</td></tr>
+                        <tr class="highlight-row"><td style="font-weight:700;">Итого расходы за первый год работы</td><td class="text-danger" style="font-size:18px; font-weight:700;">от 210 900 руб.</td><td class="text-success" style="font-size:18px; font-weight:700;">50 880 руб.</td></tr>
                     </tbody>
                 </table>
             </div>
-            
             <div class="benefit-box reveal">
                 <h3>Ваша чистая выгода за первый год:</h3>
                 <div class="benefit-value">160 020 ₽ (76%)</div>
@@ -1873,20 +316,15 @@
                     <h2>Сайт — это не расход.<br>Это инвестиция в ROMI.</h2>
                     <p>Многие компании оценивают сайт только по внешнему виду: нравится дизайн или нет, современно выглядит или устарел.</p>
                     <p>Но для бизнеса важен другой показатель — <strong>ROMI (Return on Marketing Investment)</strong>, или возврат инвестиций в маркетинг.</p>
-                    <div class="romi-quote">
-                        Проще говоря, ROMI показывает, сколько денег приносит каждый рубль, вложенный в привлечение клиентов.
-                    </div>
+                    <div class="romi-quote">Проще говоря, ROMI показывает, сколько денег приносит каждый рубль, вложенный в привлечение клиентов.</div>
                     <p>Представьте: вы запускаете рекламу, приводите посетителей на сайт, но заявки не поступают. В этом случае рекламный бюджет расходуется впустую, а показатель ROMI стремится к нулю. Поэтому хороший сайт должен не просто красиво выглядеть. Его задача — превращать посетителей в клиентов.</p>
                     <p>При разработке сайтов мы уделяем внимание не только дизайну, но и структуре, пользовательскому пути, скорости загрузки, удобству мобильной версии и продающим сценариям. Всё это напрямую влияет на конверсию и, как следствие, на ROMI вашего бизнеса.</p>
                     <p>Чем больше заявок получает компания при тех же рекламных расходах, тем выше окупаемость маркетинга. Наша задача — создать сайт, который помогает бизнесу зарабатывать больше, а не просто занимать место в интернете.</p>
                     <p style="font-size: 18px; font-weight: 600; color: #fff; margin-top: 30px;">
-                        Потому что красивый сайт — это приятно.<br>
-                        <span class="text-gradient">Сайт, который приносит клиентов и увеличивает прибыль — это выгодно.</span>
+                        Потому что красивый сайт — это приятно.<br><span class="text-gradient">Сайт, который приносит клиентов и увеличивает прибыль — это выгодно.</span>
                     </p>
                 </div>
-                <div class="romi-image-wrapper reveal">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Инвестиции в ROMI и разработка">
-                </div>
+                <div class="romi-image-wrapper reveal"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Инвестиции в ROMI и разработка"></div>
             </div>
         </div>
     </section>
@@ -1911,10 +349,7 @@
                         <p>Эксклюзивный практический курс для предпринимателей и топ-менеджеров. Управление коммерческими метриками, автоматизация воронок.</p>
                         <button class="btn btn-primary" onclick="openDemo('demoInfobiz')">Запустить демо-версию</button>
                     </div>
-                    <div class="template-mockup" onclick="openDemo('demoInfobiz')">
-                        <div style="font-size: 50px; margin-bottom: 15px;">🎓</div>
-                        <h4>Открыть симулятор Инфобизнеса</h4>
-                    </div>
+                    <div class="template-mockup" onclick="openDemo('demoInfobiz')"><div style="font-size: 50px; margin-bottom: 15px;">🎓</div><h4>Открыть симулятор Инфобизнеса</h4></div>
                 </div>
             </div>
 
@@ -1925,10 +360,7 @@
                         <p>Абсолютная роскошь на берегу океана. Интерактивное бронирование номеров, галерея апартаментов и презентация ресторанов.</p>
                         <button class="btn btn-primary" onclick="openDemo('demoHotel')">Запустить демо-версию</button>
                     </div>
-                    <div class="template-mockup" onclick="openDemo('demoHotel')">
-                        <div style="font-size: 50px; margin-bottom: 15px;">🏨</div>
-                        <h4>Открыть симулятор Отеля</h4>
-                    </div>
+                    <div class="template-mockup" onclick="openDemo('demoHotel')"><div style="font-size: 50px; margin-bottom: 15px;">🏨</div><h4>Открыть симулятор Отеля</h4></div>
                 </div>
             </div>
 
@@ -1939,10 +371,7 @@
                         <p>Высокотехнологичный интерактивный симулятор оригинального бренда. Интерактивная корзина, чекаут и динамические многостраничные сетки товаров.</p>
                         <button class="btn btn-primary" onclick="openDemo('demoSneakers')">Запустить демо-версию</button>
                     </div>
-                    <div class="template-mockup" onclick="openDemo('demoSneakers')">
-                        <div style="font-size: 50px; margin-bottom: 15px;">👟</div>
-                        <h4>Открыть симулятор ONYX-DEMO</h4>
-                    </div>
+                    <div class="template-mockup" onclick="openDemo('demoSneakers')"><div style="font-size: 50px; margin-bottom: 15px;">👟</div><h4>Открыть симулятор ONYX-DEMO</h4></div>
                 </div>
             </div>
 
@@ -1953,10 +382,7 @@
                         <p>Эксклюзивный каталог с индивидуальным расчетом стоимости. Идеально для мебельных фабрик, ателье и дизайнеров интерьера.</p>
                         <button class="btn btn-primary" onclick="openDemo('demoFurniture')">Запустить демо-версию</button>
                     </div>
-                    <div class="template-mockup" onclick="openDemo('demoFurniture')">
-                        <div style="font-size: 50px; margin-bottom: 15px;">🛋️</div>
-                        <h4>Открыть симулятор ONYX FURNITURE</h4>
-                    </div>
+                    <div class="template-mockup" onclick="openDemo('demoFurniture')"><div style="font-size: 50px; margin-bottom: 15px;">🛋️</div><h4>Открыть симулятор ONYX FURNITURE</h4></div>
                 </div>
             </div>
 
@@ -1967,10 +393,7 @@
                         <p>Яркие портфолио, нестандартные сетки проектов, интеграция с соцсетями и интерактивные брифы на разработку.</p>
                         <button class="btn btn-secondary" onclick="alert('Демо-версия в процессе обновления. Запросите актуальный прототип у менеджера в Telegram.')">Демо в разработке</button>
                     </div>
-                    <div class="template-mockup" onclick="alert('Демо-версия в процессе обновления. Запросите актуальный прототип у менеджера в Telegram.')">
-                        <div style="font-size: 50px; margin-bottom: 15px;">🚀</div>
-                        <h4>Сборка демо-стенда...</h4>
-                    </div>
+                    <div class="template-mockup" onclick="alert('Демо-версия в процессе обновления. Запросите актуальный прототип у менеджера в Telegram.')"><div style="font-size: 50px; margin-bottom: 15px;">🚀</div><h4>Сборка демо-стенда...</h4></div>
                 </div>
             </div>
         </div>
@@ -1980,41 +403,11 @@
         <div class="container reveal">
             <h2 class="section-title">Прозрачные этапы создания вашего сайта</h2>
             <div class="steps-timeline">
-                <div class="step-item">
-                    <div class="step-num">1</div>
-                    <div class="step-text">
-                        <h3>Получение заявки и глубокий анализ</h3>
-                        <p>Вы заполняете нашу фирменную интерактивную анкету-квиз, указывая специфику ниши, ваши основные пожелания, фирменный стиль.</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-num">2</div>
-                    <div class="step-text">
-                        <h3>Составление индивидуальной ИТ-стратегии</h3>
-                        <p>Ваш персональный программист связывается с вами, проводит детальный анализ конкурентов вашей сферы и формирует структуру блоков.</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-num">3</div>
-                    <div class="step-text">
-                        <h3>Разработка и верстка сайта</h3>
-                        <p>Пишется чистый, валидный код (HTML, CSS, JavaScript) с интеграцией всех форм сбора заявок, анимаций и скриптов аналитики Яндекс.</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-num">4</div>
-                    <div class="step-text">
-                        <h3>Привязка вашего домена</h3>
-                        <p>Мы приобретаем под ваш проект уникальное доменное имя, настраиваем глобальные маршрутизаторы DNS, A и CNAME записи.</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-num">5</div>
-                    <div class="step-text">
-                        <h3>Публикация сайта</h3>
-                        <p>Сайт деплоится на высокоскоростные облачные сервера хостинга, запускается первая тестовая контекстная реклама, и вы принимаете лиды.</p>
-                    </div>
-                </div>
+                <div class="step-item"><div class="step-num">1</div><div class="step-text"><h3>Получение заявки и глубокий анализ</h3><p>Вы заполняете нашу фирменную интерактивную анкету-квиз, указывая специфику ниши, ваши основные пожелания, фирменный стиль.</p></div></div>
+                <div class="step-item"><div class="step-num">2</div><div class="step-text"><h3>Составление индивидуальной ИТ-стратегии</h3><p>Ваш персональный программист связывается с вами, проводит детальный анализ конкурентов вашей сферы и формирует структуру блоков.</p></div></div>
+                <div class="step-item"><div class="step-num">3</div><div class="step-text"><h3>Разработка и верстка сайта</h3><p>Пишется чистый, валидный код (HTML, CSS, JavaScript) с интеграцией всех форм сбора заявок, анимаций и скриптов аналитики Яндекс.</p></div></div>
+                <div class="step-item"><div class="step-num">4</div><div class="step-text"><h3>Привязка вашего домена</h3><p>Мы приобретаем под ваш проект уникальное доменное имя, настраиваем глобальные маршрутизаторы DNS, A и CNAME записи.</p></div></div>
+                <div class="step-item"><div class="step-num">5</div><div class="step-text"><h3>Публикация сайта</h3><p>Сайт деплоится на высокоскоростные облачные сервера хостинга, запускается первая тестовая контекстная реклама, и вы принимаете лиды.</p></div></div>
             </div>
         </div>
     </section>
@@ -2023,592 +416,115 @@
         <div class="container reveal">
             <h2 class="section-title">Часто задаваемые вопросы (FAQ)</h2>
             <div class="faq-accordion">
-                <div class="faq-item" onclick="toggleFaq(this)">
-                    <button class="faq-trigger">Что входит в стоимость 2990 рублей в месяц? <span>+</span></button>
-                    <div class="faq-content">В эту стоимость полностью входит разработка сайта представительского класса, круглосуточная поддержка вашего персонального программиста, оплата хостинга, продление доменного имени и бесконечные контентные правки по вашему запросу.</div>
-                </div>
-                <div class="faq-item" onclick="toggleFaq(this)">
-                    <button class="faq-trigger">Сайт действительно будет моим? <span>+</span></button>
-                    <div class="faq-content">Да, мы заключаем официальный юридический договор. Весь исходный код сайта публикуется в вашем открытом или закрытом доступе, а домен регистрируется строго на ваши паспортные данные или реквизиты компании.</div>
-                </div>
-                <div class="faq-item" onclick="toggleFaq(this)">
-                    <button class="faq-trigger">Как быстро вносятся изменения на сайт? <span>+</span></button>
-                    <div class="faq-content">Все рутинные изменения контента (замена цен, добавление новых товаров, обновление акций, смена номеров) выполняются вашим личным ИТ-консультантом в течение 1 часа с момента отправки ТЗ в Телеграм.</div>
-                </div>
+                <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-trigger">Что входит в стоимость 2990 рублей в месяц? <span>+</span></button><div class="faq-content">В эту стоимость полностью входит разработка сайта представительского класса, круглосуточная поддержка вашего персонального программиста, оплата хостинга, продление доменного имени и бесконечные контентные правки по вашему запросу.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-trigger">Сайт действительно будет моим? <span>+</span></button><div class="faq-content">Да, мы заключаем официальный юридический договор. Весь исходный код сайта публикуется в вашем открытом или закрытом доступе, а домен регистрируется строго на ваши паспортные данные или реквизиты компании.</div></div>
+                <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-trigger">Как быстро вносятся изменения на сайт? <span>+</span></button><div class="faq-content">Все рутинные изменения контента (замена цен, добавление новых товаров, обновление акций, смена номеров) выполняются вашим личным ИТ-консультантом в течение 1 часа с момента отправки ТЗ в Телеграм.</div></div>
             </div>
         </div>
     </section>
 
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 ONYX. Все права защищены. Разработка высококонверсионных ИТ-решений по подписке.</p>
-        </div>
-    </footer>
-
-    <div id="orderModal" class="modal-overlay">
-        <div class="modal-box">
-            <button class="modal-close" onclick="toggleModal(false)">×</button>
-            <h3 class="modal-title">Анкета на разработку ИТ-продукта</h3>
-            <form id="onyxLeadForm" onsubmit="sendLeadToBot(event)">
-                <div class="form-group-onyx">
-                    <label>Ваше ФИО</label>
-                    <input type="text" id="leadFio" required placeholder="Иванов Иван Иванович">
-                </div>
-                <div class="form-group-onyx">
-                    <label>Ваш город</label>
-                    <input type="text" id="leadCity" required placeholder="Пермь">
-                </div>
-                <div class="form-group-onyx">
-                    <label>Вид вашего бизнеса (Ниша)</label>
-                    <input type="text" id="leadNiche" required placeholder="Автосервис / Доставка еды">
-                </div>
-                <div class="form-group-onyx">
-                    <label>Название вашей компании</label>
-                    <input type="text" id="leadCompany" required placeholder="ООО Вектор">
-                </div>
-                <div class="form-group-onyx">
-                    <label>Ссылки на ваши соц. сети или старый сайт</label>
-                    <input type="text" id="leadSocials" placeholder="vk.com/mybusiness">
-                </div>
-                <div class="form-group-onyx">
-                    <label>Ваши основные пожелания к дизайну</label>
-                    <textarea id="leadWishes" rows="2" placeholder="Хочу строгий темный B2B стиль"></textarea>
-                </div>
-                <div class="form-group-onyx">
-                    <label>Откуда вы узнали о нашей компании?</label>
-                    <select id="leadSource">
-                        <option value="yandex">Яндекс Поиск / Директ</option>
-                        <option value="telegram">Каналы в Telegram</option>
-                        <option value="avito">Объявления Авито</option>
-                        <option value="recommend">По рекомендации друзей</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Отправить анкету боту</button>
-            </form>
-        </div>
-    </div>
-
-
-    <div id="demoSneakers" class="demo-fullscreen">
-        <div class="sneaker-wrapper">
-            
-            <div class="a3-header">
-                <div class="a3-logo" contenteditable="true">ONYX-DEMO</div>
-                <div class="a3-nav">
-                    <span id="tabBtn-shoes" class="active-tab" onclick="switchSneakerTab('shoes')">Обувь</span>
-                    <span id="tabBtn-clothes" onclick="switchSneakerTab('clothes')">Одежда</span>
-                    <span id="tabBtn-acc" onclick="switchSneakerTab('acc')">Аксессуары</span>
-                    <span id="tabBtn-sale" style="color: #ff4500;" onclick="switchSneakerTab('sale')">Sale</span>
-                </div>
-                <div class="a3-header-right">
-                    <button class="a3-cart-btn" onclick="openCheckout()">
-                        Корзина (<span id="cartCount">0</span>)
-                    </button>
-                    <button class="close-demo-btn" onclick="closeDemo('demoSneakers')">Выйти из Демо</button>
-                </div>
-            </div>
-
-            <div class="a3-hero">
-                <div class="a3-hero-text">
-                    <span class="a3-hero-tag">A3BOOTS.SHOP | PREMIUM LINE</span>
-                    <h1 contenteditable="true">Winter Line Collection 2026</h1>
-                    <p contenteditable="true">Эксклюзивная подборка обуви, технологичной верхней одежды и концептуальных аксессуаров. Нажмите на навигацию выше, чтобы переключать разделы нашего многостраничного каталога!</p>
-                </div>
-                <div style="font-size: 120px; opacity: 0.05; position: absolute; right: 40px; top: 20px; user-select: none;">ONYX</div>
-            </div>
-
-            <div class="a3-catalog-container">
-                
-                <div id="sneakerSection-shoes" class="sneaker-catalog-section active-section">
-                    <div class="a3-catalog-title" contenteditable="true">Лимитированная обувь</div>
-                    <div class="a3-grid">
-                        <div class="a3-card" data-id="1">
-                            <div class="a3-image-box"><img src="img/nike-air.jpg" alt="Nike"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Nike</div>
-                                <div class="a3-name" contenteditable="true">Nike Air Max Black Premium Custom</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">14 990</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">41</div>
-                                    <div class="size-chip" onclick="selectSize(this)">42</div>
-                                    <div class="size-chip" onclick="selectSize(this)">43</div>
+        <div class="container"><p>&copy; 2026 ONYX. Все права защищены. Разработка высококонверсионных ИТ-решений по подписке.</p></div>
+    <div onclick="showFurnPage('promo-sofas')" class="group relative h-[400px] overflow-hidden rounded-sm border border-white/5 cursor-pointer shadow-xl">
+                                <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1200&q=80" alt="Роскошные Диваны" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-75">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-8 flex flex-col justify-end">
+                                    <h3 class="text-2xl text-white font-serif-furn mb-2" contenteditable="true">Премиальные диваны и мягкие зоны</h3>
+                                    <p class="text-amber-500 text-xs font-semibold tracking-widest uppercase group-hover:translate-x-3 transition-transform duration-300">Подробнее о производстве &rarr;</p>
                                 </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
+                            </div>
+                            <div onclick="showFurnPage('promo-kitchens')" class="group relative h-[400px] overflow-hidden rounded-sm border border-white/5 cursor-pointer shadow-xl">
+                                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80" alt="Премиальная кухня" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-75">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-8 flex flex-col justify-end">
+                                    <h3 class="text-2xl text-white font-serif-furn mb-2" contenteditable="true">Умные кухни и корпусные системы</h3>
+                                    <p class="text-amber-500 text-xs font-semibold tracking-widest uppercase group-hover:translate-x-3 transition-transform duration-300">Подробнее о производстве &rarr;</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="a3-card" data-id="2">
-                            <div class="a3-image-box"><img src="img/yeezy.jpg" alt="Yeezy"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Adidas</div>
-                                <div class="a3-name" contenteditable="true">Adidas Yeezy Boost 350 V2 Onyx</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">24 890</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">40</div>
-                                    <div class="size-chip" onclick="selectSize(this)">42</div>
-                                    <div class="size-chip" onclick="selectSize(this)">44</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                        <div class="a3-card" data-id="3">
-                            <div class="a3-image-box"><img src="img/triple-s.jpg" alt="Balenciaga"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Balenciaga</div>
-                                <div class="a3-name" contenteditable="true">Сникеры Balenciaga Triple S White Edition</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">59 900</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">41</div>
-                                    <div class="size-chip" onclick="selectSize(this)">42</div>
-                                    <div class="size-chip" onclick="selectSize(this)">43</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="sneakerSection-clothes" class="sneaker-catalog-section">
-                    <div class="a3-catalog-title" contenteditable="true">Дизайнерская одежда</div>
-                    <div class="a3-grid">
-                        <div class="a3-card" data-id="4">
-                            <div class="a3-image-box"><img src="img/amiri-hoodie.jpg" alt="Amiri"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Amiri</div>
-                                <div class="a3-name" contenteditable="true">Худи Amiri Core Logo Black Heavy</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">45 000</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">M</div>
-                                    <div class="size-chip" onclick="selectSize(this)">L</div>
-                                    <div class="size-chip" onclick="selectSize(this)">XL</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                        <div class="a3-card" data-id="5">
-                            <div class="a3-image-box"><img src="img/puma-tshirt.jpg" alt="Puma"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Puma</div>
-                                <div class="a3-name" contenteditable="true">Футболка Puma Неон Оверсайз Лимитированная</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">4 290</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">S</div>
-                                    <div class="size-chip" onclick="selectSize(this)">M</div>
-                                    <div class="size-chip" onclick="selectSize(this)">L</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                        <div class="a3-card" data-id="6">
-                            <div class="a3-image-box"><img src="img/off-white-jacket.jpg" alt="Off-White"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Off-White</div>
-                                <div class="a3-name" contenteditable="true">Ветровка Off-White Track Jacket Slate</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">38 500</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">M</div>
-                                    <div class="size-chip" onclick="selectSize(this)">L</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="sneakerSection-acc" class="sneaker-catalog-section">
-                    <div class="a3-catalog-title" contenteditable="true">Премиальные аксессуары</div>
-                    <div class="a3-grid">
-                        <div class="a3-card" data-id="7">
-                            <div class="a3-image-box"><img src="img/lanvin-bag.jpg" alt="Lanvin"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Lanvin</div>
-                                <div class="a3-name" contenteditable="true">Сумка Lanvin Leather Tote Bag Premium</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">34 100</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">ONE</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                        <div class="a3-card" data-id="8">
-                            <div class="a3-image-box"><img src="img/balenciaga-cap.jpg" alt="Balenciaga Cap"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Balenciaga</div>
-                                <div class="a3-name" contenteditable="true">Бейсболка Balenciaga Cap Vintage Red</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">5 800</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">ONE</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                        <div class="a3-card" data-id="9">
-                            <div class="a3-image-box"><img src="img/off-white-belt.jpg" alt="Off-White Belt"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Off-White</div>
-                                <div class="a3-name" contenteditable="true">Ремень Off-White Industrial Yellow Classic</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">12 400</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">ONE</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="sneakerSection-sale" class="sneaker-catalog-section">
-                    <div class="a3-catalog-title" contenteditable="true" style="color: #ff4500;">Горячая распродажа</div>
-                    <div class="a3-grid">
-                        <div class="a3-card" data-id="10">
-                            <div class="a3-image-box"><img src="img/converse.jpg" alt="Converse"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Converse</div>
-                                <div class="a3-name" contenteditable="true">Кеды Converse Chuck Taylor All Star Black</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">9 190</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">39</div>
-                                    <div class="size-chip" onclick="selectSize(this)">41</div>
-                                    <div class="size-chip" onclick="selectSize(this)">42</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                        <div class="a3-card" data-id="11">
-                            <div class="a3-image-box"><img src="img/vans.jpg" alt="Vans"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">Vans</div>
-                                <div class="a3-name" contenteditable="true">Кеды Vans Old Skool Classic Black/White</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">8 490</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">40</div>
-                                    <div class="size-chip" onclick="selectSize(this)">42</div>
-                                    <div class="size-chip" onclick="selectSize(this)">43</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                        <div class="a3-card" data-id="12">
-                            <div class="a3-image-box"><img src="img/nb-9060.jpg" alt="New Balance"></div>
-                            <div class="a3-card-body">
-                                <div class="a3-brand" contenteditable="true">New Balance</div>
-                                <div class="a3-name" contenteditable="true">Кроссовки New Balance 9060 Rain Cloud</div>
-                                <div class="a3-price"><span contenteditable="true" class="item-price-val">19 800</span> ₽</div>
-                                <div class="a3-sizes">
-                                    <div class="size-chip" onclick="selectSize(this)">41</div>
-                                    <div class="size-chip" onclick="selectSize(this)">42</div>
-                                    <div class="size-chip" onclick="selectSize(this)">44</div>
-                                </div>
-                                <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin: 60px 0;">
-                    <button class="btn btn-primary" style="background:#000; color:#fff;" onclick="openCheckout()">Перейти к оформлению заказа</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="checkoutModal" class="checkout-backdrop">
-        <div class="checkout-modal">
-            <div class="close-checkout-btn" onclick="closeCheckout()">&times;</div>
-            <h2>Оформление заказа (ONYX-DEMO)</h2>
-            <div class="checkout-group">
-                <label>Ваше Имя и Фамилия</label>
-                <input type="text" class="checkout-input" id="custName" placeholder="Иван Иванов">
-            </div>
-            <div class="checkout-group">
-                <label>Способ Доставки</label>
-                <select class="checkout-select" id="deliveryMethod" onchange="recalcTotal()">
-                    <option value="0">Самовывоз из шоурума ONYX-DEMO — 0 руб.</option>
-                    <option value="450">Курьерская доставка СДЭК — 450 руб.</option>
-                </select>
-            </div>
-            <div class="checkout-summary">
-                <div class="checkout-summary-row">
-                    <span>Товары (<span id="summaryCount">0</span> шт.):</span>
-                    <span><span id="summaryItemsPrice">0</span> руб.</span>
-                </div>
-                <div class="checkout-summary-row">
-                    <span>Доставка:</span>
-                    <span><span id="summaryDeliveryPrice">0</span> руб.</span>
-                </div>
-                <div class="checkout-summary-row total">
-                    <span>Итого к оплате:</span>
-                    <span><span id="summaryTotalPrice">0</span> руб.</span>
-                </div>
-            </div>
-            <button class="submit-order-btn" onclick="submitOrder()">Подтвердить заказ</button>
-        </div>
-    </div>
-
-    <div id="demoHotel" class="demo-fullscreen">
-        <div class="hotel-wrapper">
-            <header class="hotel-header">
-                <div class="hotel-container header-wrap">
-                    <a class="logo" onclick="switchHotelPage('home')">ONYX <span>Hotel</span></a>
-                    <nav>
-                        <a id="hotel-link-home" class="active" onclick="switchHotelPage('home')">Об Отеле</a>
-                        <a id="hotel-link-rooms" onclick="switchHotelPage('rooms')">Номера и Спа</a>
-                        <a id="hotel-link-dining" onclick="switchHotelPage('dining')">Рестораны</a>
-                        <a id="hotel-link-booking" onclick="switchHotelPage('booking')">Бронирование</a>
-                    </nav>
-                    <button class="btn-close-demo" onclick="closeDemo('demoHotel')">Выйти из Демо</button>
-                </div>
-            </header>
-
-            <div id="hotel-page-home" class="hotel-page active-page">
-                <section class="hero-section">
-                    <div class="hero-content">
-                        <div class="stars">★★★★★</div>
-                        <h1 contenteditable="true">ONYX GRAND HOTEL</h1>
-                        <p style="color: var(--h-text-muted); font-size: 18px; max-width: 600px; margin: 0 auto 40px;" contenteditable="true">
-                            Абсолютная роскошь на берегу океана. Место, где премиальный отдых встречается с безупречным сервисом.
-                        </p>
-                        <button class="hotel-btn btn-gold" onclick="switchHotelPage('booking')">Забронировать визит</button>
                     </div>
                 </section>
 
-                <div class="hotel-container" style="margin-top: 80px;">
-                    <h2 class="section-title" contenteditable="true">Территория роскоши</h2>
-                    <p class="section-subtitle" contenteditable="true">Каждый метр нашего отеля спроектирован для вашего визуального и физического наслаждения.</p>
-                    <div class="grid-2">
-                        <div class="image-card">
-                            <img src="img/pic2.jpg" alt="Главный бассейн">
-                            <div class="card-content">
-                                <h3 contenteditable="true">Панорамный бассейн</h3>
-                                <p contenteditable="true">Наслаждайтесь вечерней прохладой у 50-метрового бассейна с подогревом.</p>
-                            </div>
-                        </div>
-                        <div class="image-card">
-                            <img src="img/pic7.jpg" alt="Интерьеры отеля">
-                            <div class="card-content">
-                                <h3 contenteditable="true">Атмосфера в каждой детали</h3>
-                                <p contenteditable="true">Дизайнерские интерьеры и премиальные материалы отделки.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h2 class="section-title" contenteditable="true" style="margin-top: 100px;">Бизнес и Конференции</h2>
-                    <p class="section-subtitle" contenteditable="true">ONYX — это идеальная площадка для заключения международных контрактов.</p>
-                    <div class="grid-2">
-                        <div class="image-card">
-                            <img src="img/pic12.jpg" alt="B2B">
-                            <div class="card-content">
-                                <h3 contenteditable="true">Переговорные комнаты VIP</h3>
-                                <p contenteditable="true">Заключайте важные сделки в приватной обстановке.</p>
-                            </div>
-                        </div>
-                        <div class="image-card">
-                            <img src="img/pic13.jpg" alt="Экономика">
-                            <div class="card-content">
-                                <h3 contenteditable="true">Международный масштаб</h3>
-                                <p contenteditable="true">Резиденция для глобальных инвестиционных форумов.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="hotel-page-rooms" class="hotel-page hotel-container">
-                <h2 class="section-title" contenteditable="true">Апартаменты и Люксы</h2>
-                <p class="section-subtitle" contenteditable="true">Проснитесь в атмосфере абсолютного комфорта.</p>
-                <div class="grid-3">
-                    <div class="image-card">
-                        <img src="img/pic6.jpg" alt="Twin">
-                        <div class="card-content">
-                            <h3 contenteditable="true">Modern Panorama Twin</h3>
-                            <p contenteditable="true" style="color: var(--h-accent-gold); margin-bottom: 10px;">от 45 000 ₽ / ночь</p>
-                        </div>
-                    </div>
-                    <div class="image-card">
-                        <img src="img/pic4.jpg" alt="Wood">
-                        <div class="card-content">
-                            <h3 contenteditable="true">Executive Wood Twin</h3>
-                            <p contenteditable="true" style="color: var(--h-accent-gold); margin-bottom: 10px;">от 55 000 ₽ / ночь</p>
-                        </div>
-                    </div>
-                    <div class="image-card">
-                        <img src="img/pic5.jpg" alt="Suite">
-                        <div class="card-content">
-                            <h3 contenteditable="true">Classic Royal Suite</h3>
-                            <p contenteditable="true" style="color: var(--h-accent-gold); margin-bottom: 10px;">от 80 000 ₽ / ночь</p>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 class="section-title" contenteditable="true" style="margin-top: 80px;">Приватные SPA-зоны</h2>
-                <div class="grid-2">
-                    <div class="image-card large-img">
-                        <img src="img/pic8.jpg" alt="Ванная">
-                        <div class="card-content">
-                            <h3 contenteditable="true">Тропический душ</h3>
-                        </div>
-                    </div>
-                    <div class="image-card large-img">
-                        <img src="img/pic9.jpg" alt="Ванная">
-                        <div class="card-content">
-                            <h3 contenteditable="true">Дизайнерские решения</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="hotel-page-dining" class="hotel-page hotel-container">
-                <h2 class="section-title" contenteditable="true">Высокая кухня</h2>
-                <div class="grid-2">
-                    <div class="image-card large-img">
-                        <img src="img/pic11.jpg" alt="Ресторан">
-                        <div class="card-content">
-                            <h3 contenteditable="true">Sunset Marina Restaurant</h3>
-                        </div>
-                    </div>
-                    <div class="image-card large-img">
-                        <img src="img/pic10.jpg" alt="Бар">
-                        <div class="card-content">
-                            <h3 contenteditable="true">Onyx Lounge & Bar</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="hotel-page-booking" class="hotel-page hotel-container">
-                <h2 class="section-title" contenteditable="true">Оформление визита</h2>
-                <div class="booking-widget">
-                    <form onsubmit="event.preventDefault(); alert('ONYX DEMO: Заявка на бронирование отеля успешно отправлена!');">
-                        <div class="grid-2" style="margin-bottom: 0; gap: 20px;">
-                            <div class="form-group">
-                                <label>Дата заезда и выезда</label>
-                                <input type="text" class="form-control" placeholder="15.08.2026 - 25.08.2026" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Категория номера</label>
-                                <select class="form-control">
-                                    <option>Modern Panorama Twin</option>
-                                    <option>Executive Wood Twin</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>ФИО Гостя</label>
-                                <input type="text" class="form-control" placeholder="Александр Константинопольский" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Телефон</label>
-                                <input type="tel" class="form-control" placeholder="+7 (999) 000-00-00" required>
-                            </div>
-                        </div>
-                        <button type="submit" class="hotel-btn btn-gold" style="width: 100%; margin-top: 20px; padding: 20px;">Забронировать</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="demoInfobiz" class="demo-fullscreen">
-        <div class="infobiz-wrapper">
-            <header class="info-header">
-                <div class="info-container header-wrap">
-                    <a class="logo" onclick="switchInfoPage('main')">ONYX <span>DEMO</span></a>
-                    <div style="display: flex; align-items: center;">
-                        <nav style="margin-right: 25px;">
-                            <a id="info-link-main" class="active" onclick="switchInfoPage('main')">О программе</a>
-                            <a id="info-link-order" onclick="switchInfoPage('order')">Оформление подписки</a>
-                        </nav>
-                        <div class="editor-badge hidden sm:block">Режим кастомизации</div>
-                        <button class="btn-close-demo" onclick="closeDemo('demoInfobiz')">Выйти</button>
-                    </div>
-                </div>
-            </header>
-
-            <div id="info-page-main" class="info-page active-page info-container">
-                <div class="hero-grid">
-                    <div>
-                        <div class="tagline" contenteditable="true">Масштабирование бизнеса 2026</div>
-                        <h1 contenteditable="true">Директор по продажам: Системный бизнес</h1>
-                        <p class="description-text" contenteditable="true">Эксклюзивный практический курс для топ-менеджеров. Управление метриками и найм специалистов.</p>
-                        <div class="btn-group">
-                            <button class="info-btn btn-gold" onclick="switchInfoPage('order')">Зарегистрироваться</button>
-                            <button class="info-btn btn-outline" contenteditable="true">План (PDF)</button>
-                        </div>
-                    </div>
-                    <img src="img/laptop.jpg" alt="Бизнес-коллаж ONYX" style="width: 100%; height: 450px; object-fit: cover; border-radius: 12px; border: 1px solid var(--i-border-color);">
-                </div>
-
-                <h2 style="text-align: center; margin-bottom: 50px;" contenteditable="true">Структура программы</h2>
-                <div class="modules-grid">
-                    <div class="module-card">
-                        <div class="module-num">Модуль 01</div>
-                        <h3 contenteditable="true">Аудит коммерческой стратегии</h3>
-                        <p contenteditable="true" style="color: var(--i-text-muted);">Поиск скрытых точек роста.</p>
-                    </div>
-                    <div class="module-card">
-                        <div class="module-num">Модуль 02</div>
-                        <h3 contenteditable="true">Масштабирование отдела</h3>
-                        <p contenteditable="true" style="color: var(--i-text-muted);">Разработка регламентов и систем мотивации.</p>
-                    </div>
-                    <div class="module-card">
-                        <div class="module-num">Модуль 03</div>
-                        <h3 contenteditable="true">CRM и Сквозная аналитика</h3>
-                        <p contenteditable="true" style="color: var(--i-text-muted);">Внедрение IT-решений для контроля бюджетов.</p>
-                    </div>
-                    <div class="module-card">
-                        <div class="module-num">Модуль 04</div>
-                        <h3 contenteditable="true">Финальный консалтинг</h3>
-                        <p contenteditable="true" style="color: var(--i-text-muted);">Защита бизнес-стратегии перед экспертами.</p>
-                    </div>
-                </div>
-
-                <div class="trend-block">
-                    <div>
-                        <h3 style="font-size: 26px; margin-bottom: 20px; color: var(--i-accent-gold);" contenteditable="true">Выход на глобальные рынки</h3>
-                        <p contenteditable="true" style="color: var(--i-text-muted); font-size: 15px;">Мы обучаем масштабировать бизнес с использованием надежных инфраструктурных паттернов.</p>
-                    </div>
-                    <img src="img/laptop2.jpg" alt="Глобальная экономика" style="width: 100%; height: 320px; object-fit: cover; border-radius: 12px; border: 1px solid var(--i-border-color);">
-                </div>
-            </div> 
-
-            <div id="info-page-order" class="info-page info-container">
-                <div class="order-layout">
-                    <div>
-                        <h2 contenteditable="true">Оформление заказа</h2>
-                        <p style="color: var(--i-text-muted); margin-bottom: 35px;" contenteditable="true">Вы приобретаете доступ к флагманской программе обучения.</p>
-                        <div class="program-details">
-                            <div style="font-size: 18px; font-weight: bold; margin-bottom: 20px; color: var(--i-accent-gold);" contenteditable="true">Спецификация ONYX</div>
-                            <div class="detail-item">
-                                <span style="color: var(--i-text-muted);">Программа:</span>
-                                <span style="font-weight: bold;" contenteditable="true">Директор по продажам</span>
-                            </div>
-                            <div class="detail-item">
-                                <span style="color: var(--i-text-muted);">Длительность:</span>
-                                <span style="font-weight: bold;" contenteditable="true">6 месяцев</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="checkout-box">
-                            <h3 style="margin-top: 0; margin-bottom: 25px;" contenteditable="true">Заполните данные</h3>
-                            <div class="price-tag">
-                                <span style="font-size: 36px; font-weight: bold; color: var(--i-accent-gold);" contenteditable="true">49 900 ₽</span>
-                            </div>
-                            <form onsubmit="event.preventDefault(); alert('ONYX DEMO: Вы успешно зарегистрировались на курс!');">
-                                <div class="form-group">
-                                    <label>ФИО Слушателя</label>
-                                    <input type="text" class="form-control" required>
+                <section id="furn-page-promo-sofas" class="furn-page-section py-16">
+                    <div class="max-w-7xl mx-auto px-6">
+                        <button onclick="showFurnPage('home')" class="text-amber-500 text-xs font-semibold tracking-widest uppercase mb-6 inline-block hover:text-amber-400 hover:translate-x-[-4px]">&larr; Вернуться назад</button>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                            <div>
+                                <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Эксклюзивный комфорт</span>
+                                <h2 class="font-serif-furn text-4xl sm:text-5xl text-white mb-6" contenteditable="true">Премиальная мягкая мебель</h2>
+                                <p class="text-gray-300 font-light leading-relaxed mb-6" contenteditable="true">Каждый диван — это произведение инженерного искусства. Мы рассчитываем эргономику посадки индивидуально под ваш рост, подбираем идеальную жесткость латексного наполнителя (HR-пена) и комбинируем пуховые прослойки для эффекта "обволакивания".</p>
+                                <div class="space-y-4 mb-8">
+                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Каркасы из сухой березовой фанеры и массива хвойных пород (никакого ДСП).</p></div>
+                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Ткани со всего мира: бельгийский шенилл, итальянское букле, натуральная кожа.</p></div>
+                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Пожизненная гарантия на целостность скрытых сварных каркасов.</p></div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Контактный Email</label>
-                                    <input type="email" class="form-control" required>
-                                </div>
-                                <button type="submit" class="info-btn btn-gold" style="width: 100%; margin-top: 10px;">Оплатить курс</button>
-                            </form>
+                                <button onclick="openFurnModal('furn-sofa-modal')" class="bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase px-8 py-4 transition-colors rounded-sm shadow-xl">Рассчитать концепт дивана</button>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500">
+                                <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500 mt-8">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>p-6">
+                </section>
+
+                <section id="furn-page-promo-kitchens" class="furn-page-section py-16">
+                    <div class="max-w-7xl mx-auto px-6">
+                        <button onclick="showFurnPage('home')" class="text-amber-500 text-xs font-semibold tracking-widest uppercase mb-6 inline-block hover:text-amber-400 hover:translate-x-[-4px]">&larr; Вернуться назад</button>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                            <div class="order-2 lg:order-1 grid grid-cols-2 gap-4">
+                                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500">
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" class="rounded-sm w-full h-64 object-cover shadow-lg hover:scale-105 transition-transform duration-500 mt-[-32px]">
+                            </div>
+                            <div class="order-1 lg:order-2">
+                                <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Технологичное превосходство</span>
+                                <h2 class="font-serif-furn text-4xl sm:text-5xl text-white mb-6" contenteditable="true">Высокотехнологичные кухни</h2>
+                                <p class="text-gray-300 font-light leading-relaxed mb-6" contenteditable="true">Кухни создаются по принципу "архитектурной чистоты линии". Никаких видимых ручек, лишних зазоров или неэффективных углов. Мы интегрируем передовые механизмы плавного закрывания Blum и Hettich последнего поколения.</p>
+                                <div class="space-y-4 mb-8">
+                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Влагостойкий МДФ повышенной плотности с лазерной кромкой.</p></div>
+                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Столешницы из широкоформатного керамогранита и кварцевого агломерата.</p></div>
+                                    <div class="flex items-start gap-3"><span class="text-amber-500 font-bold">✓</span><p class="text-gray-400 text-sm" contenteditable="true">Интегрированная умная светодиодная подсветка с датчиками взмаха руки.</p></div>
+                                </div>
+                                <button onclick="openFurnModal('furn-kitchen-modal')" class="bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase px-8 py-4 transition-colors rounded-sm shadow-xl">Спроектировать умную кухню</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="furn-page-portfolio" class="furn-page-section py-16">
+                    <div class="max-w-7xl mx-auto px-6">
+                        <div class="mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                            <div>
+                                <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Наше портфолио</span>
+                                <h2 class="font-serif-furn text-3xl sm:text-5xl text-white" contenteditable="true">Выполненные работы</h2>
+                            </div>
+                            <p class="text-gray-400 font-light max-w-xs text-sm" contenteditable="true">Все изделия спроектированы индивидуально под интерьеры заказчиков.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div class="bg-[#161616] border border-white/5 rounded-sm overflow-hidden group shadow-lg hover:border-amber-700/30 transition-all duration-300">
+                                <div class="h-64 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="text-lg font-medium text-white mb-1" contenteditable="true">Диван «Гранд Лаунж»</h3>
+                                    <p class="text-gray-400 text-xs font-light mb-4" contenteditable="true">Материал: Текстурированное букле, независимый пружинный блок</p>
+                                    <button onclick="openFurnModal('furn-main-modal')" class="text-amber-500 text-xs font-semibold uppercase tracking-wider hover:text-amber-400 hover:translate-x-1 transition-transform">Узнать стоимость &rarr;</button>
+                                </div>
+                            </div>
+                            <div class="bg-[#161616] border border-white/5 rounded-sm overflow-hidden group shadow-lg hover:border-amber-700/30 transition-all duration-300">
+                                <div class="h-64 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="text-lg font-medium text-white mb-1" contenteditable="true">Кабинет из натурального шпона</h3>
+                                    <p class="text-gray-400 text-xs font-light mb-4" contenteditable="true">Интегрированные столы, скрытые системы хранения</p>
+                                    <button onclick="openFurnModal('furn-main-modal')" class="text-amber-500 text-xs font-semibold uppercase tracking-wider hover:text-amber-400 hover:translate-x-1 transition-transform">Узнать стоимость &rarr;</button>
+                                </div>
+                            </div>
+                            <div class="bg-[#161616] border border-white/5 rounded-sm overflow-hidden group shadow-lg hover:border-amber-700/30 transition-all duration-300">
+                                <div class="h-64 overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="p-6">
                                     <h3 class="text-lg font-medium text-white mb-1" contenteditable="true">Кухонный гарнитур «Графит»</h3>
                                     <p class="text-gray-400 text-xs font-light mb-4" contenteditable="true">Фасады МДФ эмаль, интегрированный профиль и фурнитура Blum</p>
                                     <button onclick="openFurnModal('furn-main-modal')" class="text-amber-500 text-xs font-semibold uppercase tracking-wider hover:text-amber-400 hover:translate-x-1 transition-transform">Узнать стоимость &rarr;</button>
