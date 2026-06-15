@@ -427,10 +427,6 @@
             align-items: center;
         }
 
-        @media (max-width: 768px) {
-            .template-preview-grid { flex-direction: column; }
-        }
-
         .template-info {
             flex: 1;
         }
@@ -645,7 +641,6 @@
             font-size: 15px;
         }
 
-        /* ПОДВАЛ */
         .footer {
             border-top: 1px solid var(--border-plat);
             padding: 40px 0;
@@ -657,6 +652,37 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ (MOBILE RESPONSIVE FIXES)
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .top-bar .container { flex-direction: column; gap: 10px; text-align: center; }
+            .header .container { flex-direction: column; gap: 15px; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .hero { padding: 60px 0; }
+            .hero-title { font-size: 32px; }
+            .hero-subtitle { font-size: 16px; padding: 0 10px; }
+            .hero-btns { flex-direction: column; width: 100%; padding: 0 20px; box-sizing: border-box; }
+            .hero-btns .btn { width: 100%; }
+            .stats-grid { flex-direction: column; gap: 30px; text-align: center; }
+            .section-title { font-size: 26px; }
+            .why-grid { grid-template-columns: 1fr; }
+            .template-preview-grid { flex-direction: column; text-align: center; }
+            .tabs-nav { flex-direction: column; align-items: stretch; gap: 8px; }
+            .tab-btn { width: 100%; text-align: center; }
+            .step-item { flex-direction: column; align-items: center; text-align: center; }
+            .modal-box { margin: 15px; width: auto; padding: 25px; }
+            .modal-title { font-size: 20px; }
+            .faq-trigger { font-size: 14px; padding: 15px; }
+            
+            /* Адаптивность для Демо Кроссовок */
+            #demoSneakers .a3-header { flex-direction: column; gap: 15px; padding: 15px; text-align: center; }
+            #demoSneakers .a3-nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            #demoSneakers .a3-hero { padding: 40px 20px; text-align: center; flex-direction: column; }
+            #demoSneakers .a3-hero-text h1 { font-size: 32px; }
+            #demoSneakers .a3-catalog-title { font-size: 22px; }
         }
 
         /* ==========================================================================
@@ -678,7 +704,6 @@
             display: block;
         }
 
-        /* ПОДСВЕТКА ДЛЯ РЕДАКТИРОВАНИЯ ВО ВСЕХ ДЕМО */
         [contenteditable="true"]:hover {
             cursor: pointer;
             outline: 2px dashed rgba(124, 58, 237, 0.5);
@@ -825,11 +850,12 @@
         }
 
         #demoSneakers .a3-catalog-title {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 40px;
+            text-align: center;
             border-bottom: 2px solid #000;
             padding-bottom: 15px;
         }
@@ -1698,7 +1724,6 @@
 </head>
 <body>
 
-    <!-- 1. ТЕХНИЧЕСКИЙ ТОП-БАР -->
     <div class="top-bar">
         <div class="container">
             <div class="top-bar-left">
@@ -1711,7 +1736,6 @@
         </div>
     </div>
 
-    <!-- 2. НАВИГАЦИОННЫЙ ХЕДЕР -->
     <header class="header">
         <div class="container">
             <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -1729,7 +1753,6 @@
         </div>
     </header>
 
-    <!-- 3. ГЛАВНЫЙ ЭКРАН -->
     <section class="hero">
         <div class="container">
             <h1 class="hero-title">Продающий сайт представительского класса по доступной <span class="text-gradient">подписке</span></h1>
@@ -1741,7 +1764,6 @@
         </div>
     </section>
 
-    <!-- 4. МАРКЕТИНГОВЫЙ БЛОК РОССТАТА -->
     <section class="stats-section">
         <div class="container">
             <div class="stats-grid">
@@ -1758,7 +1780,6 @@
         </div>
     </section>
 
-    <!-- 5. БИЗНЕС-МАТЕМАТИКА -->
     <section class="math-section" id="math">
         <div class="container">
             <h2 class="section-title">Математический расчет: ONYX против веб-студий</h2>
@@ -1803,7 +1824,6 @@
         </div>
     </section>
 
-    <!-- 6. ЗАЧЕМ НУЖЕН САЙТ -->
     <section class="why-section" id="why">
         <div class="container">
             <h2 class="section-title">Почему вашему бизнесу жизненно необходим сайт в 2026 году</h2>
@@ -1827,7 +1847,6 @@
         </div>
     </section>
 
-    <!-- 7. ВИТРИНА ШАБЛОНОВ ДЛЯ ДЕМО-ВЕРСИЙ (5 ОКОН) -->
     <section class="templates-section" id="templates">
         <div class="container">
             <h2 class="section-title">Отраслевые ИТ-решения для любого направления</h2>
@@ -1841,7 +1860,6 @@
                 <button class="tab-btn" onclick="switchTab(event, 'tab-smm')">SMM агентство</button>
             </div>
 
-            <!-- Вкладка Инфобизнеса -->
             <div id="tab-infobiz" class="tab-content active">
                 <div class="template-preview-grid">
                     <div class="template-info">
@@ -1856,7 +1874,6 @@
                 </div>
             </div>
 
-            <!-- Вкладка Отелей -->
             <div id="tab-hotel" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
@@ -1871,7 +1888,6 @@
                 </div>
             </div>
 
-            <!-- Вкладка Кроссовок -->
             <div id="tab-sneakers" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
@@ -1886,7 +1902,6 @@
                 </div>
             </div>
 
-            <!-- Вкладка Мебели -->
             <div id="tab-furniture" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
@@ -1901,7 +1916,6 @@
                 </div>
             </div>
 
-            <!-- Вкладка SMM (Заглушка) -->
             <div id="tab-smm" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
@@ -1918,7 +1932,6 @@
         </div>
     </section>
 
-    <!-- 8. ЭТАПЫ СОЗДАНИЯ САЙТА -->
     <section class="steps-section" id="steps">
         <div class="container">
             <h2 class="section-title">Прозрачные этапы создания вашего сайта</h2>
@@ -1962,7 +1975,6 @@
         </div>
     </section>
 
-    <!-- 9. РАЗДЕЛ FAQ -->
     <section class="faq-section" id="faq">
         <div class="container">
             <h2 class="section-title">Часто задаваемые вопросы (FAQ)</h2>
@@ -1983,14 +1995,12 @@
         </div>
     </section>
 
-    <!-- ПОДВАЛ ГЛАВНОГО САЙТА -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2026 ONYX Systems. Все права защищены. Разработка высококонверсионных ИТ-решений по подписке.</p>
         </div>
     </footer>
 
-    <!-- МОДAЛЬНОЕ ОКНО QUIZ-АНКЕТЫ ONYX -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-box">
             <button class="modal-close" onclick="toggleModal(false)">×</button>
@@ -2035,13 +2045,9 @@
     </div>
 
 
-    <!-- ==========================================================================
-       ПОЛНОЭКРАННЫЙ СИМУЛЯТОР 1: МНОГОСТРАНИЧНЫЙ ИНТЕРНЕТ-МАГАЗИН (ONYX-DEMO)
-       ========================================================================== -->
     <div id="demoSneakers" class="demo-fullscreen">
         <div class="sneaker-wrapper">
             
-            <!-- ХЕДЕР МАГАЗИНА ONYX-DEMO -->
             <div class="a3-header">
                 <div class="a3-logo" contenteditable="true">ONYX-DEMO</div>
                 <div class="a3-nav">
@@ -2058,7 +2064,6 @@
                 </div>
             </div>
 
-            <!-- ГЛАВНЫЙ БАННЕР МАГАЗИНА -->
             <div class="a3-hero">
                 <div class="a3-hero-text">
                     <span class="a3-hero-tag">A3BOOTS.SHOP | PREMIUM LINE</span>
@@ -2068,14 +2073,11 @@
                 <div style="font-size: 120px; opacity: 0.05; position: absolute; right: 40px; top: 20px; user-select: none;">ONYX</div>
             </div>
 
-            <!-- КАТАЛОГ СЕТКА ИЗ 12 РАЗНЫХ ТОВАРОВ (ЛОКАЛЬНЫЕ ССЫЛКИ ИЗ ВАШЕЙ ПАПКИ IMG) -->
             <div class="a3-catalog-container">
                 
-                <!-- СТРАНИЦА 1: ОБУВЬ -->
                 <div id="sneakerSection-shoes" class="sneaker-catalog-section active-section">
                     <div class="a3-catalog-title" contenteditable="true">Лимитированная обувь</div>
                     <div class="a3-grid">
-                        <!-- Товар 1 -->
                         <div class="a3-card" data-id="1">
                             <div class="a3-image-box"><img src="img/nike-air.jpg" alt="Nike"></div>
                             <div class="a3-card-body">
@@ -2090,7 +2092,6 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
-                        <!-- Товар 2 -->
                         <div class="a3-card" data-id="2">
                             <div class="a3-image-box"><img src="img/yeezy.jpg" alt="Yeezy"></div>
                             <div class="a3-card-body">
@@ -2105,7 +2106,6 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
-                        <!-- Товар 3 -->
                         <div class="a3-card" data-id="3">
                             <div class="a3-image-box"><img src="img/triple-s.jpg" alt="Balenciaga"></div>
                             <div class="a3-card-body">
@@ -2123,11 +2123,9 @@
                     </div>
                 </div>
 
-                <!-- СТРАНИЦА 2: ОДЕЖДА -->
                 <div id="sneakerSection-clothes" class="sneaker-catalog-section">
                     <div class="a3-catalog-title" contenteditable="true">Дизайнерская одежда</div>
                     <div class="a3-grid">
-                        <!-- Товар 4 -->
                         <div class="a3-card" data-id="4">
                             <div class="a3-image-box"><img src="img/amiri-hoodie.jpg" alt="Amiri"></div>
                             <div class="a3-card-body">
@@ -2142,7 +2140,6 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
-                        <!-- Товар 5 -->
                         <div class="a3-card" data-id="5">
                             <div class="a3-image-box"><img src="img/puma-tshirt.jpg" alt="Puma"></div>
                             <div class="a3-card-body">
@@ -2157,7 +2154,6 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
-                        <!-- Товар 6 -->
                         <div class="a3-card" data-id="6">
                             <div class="a3-image-box"><img src="img/off-white-jacket.jpg" alt="Off-White"></div>
                             <div class="a3-card-body">
@@ -2174,11 +2170,9 @@
                     </div>
                 </div>
 
-                <!-- СТРАНИЦА 3: АКСЕССУАРЫ -->
                 <div id="sneakerSection-acc" class="sneaker-catalog-section">
                     <div class="a3-catalog-title" contenteditable="true">Премиальные аксессуары</div>
                     <div class="a3-grid">
-                        <!-- Товар 7 -->
                         <div class="a3-card" data-id="7">
                             <div class="a3-image-box"><img src="img/lanvin-bag.jpg" alt="Lanvin"></div>
                             <div class="a3-card-body">
@@ -2191,7 +2185,6 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
-                        <!-- Товар 8 -->
                         <div class="a3-card" data-id="8">
                             <div class="a3-image-box"><img src="img/balenciaga-cap.jpg" alt="Balenciaga Cap"></div>
                             <div class="a3-card-body">
@@ -2204,7 +2197,6 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
-                        <!-- Товар 9 -->
                         <div class="a3-card" data-id="9">
                             <div class="a3-image-box"><img src="img/off-white-belt.jpg" alt="Off-White Belt"></div>
                             <div class="a3-card-body">
@@ -2220,11 +2212,9 @@
                     </div>
                 </div>
 
-                <!-- СТРАНИЦА 4: SALE -->
                 <div id="sneakerSection-sale" class="sneaker-catalog-section">
                     <div class="a3-catalog-title" contenteditable="true" style="color: #ff4500;">Горячая распродажа</div>
                     <div class="a3-grid">
-                        <!-- Товар 10 -->
                         <div class="a3-card" data-id="10">
                             <div class="a3-image-box"><img src="img/converse.jpg" alt="Converse"></div>
                             <div class="a3-card-body">
@@ -2239,7 +2229,6 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
-                        <!-- Товар 11 -->
                         <div class="a3-card" data-id="11">
                             <div class="a3-image-box"><img src="img/vans.jpg" alt="Vans"></div>
                             <div class="a3-card-body">
@@ -2254,7 +2243,6 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
-                        <!-- Товар 12 -->
                         <div class="a3-card" data-id="12">
                             <div class="a3-image-box"><img src="img/nb-9060.jpg" alt="New Balance"></div>
                             <div class="a3-card-body">
@@ -2272,7 +2260,6 @@
                     </div>
                 </div>
 
-                <!-- КНОПКА ФИНAЛЬНОГО ЧЕКАУТА -->
                 <div style="text-align: center; margin: 60px 0;">
                     <button class="btn btn-primary" style="background:#000; color:#fff;" onclick="openCheckout()">Перейти к оформлению заказа</button>
                 </div>
@@ -2280,7 +2267,6 @@
         </div>
     </div>
 
-    <!-- ЧЕКАУТ ДЛЯ КРОССОВОК -->
     <div id="checkoutModal" class="checkout-backdrop">
         <div class="checkout-modal">
             <div class="close-checkout-btn" onclick="closeCheckout()">&times;</div>
@@ -2315,9 +2301,6 @@
     </div>
 
 
-    <!-- ==========================================================================
-       ПОЛНОЭКРАННЫЙ СИМУЛЯТОР 2: ОТЕЛИ (ONYX GRAND HOTEL)
-       ========================================================================== -->
     <div id="demoHotel" class="demo-fullscreen">
         <div class="hotel-wrapper">
             <header class="hotel-header">
@@ -2481,9 +2464,6 @@
     </div>
 
 
-    <!-- ==========================================================================
-       ПОЛНОЭКРАННЫЙ СИМУЛЯТОР 3: ИНФОБИЗНЕС И ОНЛАЙН-ШКОЛА
-       ========================================================================== -->
     <div id="demoInfobiz" class="demo-fullscreen">
         <div class="infobiz-wrapper">
             <header class="info-header">
@@ -2589,9 +2569,6 @@
     </div>
 
 
-    <!-- ==========================================================================
-       ПОЛНОЭКРАННЫЙ СИМУЛЯТОР 4: МЕБЕЛЬ И ИНТЕРЬЕРЫ (ONYX FURNITURE)
-       ========================================================================== -->
     <div id="demoFurniture" class="demo-fullscreen">
         <div class="furn-wrapper bg-[#121212] text-gray-100 min-h-screen flex flex-col overflow-x-hidden font-sans">
             
@@ -2863,7 +2840,6 @@
 
             </main>
 
-            <!-- МОДАЛЬНОЕ ОКНО 1: ОБЩИЙ РАСЧЕТ -->
             <div id="furn-main-modal" class="modal-element fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
                 <div class="bg-[#161616] border border-white/10 p-8 rounded-sm max-w-md w-full relative transform scale-95 transition-transform duration-300 shadow-2xl">
                     <button onclick="closeFurnModal('furn-main-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-light transition-colors">&times;</button>
@@ -2886,7 +2862,6 @@
                 </div>
             </div>
 
-            <!-- МОДАЛЬНОЕ ОКНО 2: РАСЧЕТ ДИВАНА -->
             <div id="furn-sofa-modal" class="modal-element fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
                 <div class="bg-[#161616] border border-white/10 p-8 rounded-sm max-w-md w-full relative transform scale-95 transition-transform duration-300 shadow-2xl">
                     <button onclick="closeFurnModal('furn-sofa-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-light transition-colors">&times;</button>
@@ -2909,7 +2884,6 @@
                 </div>
             </div>
 
-            <!-- МОДАЛЬНОЕ ОКНО 3: РАСЧЕТ КУХНИ -->
             <div id="furn-kitchen-modal" class="modal-element fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
                 <div class="bg-[#161616] border border-white/10 p-8 rounded-sm max-w-md w-full relative transform scale-95 transition-transform duration-300 shadow-2xl">
                     <button onclick="closeFurnModal('furn-kitchen-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-light transition-colors">&times;</button>
@@ -2939,9 +2913,6 @@
     </div>
 
 
-    <!-- ==========================================================================
-           ГЛОБАЛЬНЫЙ JAVASCRIPT ДЛЯ ВСЕХ МОДУЛЕЙ
-       ========================================================================== -->
     <script>
         // 1. ЛОГИКА ГЛАВНОГО САЙТА (ПЕРЕКЛЮЧЕНИЕ ТАБОВ, СКРОЛЛ)
         function switchTab(event, tabId) {
@@ -3024,23 +2995,19 @@
         let cart = [];
         
         function switchSneakerTab(tabId) {
-            // Скрываем все секции каталога кроссовок
             const sections = document.querySelectorAll('#demoSneakers .sneaker-catalog-section');
             sections.forEach(sec => {
                 sec.classList.remove('active-section');
             });
             
-            // Снимаем активный класс со всех кнопок навигации кроссовок
             const navSpans = document.querySelectorAll('#demoSneakers .a3-nav span');
             navSpans.forEach(span => {
                 span.classList.remove('active-tab');
             });
             
-            // Показываем нужную секцию и делаем кнопку активной
             document.getElementById(`sneakerSection-${tabId}`).classList.add('active-section');
             document.getElementById(`tabBtn-${tabId}`).classList.add('active-tab');
             
-            // Скроллим наверх каталога
             document.getElementById('demoSneakers').scrollTo({ top: 300, behavior: 'smooth' });
         }
 
@@ -3161,13 +3128,6 @@
                 }, 300);
             }
         }
-
-        // Блокировка всплытия событий для редактируемых полей во всех демо
-        document.querySelectorAll('[contenteditable="true"]').forEach(element => {
-            element.addEventListener('click', e => {
-                e.stopPropagation();
-            });
-        });
     </script>
 </body>
 </html>
