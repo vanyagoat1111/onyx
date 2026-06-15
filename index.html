@@ -12,7 +12,7 @@
     <script>
         tailwind.config = {
             corePlugins: {
-                preflight: false, // Отключаем сброс стилей, чтобы не сломать основной сайт
+                preflight: false,
             }
         }
     </script>
@@ -663,7 +663,7 @@
            ОБЩИЕ СТИЛИ ДЛЯ ВСЕХ ПОЛНОЭКРАННЫХ ДЕМО
            ========================================================================== */
         .demo-fullscreen {
-            display: none; /* СКРЫВАЕМ ПО УМОЛЧАНИЮ */
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -675,7 +675,15 @@
         }
 
         .demo-fullscreen.active {
-            display: block; /* ПОКАЗЫВАЕМ ПРИ КЛИКЕ */
+            display: block;
+        }
+
+        /* ПОДСВЕТКА ДЛЯ РЕДАКТИРОВАНИЯ ВО ВСЕХ ДЕМО */
+        [contenteditable="true"]:hover {
+            cursor: pointer;
+            outline: 2px dashed rgba(124, 58, 237, 0.5);
+            background: rgba(124, 58, 237, 0.05);
+            border-radius: 4px;
         }
 
         /* ==========================================================================
@@ -807,7 +815,6 @@
             padding: 60px 20px;
         }
 
-        /* Многостраничные разделы каталога */
         #demoSneakers .sneaker-catalog-section {
             display: none;
         }
@@ -1691,6 +1698,7 @@
 </head>
 <body>
 
+    <!-- 1. ТЕХНИЧЕСКИЙ ТОП-БАР -->
     <div class="top-bar">
         <div class="container">
             <div class="top-bar-left">
@@ -1703,6 +1711,7 @@
         </div>
     </div>
 
+    <!-- 2. НАВИГАЦИОННЫЙ ХЕДЕР -->
     <header class="header">
         <div class="container">
             <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
@@ -1720,10 +1729,11 @@
         </div>
     </header>
 
+    <!-- 3. ГЛАВНЫЙ ЭКРАН -->
     <section class="hero">
         <div class="container">
             <h1 class="hero-title">Продающий сайт представительского класса по доступной <span class="text-gradient">подписке</span></h1>
-            <p class="hero-subtitle">Выводите свой бизнес на совершенно новый уровень вместе with ONYX. Заполняйте анкету ниже, и уже сегодня мы пришлем интерактивный прототип вашего будущего сайта.</p>
+            <p class="hero-subtitle">Выводите свой бизнес на совершенно новый уровень вместе с ONYX. Заполняйте анкету ниже, и уже сегодня мы пришлем интерактивный прототип вашего будущего сайта.</p>
             <div class="hero-btns">
                 <button class="btn btn-primary" onclick="toggleModal(true)">Заполнить анкету</button>
                 <button class="btn btn-secondary" onclick="scrollToTemplates()">Демо-версия сайта</button>
@@ -1731,6 +1741,7 @@
         </div>
     </section>
 
+    <!-- 4. МАРКЕТИНГОВЫЙ БЛОК РОССТАТА -->
     <section class="stats-section">
         <div class="container">
             <div class="stats-grid">
@@ -1741,12 +1752,13 @@
                 <div class="stats-info">
                     <h2>Мы полностью предостерегаем ваш бизнес от финансовых рисков</h2>
                     <p>По данным официальной статистики Росстата, около 90% новых коммерческих проектов прекращают свое существование в течение первых 12 месяцев. Инвестиции в дорогостоящую классическую веб-разработку (от 150 000 рублей) в современных реалиях часто становятся неоправданной потерей стартового капитала.</p>
-                    <p>Наша уникальная модель подписки за 2990 руб/мес полностью решает эту боль. Вы не рикроете крупными бюджетами. Мы берем на себя создание сайта, его техническую поддержку и бесплатное обслуживание на постоянной основе.</p>
+                    <p>Наша уникальная модель подписки за 2990 руб/мес полностью решает эту боль. Вы не рискуете крупными бюджетами. Мы берем на себя создание сайта, его техническую поддержку и бесплатное обслуживание на постоянной основе.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- 5. БИЗНЕС-МАТЕМАТИКА -->
     <section class="math-section" id="math">
         <div class="container">
             <h2 class="section-title">Математический расчет: ONYX против веб-студий</h2>
@@ -1791,6 +1803,7 @@
         </div>
     </section>
 
+    <!-- 6. ЗАЧЕМ НУЖЕН САЙТ -->
     <section class="why-section" id="why">
         <div class="container">
             <h2 class="section-title">Почему вашему бизнесу жизненно необходим сайт в 2026 году</h2>
@@ -1814,6 +1827,7 @@
         </div>
     </section>
 
+    <!-- 7. ВИТРИНА ШАБЛОНОВ ДЛЯ ДЕМО-ВЕРСИЙ (5 ОКОН) -->
     <section class="templates-section" id="templates">
         <div class="container">
             <h2 class="section-title">Отраслевые ИТ-решения для любого направления</h2>
@@ -1827,6 +1841,7 @@
                 <button class="tab-btn" onclick="switchTab(event, 'tab-smm')">SMM агентство</button>
             </div>
 
+            <!-- Вкладка Инфобизнеса -->
             <div id="tab-infobiz" class="tab-content active">
                 <div class="template-preview-grid">
                     <div class="template-info">
@@ -1841,6 +1856,7 @@
                 </div>
             </div>
 
+            <!-- Вкладка Отелей -->
             <div id="tab-hotel" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
@@ -1855,6 +1871,7 @@
                 </div>
             </div>
 
+            <!-- Вкладка Кроссовок -->
             <div id="tab-sneakers" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
@@ -1869,6 +1886,7 @@
                 </div>
             </div>
 
+            <!-- Вкладка Мебели -->
             <div id="tab-furniture" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
@@ -1883,6 +1901,7 @@
                 </div>
             </div>
 
+            <!-- Вкладка SMM (Заглушка) -->
             <div id="tab-smm" class="tab-content">
                 <div class="template-preview-grid">
                     <div class="template-info">
@@ -1899,6 +1918,7 @@
         </div>
     </section>
 
+    <!-- 8. ЭТАПЫ СОЗДАНИЯ САЙТА -->
     <section class="steps-section" id="steps">
         <div class="container">
             <h2 class="section-title">Прозрачные этапы создания вашего сайта</h2>
@@ -1942,6 +1962,7 @@
         </div>
     </section>
 
+    <!-- 9. РАЗДЕЛ FAQ -->
     <section class="faq-section" id="faq">
         <div class="container">
             <h2 class="section-title">Часто задаваемые вопросы (FAQ)</h2>
@@ -1962,12 +1983,14 @@
         </div>
     </section>
 
+    <!-- ПОДВАЛ ГЛАВНОГО САЙТА -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2026 ONYX Systems. Все права защищены. Разработка высококонверсионных ИТ-решений по подписке.</p>
         </div>
     </footer>
 
+    <!-- МОДAЛЬНОЕ ОКНО QUIZ-АНКЕТЫ ONYX -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-box">
             <button class="modal-close" onclick="toggleModal(false)">×</button>
@@ -2012,9 +2035,13 @@
     </div>
 
 
+    <!-- ==========================================================================
+       ПОЛНОЭКРАННЫЙ СИМУЛЯТОР 1: МНОГОСТРАНИЧНЫЙ ИНТЕРНЕТ-МАГАЗИН (ONYX-DEMO)
+       ========================================================================== -->
     <div id="demoSneakers" class="demo-fullscreen">
         <div class="sneaker-wrapper">
             
+            <!-- ХЕДЕР МАГАЗИНА ONYX-DEMO -->
             <div class="a3-header">
                 <div class="a3-logo" contenteditable="true">ONYX-DEMO</div>
                 <div class="a3-nav">
@@ -2031,6 +2058,7 @@
                 </div>
             </div>
 
+            <!-- ГЛАВНЫЙ БАННЕР МАГАЗИНА -->
             <div class="a3-hero">
                 <div class="a3-hero-text">
                     <span class="a3-hero-tag">A3BOOTS.SHOP | PREMIUM LINE</span>
@@ -2040,11 +2068,14 @@
                 <div style="font-size: 120px; opacity: 0.05; position: absolute; right: 40px; top: 20px; user-select: none;">ONYX</div>
             </div>
 
+            <!-- КАТАЛОГ СЕТКА ИЗ 12 РАЗНЫХ ТОВАРОВ (ЛОКАЛЬНЫЕ ССЫЛКИ ИЗ ВАШЕЙ ПАПКИ IMG) -->
             <div class="a3-catalog-container">
                 
+                <!-- СТРАНИЦА 1: ОБУВЬ -->
                 <div id="sneakerSection-shoes" class="sneaker-catalog-section active-section">
                     <div class="a3-catalog-title" contenteditable="true">Лимитированная обувь</div>
                     <div class="a3-grid">
+                        <!-- Товар 1 -->
                         <div class="a3-card" data-id="1">
                             <div class="a3-image-box"><img src="img/nike-air.jpg" alt="Nike"></div>
                             <div class="a3-card-body">
@@ -2059,6 +2090,7 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
+                        <!-- Товар 2 -->
                         <div class="a3-card" data-id="2">
                             <div class="a3-image-box"><img src="img/yeezy.jpg" alt="Yeezy"></div>
                             <div class="a3-card-body">
@@ -2073,6 +2105,7 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
+                        <!-- Товар 3 -->
                         <div class="a3-card" data-id="3">
                             <div class="a3-image-box"><img src="img/triple-s.jpg" alt="Balenciaga"></div>
                             <div class="a3-card-body">
@@ -2090,9 +2123,11 @@
                     </div>
                 </div>
 
+                <!-- СТРАНИЦА 2: ОДЕЖДА -->
                 <div id="sneakerSection-clothes" class="sneaker-catalog-section">
                     <div class="a3-catalog-title" contenteditable="true">Дизайнерская одежда</div>
                     <div class="a3-grid">
+                        <!-- Товар 4 -->
                         <div class="a3-card" data-id="4">
                             <div class="a3-image-box"><img src="img/amiri-hoodie.jpg" alt="Amiri"></div>
                             <div class="a3-card-body">
@@ -2107,6 +2142,7 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
+                        <!-- Товар 5 -->
                         <div class="a3-card" data-id="5">
                             <div class="a3-image-box"><img src="img/puma-tshirt.jpg" alt="Puma"></div>
                             <div class="a3-card-body">
@@ -2121,6 +2157,7 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
+                        <!-- Товар 6 -->
                         <div class="a3-card" data-id="6">
                             <div class="a3-image-box"><img src="img/off-white-jacket.jpg" alt="Off-White"></div>
                             <div class="a3-card-body">
@@ -2137,9 +2174,11 @@
                     </div>
                 </div>
 
+                <!-- СТРАНИЦА 3: АКСЕССУАРЫ -->
                 <div id="sneakerSection-acc" class="sneaker-catalog-section">
                     <div class="a3-catalog-title" contenteditable="true">Премиальные аксессуары</div>
                     <div class="a3-grid">
+                        <!-- Товар 7 -->
                         <div class="a3-card" data-id="7">
                             <div class="a3-image-box"><img src="img/lanvin-bag.jpg" alt="Lanvin"></div>
                             <div class="a3-card-body">
@@ -2152,6 +2191,7 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
+                        <!-- Товар 8 -->
                         <div class="a3-card" data-id="8">
                             <div class="a3-image-box"><img src="img/balenciaga-cap.jpg" alt="Balenciaga Cap"></div>
                             <div class="a3-card-body">
@@ -2164,6 +2204,7 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
+                        <!-- Товар 9 -->
                         <div class="a3-card" data-id="9">
                             <div class="a3-image-box"><img src="img/off-white-belt.jpg" alt="Off-White Belt"></div>
                             <div class="a3-card-body">
@@ -2179,9 +2220,11 @@
                     </div>
                 </div>
 
+                <!-- СТРАНИЦА 4: SALE -->
                 <div id="sneakerSection-sale" class="sneaker-catalog-section">
                     <div class="a3-catalog-title" contenteditable="true" style="color: #ff4500;">Горячая распродажа</div>
                     <div class="a3-grid">
+                        <!-- Товар 10 -->
                         <div class="a3-card" data-id="10">
                             <div class="a3-image-box"><img src="img/converse.jpg" alt="Converse"></div>
                             <div class="a3-card-body">
@@ -2196,6 +2239,7 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
+                        <!-- Товар 11 -->
                         <div class="a3-card" data-id="11">
                             <div class="a3-image-box"><img src="img/vans.jpg" alt="Vans"></div>
                             <div class="a3-card-body">
@@ -2210,6 +2254,7 @@
                                 <button class="a3-buy-btn" onclick="addToCart(this)">В корзину</button>
                             </div>
                         </div>
+                        <!-- Товар 12 -->
                         <div class="a3-card" data-id="12">
                             <div class="a3-image-box"><img src="img/nb-9060.jpg" alt="New Balance"></div>
                             <div class="a3-card-body">
@@ -2227,6 +2272,7 @@
                     </div>
                 </div>
 
+                <!-- КНОПКА ФИНAЛЬНОГО ЧЕКАУТА -->
                 <div style="text-align: center; margin: 60px 0;">
                     <button class="btn btn-primary" style="background:#000; color:#fff;" onclick="openCheckout()">Перейти к оформлению заказа</button>
                 </div>
@@ -2234,6 +2280,7 @@
         </div>
     </div>
 
+    <!-- ЧЕКАУТ ДЛЯ КРОССОВОК -->
     <div id="checkoutModal" class="checkout-backdrop">
         <div class="checkout-modal">
             <div class="close-checkout-btn" onclick="closeCheckout()">&times;</div>
@@ -2268,6 +2315,9 @@
     </div>
 
 
+    <!-- ==========================================================================
+       ПОЛНОЭКРАННЫЙ СИМУЛЯТОР 2: ОТЕЛИ (ONYX GRAND HOTEL)
+       ========================================================================== -->
     <div id="demoHotel" class="demo-fullscreen">
         <div class="hotel-wrapper">
             <header class="hotel-header">
@@ -2431,6 +2481,9 @@
     </div>
 
 
+    <!-- ==========================================================================
+       ПОЛНОЭКРАННЫЙ СИМУЛЯТОР 3: ИНФОБИЗНЕС И ОНЛАЙН-ШКОЛА
+       ========================================================================== -->
     <div id="demoInfobiz" class="demo-fullscreen">
         <div class="infobiz-wrapper">
             <header class="info-header">
@@ -2536,6 +2589,9 @@
     </div>
 
 
+    <!-- ==========================================================================
+       ПОЛНОЭКРАННЫЙ СИМУЛЯТОР 4: МЕБЕЛЬ И ИНТЕРЬЕРЫ (ONYX FURNITURE)
+       ========================================================================== -->
     <div id="demoFurniture" class="demo-fullscreen">
         <div class="furn-wrapper bg-[#121212] text-gray-100 min-h-screen flex flex-col overflow-x-hidden font-sans">
             
@@ -2733,4 +2789,385 @@
                                 <div class="h-64 overflow-hidden">
                                     <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 </div>
-                                <div class="
+                                <div class="p-6">
+                                    <h3 class="text-lg font-medium text-white mb-1" contenteditable="true">Кухонный гарнитур «Графит»</h3>
+                                    <p class="text-gray-400 text-xs font-light mb-4" contenteditable="true">Фасады МДФ эмаль, интегрированный профиль и фурнитура Blum</p>
+                                    <button onclick="openFurnModal('furn-main-modal')" class="text-amber-500 text-xs font-semibold uppercase tracking-wider hover:text-amber-400 hover:translate-x-1 transition-transform">Узнать стоимость &rarr;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="furn-page-prices" class="furn-page-section py-16">
+                    <div class="max-w-4xl mx-auto px-6">
+                        <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Прозрачный расчет</span>
+                        <h2 class="font-serif-furn text-3xl sm:text-5xl text-white mb-4" contenteditable="true">Базовые тарифы мастерской</h2>
+                        <p class="text-gray-400 font-light text-sm mb-12" contenteditable="true">Конечная стоимость зависит от выбранных тканей, сложности проекта и фурнитуры. Работаем строго по договору.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="p-6 bg-[#161616] border border-white/5 rounded-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-amber-700/30 transition-all duration-300">
+                                <div>
+                                    <h3 class="text-white font-medium text-base" contenteditable="true">Мягкая мебель (Диваны / Кресла)</h3>
+                                    <p class="text-gray-400 text-xs font-light mt-1" contenteditable="true">Огромный выбор тканей (антикоготь, букле, натуральная кожа)</p>
+                                </div>
+                                <span class="font-serif-furn text-xl text-amber-500 whitespace-nowrap" contenteditable="true">от 205 000 ₽</span>
+                            </div>
+                            <div class="p-6 bg-[#161616] border border-white/5 rounded-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-amber-700/30 transition-all duration-300">
+                                <div>
+                                    <h3 class="text-white font-medium text-base" contenteditable="true">Стеновые шпонированные панели</h3>
+                                    <p class="text-gray-400 text-xs font-light mt-1" contenteditable="true">Шпон дуба, ореха, ясеня, МДФ основа высокой прочности</p>
+                                </div>
+                                <span class="font-serif-furn text-xl text-amber-500 whitespace-nowrap" contenteditable="true">от 14 500 ₽ / м²</span>
+                            </div>
+                        </div>
+                        <div class="mt-12 text-center bg-amber-950/20 border border-amber-900/30 p-8 rounded-sm">
+                            <h4 class="text-white font-medium mb-2" contenteditable="true">У вас есть готовый дизайн-проект или эскиз от руки?</h4>
+                            <p class="text-gray-400 text-xs font-light mb-6" contenteditable="true">Пришлите его нам — инженеры сделают точную калькуляцию за 1 рабочий день.</p>
+                            <button onclick="openFurnModal('furn-main-modal')" class="bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase px-6 py-3 transition-colors rounded-sm shadow-md">Загрузить проект на расчет</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="furn-page-about" class="furn-page-section py-16">
+                    <div class="max-w-7xl mx-auto px-6">
+                        <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">О нас</span>
+                        <h2 class="font-serif-furn text-3xl sm:text-5xl text-white mb-12" contenteditable="true">Искренне любим свое дело</h2>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                            <div class="space-y-6 text-gray-400 font-light leading-relaxed text-base">
+                                <p contenteditable="true">Мы — узкоспециализированная команда профессионалов. Каждый из нас пришел в мебельную сферу более 10 лет назад, пройдя путь от простых сборщиков до создателей сложнейших интерьерных конструкций.</p>
+                                <p contenteditable="true">Наше главное отличие — фанатичное отношение к качеству и швам. Если это диван, то линии будут безупречно ровными, а ткань натянута без единой лишней складки. Если это корпусная мебель — зазоры будут идеальными до долей миллиметра.</p>
+                            </div>
+                            
+                            <div class="flex items-center justify-center p-4">
+                                <div class="w-80 h-80 rounded-full border-2 border-white/80 bg-transparent flex flex-col items-center justify-center p-8 text-center shadow-2xl relative overflow-hidden group hover:border-amber-500 transition-all duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-100 group-hover:from-amber-600/10 transition-colors duration-500"></div>
+                                    <span class="text-5xl font-bold tracking-[0.25em] text-white uppercase mb-2 font-serif-furn group-hover:scale-110 group-hover:text-amber-500 transition-all duration-500">O</span>
+                                    <span class="text-sm tracking-[0.4em] text-white uppercase font-semibold group-hover:text-amber-400 transition-colors">ONYX FURNITURE</span>
+                                    <span class="text-[10px] tracking-widest text-white/60 uppercase mt-4 font-light">СОЗДАНО В 2026</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="furn-page-contacts" class="furn-page-section py-16">
+                    <div class="max-w-4xl mx-auto px-6 text-center">
+                        <span class="text-amber-500 text-xs font-semibold tracking-widest uppercase block mb-2" contenteditable="true">Связь</span>
+                        <h2 class="font-serif-furn text-3xl sm:text-5xl text-white mb-6" contenteditable="true">Ждем вас в гости</h2>
+                        <p class="text-gray-400 font-light text-base mb-8" contenteditable="true">г. Москва, Пресненская наб., 12</p>
+                        <p class="text-2xl text-amber-500 font-medium" contenteditable="true">+7 (999) 000-00-00</p>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- МОДАЛЬНОЕ ОКНО 1: ОБЩИЙ РАСЧЕТ -->
+            <div id="furn-main-modal" class="modal-element fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+                <div class="bg-[#161616] border border-white/10 p-8 rounded-sm max-w-md w-full relative transform scale-95 transition-transform duration-300 shadow-2xl">
+                    <button onclick="closeFurnModal('furn-main-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-light transition-colors">&times;</button>
+                    <span class="text-amber-500 text-[10px] font-semibold tracking-widest uppercase block mb-1">Расчет стоимости</span>
+                    <h3 class="font-serif-furn text-2xl text-white mb-6">Обсудить ваш проект</h3>
+                    
+                    <form onsubmit="event.preventDefault(); alert('ONYX DEMO: Заявка на расчет успешно отправлена!'); closeFurnModal('furn-main-modal');" class="space-y-4">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Ваше имя</label>
+                            <input type="text" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Телефон</label>
+                            <input type="tel" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                        </div>
+                        <button type="submit" class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase py-4 transition-colors rounded-sm shadow-md">
+                            Отправить запрос
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- МОДАЛЬНОЕ ОКНО 2: РАСЧЕТ ДИВАНА -->
+            <div id="furn-sofa-modal" class="modal-element fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+                <div class="bg-[#161616] border border-white/10 p-8 rounded-sm max-w-md w-full relative transform scale-95 transition-transform duration-300 shadow-2xl">
+                    <button onclick="closeFurnModal('furn-sofa-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-light transition-colors">&times;</button>
+                    <span class="text-amber-500 text-[10px] font-semibold tracking-widest uppercase block mb-1">Мягкая мебель</span>
+                    <h3 class="font-serif-furn text-2xl text-white mb-6">Концепт дивана</h3>
+                    
+                    <form onsubmit="event.preventDefault(); alert('ONYX DEMO: Заявка на расчет дивана успешно отправлена!'); closeFurnModal('furn-sofa-modal');" class="space-y-4">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Примерные размеры (Ш х Д)</label>
+                            <input type="text" placeholder="например, 250х180 см" class="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Телефон для связи</label>
+                            <input type="tel" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                        </div>
+                        <button type="submit" class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase py-4 transition-colors rounded-sm shadow-md">
+                            Получить расчет дивана
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- МОДАЛЬНОЕ ОКНО 3: РАСЧЕТ КУХНИ -->
+            <div id="furn-kitchen-modal" class="modal-element fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+                <div class="bg-[#161616] border border-white/10 p-8 rounded-sm max-w-md w-full relative transform scale-95 transition-transform duration-300 shadow-2xl">
+                    <button onclick="closeFurnModal('furn-kitchen-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-light transition-colors">&times;</button>
+                    <span class="text-amber-500 text-[10px] font-semibold tracking-widest uppercase block mb-1">Корпусная мебель</span>
+                    <h3 class="font-serif-furn text-2xl text-white mb-6">Проект умной кухни</h3>
+                    
+                    <form onsubmit="event.preventDefault(); alert('ONYX DEMO: Заявка на расчет кухни успешно отправлена!'); closeFurnModal('furn-kitchen-modal');" class="space-y-4">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Конфигурация</label>
+                            <select class="w-full bg-[#1c1c1c] border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                                <option>Прямая кухня</option>
+                                <option>Угловая (Г-образная)</option>
+                                <option>С кухонным островом</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-wider text-gray-400 mb-2">Телефон для связи</label>
+                            <input type="tel" required class="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm rounded-sm text-white focus:outline-none focus:border-amber-500 transition-colors">
+                        </div>
+                        <button type="submit" class="w-full bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold tracking-widest uppercase py-4 transition-colors rounded-sm shadow-md">
+                            Спроектировать кухню
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==========================================================================
+           ГЛОБАЛЬНЫЙ JAVASCRIPT ДЛЯ ВСЕХ МОДУЛЕЙ
+       ========================================================================== -->
+    <script>
+        // 1. ЛОГИКА ГЛАВНОГО САЙТА (ПЕРЕКЛЮЧЕНИЕ ТАБОВ, СКРОЛЛ)
+        function switchTab(event, tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+
+        function toggleModal(show) {
+            const modal = document.getElementById('orderModal');
+            if(show) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
+        }
+
+        function scrollToTemplates() {
+            document.getElementById('templates').scrollIntoView({behavior: 'smooth'});
+        }
+
+        // 2. ОТКРЫТИЕ И ЗАКРЫТИЕ СИМУЛЯТОРОВ
+        function openDemo(demoId) {
+            document.getElementById(demoId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDemo(demoId) {
+            document.getElementById(demoId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 3. ОТПРАВКА ЛИДА С ГЛАВНОГО САЙТА В ТЕЛЕГРАМ БОТ
+        function sendLeadToBot(event) {
+            event.preventDefault();
+            const token = "8661217530:AAGHcGZeOAkisdW71fl6Rl3dqQapq6IIRsE";
+            const chatId = "2059002474";
+            
+            const fio = document.getElementById('leadFio').value;
+            const city = document.getElementById('leadCity').value;
+            const niche = document.getElementById('leadNiche').value;
+            const company = document.getElementById('leadCompany').value;
+            const socials = document.getElementById('leadSocials').value;
+            const wishes = document.getElementById('leadWishes').value;
+            const source = document.getElementById('leadSource').value;
+            
+            const message = `🔥 НОВАЯ ЗАЯВКА С АНКЕТЫ ONYX 🔥\n\n👤 ФИО: ${fio}\n📍 Город: ${city}\n💼 Ниша: ${niche}\n🏢 Компания: ${company}\n🔗 Соц.сети: ${socials}\n📝 Пожелания: ${wishes}\n🌐 Источник: ${source}`;
+                            
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatId, text: message })
+            }).then(response => {
+                if(response.ok) { 
+                    alert('Анкета отправлена!'); 
+                    toggleModal(false); 
+                    document.getElementById('onyxLeadForm').reset(); 
+                } else { 
+                    alert('Ошибка отправки в API Telegram.'); 
+                }
+            }).catch(err => { 
+                alert('Ошибка соединения с серверами.'); 
+            });
+        }
+
+        // 4. ЛОГИКА ДЕМО СНИКЕРОВ (ONYX-DEMO МНОГОСТРАНИЧНЫЙ)
+        let cart = [];
+        
+        function switchSneakerTab(tabId) {
+            // Скрываем все секции каталога кроссовок
+            const sections = document.querySelectorAll('#demoSneakers .sneaker-catalog-section');
+            sections.forEach(sec => {
+                sec.classList.remove('active-section');
+            });
+            
+            // Снимаем активный класс со всех кнопок навигации кроссовок
+            const navSpans = document.querySelectorAll('#demoSneakers .a3-nav span');
+            navSpans.forEach(span => {
+                span.classList.remove('active-tab');
+            });
+            
+            // Показываем нужную секцию и делаем кнопку активной
+            document.getElementById(`sneakerSection-${tabId}`).classList.add('active-section');
+            document.getElementById(`tabBtn-${tabId}`).classList.add('active-tab');
+            
+            // Скроллим наверх каталога
+            document.getElementById('demoSneakers').scrollTo({ top: 300, behavior: 'smooth' });
+        }
+
+        function selectSize(element) {
+            const siblingChips = element.parentElement.querySelectorAll('.size-chip');
+            siblingChips.forEach(chip => {
+                chip.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function addToCart(buttonElement) {
+            const card = buttonElement.closest('.a3-card');
+            const name = card.querySelector('.a3-name').innerText;
+            const price = parseInt(card.querySelector('.item-price-val').innerText.replace(/\s+/g, '')) || 0;
+            const sizeChip = card.querySelector('.size-chip.selected');
+            
+            if (!sizeChip) {
+                return alert(`Пожалуйста, выберите размер/параметр для: ${name}`);
+            }
+
+            cart.push({ name: name, price: price });
+            document.getElementById('cartCount').innerText = cart.length;
+            alert(`Добавлено в корзину ONYX-DEMO:\n${name}\nРазмер: ${sizeChip.innerText}\nЦена: ${price} руб.`);
+        }
+
+        function openCheckout() {
+            if (cart.length === 0) {
+                return alert('Ваша корзина пуста! Добавьте товары.');
+            }
+            document.getElementById('checkoutModal').classList.add('active');
+            recalcTotal();
+        }
+
+        function closeCheckout() { 
+            document.getElementById('checkoutModal').classList.remove('active'); 
+        }
+
+        function recalcTotal() {
+            let itemsTotal = cart.reduce((sum, item) => sum + item.price, 0);
+            const deliveryValue = parseInt(document.getElementById('deliveryMethod').value) || 0;
+            document.getElementById('summaryCount').innerText = cart.length;
+            document.getElementById('summaryItemsPrice').innerText = itemsTotal.toLocaleString('ru-RU');
+            document.getElementById('summaryDeliveryPrice').innerText = deliveryValue.toLocaleString('ru-RU');
+            document.getElementById('summaryTotalPrice').innerText = (itemsTotal + deliveryValue).toLocaleString('ru-RU');
+        }
+
+        function submitOrder() {
+            if (!document.getElementById('custName').value.trim()) {
+                return alert('Пожалуйста, введите ваше имя.');
+            }
+            alert('🎉 Заказ успешно симулирован!');
+            cart = []; 
+            document.getElementById('cartCount').innerText = '0'; 
+            closeCheckout();
+        }
+
+        // 5. ЛОГИКА ДЕМО ОТЕЛЕЙ (НАВИГАЦИЯ ВНУТРИ СИМУЛЯТОРА)
+        function switchHotelPage(pageId) {
+            document.querySelectorAll('#demoHotel .hotel-page').forEach(p => {
+                p.classList.remove('active-page');
+            });
+            document.querySelectorAll('#demoHotel nav a').forEach(l => {
+                l.classList.remove('active');
+            });
+            document.getElementById(`hotel-page-${pageId}`).classList.add('active-page');
+            document.getElementById(`hotel-link-${pageId}`).classList.add('active');
+            document.getElementById('demoHotel').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 6. ЛОГИКА ДЕМО ИНФОБИЗНЕСА (НАВИГАЦИЯ ВНУТРИ СИМУЛЯТОРА)
+        function switchInfoPage(pageId) {
+            document.querySelectorAll('#demoInfobiz .info-page').forEach(p => {
+                p.classList.remove('active-page');
+            });
+            document.querySelectorAll('#demoInfobiz nav a').forEach(l => {
+                l.classList.remove('active');
+            });
+            document.getElementById(`info-page-${pageId}`).classList.add('active-page');
+            document.getElementById(`info-link-${pageId}`).classList.add('active');
+            document.getElementById('demoInfobiz').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 7. ЛОГИКА ДЕМО МЕБЕЛИ (ONYX FURNITURE)
+        function showFurnPage(pageId) {
+            const sections = document.querySelectorAll('#demoFurniture .furn-page-section');
+            sections.forEach(sec => {
+                sec.classList.remove('active');
+            });
+            const targetSection = document.getElementById(`furn-page-${pageId}`);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                document.getElementById('demoFurniture').scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function openFurnModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modal.querySelector('.transform').classList.remove('scale-95');
+                    modal.querySelector('.transform').classList.add('scale-100');
+                }, 10);
+            }
+        }
+
+        function closeFurnModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('opacity-0');
+                modal.querySelector('.transform').classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Блокировка всплытия событий для редактируемых полей во всех демо
+        document.querySelectorAll('[contenteditable="true"]').forEach(element => {
+            element.addEventListener('click', e => {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>
